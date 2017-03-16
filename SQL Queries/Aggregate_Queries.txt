@@ -1,0 +1,112 @@
+
+
+SELECT	AtBatID,
+		avg(x) as x, 
+		avg(y) as y, 
+		avg(start_speed) as start_speed,
+		avg(end_speed) as end_speed,
+		avg(sz_top) as sz_top,
+		avg(sz_bot) as sz_bot,
+		avg(pfx_x) as pfx_x,
+		avg(pfx_z) as pfx_z,
+		avg(px) as px,
+		avg(pz) as pz,
+		avg(x0) as x0,
+		avg(y0) as y0,
+		avg(z0) as z0,
+		avg(vx0) as vx0,
+		avg(vy0) as vy0,
+		avg(vz0) as vz0,
+		avg(ax) as ax,
+		avg(ay) as ay,
+		avg(az) as az,
+		avg(break_y) as break_y,
+		avg(break_angle) as break_angle,
+		avg(break_length) as break_length,
+		avg(spin_dir) as spin_dir,
+		avg(spin_rate) as spin_rate,
+		count(id) as num_pitches,
+		GID
+INTO pitchfx.dbo.AggregatePitches
+from pitchfx.dbo.pitches p
+group by AtBatId, GID
+
+
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AggregatePitches ADD CONSTRAINT
+	PK_AggregatePitches PRIMARY KEY CLUSTERED 
+	(
+	AtBatID
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.AggregatePitches SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+select 	g.id as Games_Id, 
+		g.GameDate, 
+		g.HomeTeam, 
+		g.AwayTeam, 
+		b.Id as atBats_Id, 
+		b.Strikes, 
+		b.Balls, 
+		b.Outs, 
+		b.batter, 
+		b.pitcher, 
+		b.p_throws, 
+		b.atbat_des, 
+		b.atbat_event, 
+		b.inning, 
+		b.atbat_num, 
+		P.*
+INTO pitchfx.dbo.GamesAtBatsAggregatePitches
+from  pitchfx.dbo.games g 
+inner join pitchfx.dbo.atbats b on b.gameid = g.id 
+inner join pitchfx.dbo.AggregatePitches p on b.id = p.atbatid
+
+
+
+
+SELECT *
+FROM
+(
+	SELECT	year(gameDate) as season, 
+			pitcher, 
+			avg(x) as x, 
+			avg(y) as y, 
+			avg(start_speed) as start_speed,
+			avg(end_speed) as end_speed,
+			avg(sz_top) as sz_top,
+			avg(sz_bot) as sz_bot,
+			avg(pfx_x) as pfx_x,
+			avg(pfx_z) as pfx_z,
+			avg(px) as px,
+			avg(pz) as pz,
+			avg(x0) as x0,
+			avg(y0) as y0,
+			avg(z0) as z0,
+			avg(vx0) as vx0,
+			avg(vy0) as vy0,
+			avg(vz0) as vz0,
+			avg(ax) as ax,
+			avg(ay) as ay,
+			avg(az) as az,
+			avg(break_y) as break_y,
+			avg(break_angle) as break_angle,
+			avg(break_length) as break_length,
+			avg(spin_dir) as spin_dir,
+			avg(spin_rate) as spin_rate,
+			sum(num_pitches) as num_pitches
+	FROM pitchfx.dbo.GamesAtBatsAggregatePitches 
+	GROUP BY year(gameDate), pitcher
+) p
+INNER JOIN 
+(
+	select id, max(First) as nameFirst, max(last) as nameLast
+	from pitchfx.dbo.players
+	group by id
+) pl on p.pitcher = pl.id
+

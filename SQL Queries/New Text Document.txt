@@ -1,0 +1,31 @@
+select g.id as Games_Id, g.GameDate, g.HomeTeam, g.AwayTeam, b.Id as atBats_Id, b.Strikes, b.Balls, b.Outs, b.batter, b.pitcher, b.p_throws, b.atbat_des, b.atbat_event, b.inning, b.atbat_num, P.*
+INTO GamesAtBatAggPitches
+from  pitchfxtest.dbo.games g 
+inner join pitchfxtest.dbo.atbats b on b.gameid = g.id 
+inner join pitchfxtest.dbo.AggPitches p on b.id = p.atbatid
+
+select gameYear, count(*)
+from (
+select year(gameDate) as gameYear, pitcher, avg(x) as x , avg(y) as y
+from 	GamesAtBatAggPitches
+where x is not null
+group by year(gameDate), pitcher ) as ag
+group by gameYear
+		
+		
+select year(gameDate) as gameYear, pitcher, max(p.first), max(p.last), avg(x) as x , avg(y) as y
+from 	GamesAtBatAggPitches g
+inner join PlayerStaging p on g.pitcher = p.id
+where x is not null
+group by year(gameDate), pitcher
+having year(gameDate) = 2011
+order by year(gameDate), pitcher		
+
+
+select count(*)
+from  pitchfxtest.dbo.games g 
+inner join pitchfxtest.dbo.atbats b on b.gameid = g.id 
+
+ 
+select distinct year(gamedate)
+from  pitchfxtest.dbo.games 

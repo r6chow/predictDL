@@ -1,0 +1,249 @@
+USE [PitchFx]
+GO
+/****** Object:  User [pitchfxuser]    Script Date: 03/14/2017 21:07:51 ******/
+CREATE USER [pitchfxuser] FOR LOGIN [pitchfxuser] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  Table [dbo].[Players]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Players](
+	[id] [int] NOT NULL,
+	[first] [varchar](255) NOT NULL,
+	[last] [varchar](255) NOT NULL,
+	[num] [int] NULL,
+	[boxname] [varchar](255) NULL,
+	[rl] [varchar](10) NULL,
+	[position] [varchar](10) NULL,
+	[status] [varchar](10) NULL,
+	[bat_order] [int] NULL,
+	[game_position] [varchar](10) NULL,
+	[avg] [decimal](18, 3) NULL,
+	[hr] [int] NULL,
+	[rbi] [int] NULL,
+	[wins] [int] NULL,
+	[losses] [int] NULL,
+	[era] [decimal](18, 2) NULL,
+	[GID] [nvarchar](max) NULL,
+	[row_id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_Players] PRIMARY KEY CLUSTERED 
+(
+	[row_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[GamesAtBatAggPitches]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[GamesAtBatAggPitches](
+	[Games_Id] [int] NOT NULL,
+	[GameDate] [datetime] NOT NULL,
+	[HomeTeam] [nvarchar](max) NULL,
+	[AwayTeam] [nvarchar](max) NULL,
+	[atBats_Id] [int] NOT NULL,
+	[Strikes] [smallint] NOT NULL,
+	[Balls] [smallint] NOT NULL,
+	[Outs] [smallint] NOT NULL,
+	[batter] [int] NOT NULL,
+	[pitcher] [int] NOT NULL,
+	[p_throws] [nvarchar](max) NULL,
+	[atbat_des] [nvarchar](max) NOT NULL,
+	[atbat_event] [nvarchar](max) NOT NULL,
+	[inning] [smallint] NOT NULL,
+	[atbat_num] [smallint] NOT NULL,
+	[AtBatId] [int] NOT NULL,
+	[x] [decimal](18, 2) NULL,
+	[y] [decimal](18, 2) NULL,
+	[start_speed] [decimal](18, 2) NULL,
+	[end_speed] [decimal](18, 2) NULL,
+	[sz_top] [decimal](18, 2) NULL,
+	[sz_bot] [decimal](18, 2) NULL,
+	[pfx_x] [decimal](18, 2) NULL,
+	[pfx_z] [decimal](18, 2) NULL,
+	[px] [decimal](18, 3) NULL,
+	[pz] [decimal](18, 3) NULL,
+	[x0] [decimal](18, 3) NULL,
+	[y0] [decimal](18, 3) NULL,
+	[z0] [decimal](18, 3) NULL,
+	[vx0] [decimal](18, 3) NULL,
+	[vy0] [decimal](18, 3) NULL,
+	[vz0] [decimal](18, 3) NULL,
+	[ax] [decimal](18, 3) NULL,
+	[ay] [decimal](18, 3) NULL,
+	[az] [decimal](18, 3) NULL,
+	[break_y] [decimal](18, 2) NULL,
+	[break_angle] [decimal](18, 2) NULL,
+	[break_length] [decimal](18, 2) NULL,
+	[spin_dir] [decimal](18, 3) NULL,
+	[spin_rate] [decimal](18, 3) NULL,
+	[num_pitches] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Games]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Games](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[GameDate] [datetime] NOT NULL,
+	[HomeTeam] [nvarchar](max) NULL,
+	[AwayTeam] [nvarchar](max) NULL,
+	[GID] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Games] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AtBats]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[AtBats](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Strikes] [smallint] NOT NULL,
+	[Balls] [smallint] NOT NULL,
+	[Outs] [smallint] NOT NULL,
+	[start_tfs] [nvarchar](max) NULL,
+	[start_tfs_zulu] [nvarchar](max) NULL,
+	[batter] [int] NOT NULL,
+	[stand] [nvarchar](max) NOT NULL,
+	[b_height] [nvarchar](max) NULL,
+	[pitcher] [int] NOT NULL,
+	[p_throws] [nvarchar](max) NULL,
+	[atbat_des] [nvarchar](max) NOT NULL,
+	[atbat_event] [nvarchar](max) NOT NULL,
+	[Inning] [smallint] NOT NULL,
+	[InningHalf] [varchar](50) NOT NULL,
+	[atbat_num] [smallint] NOT NULL,
+	[GameId] [int] NOT NULL,
+	[play_guid] [uniqueidentifier] NULL,
+	[GID] [nvarchar](max) NULL,
+ CONSTRAINT [PK_AtBats] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Pitches]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pitches](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[des] [nvarchar](max) NOT NULL,
+	[pitch_id] [int] NOT NULL,
+	[type] [nvarchar](max) NULL,
+	[tfs] [nvarchar](max) NULL,
+	[tfs_zulu] [nvarchar](max) NULL,
+	[x] [decimal](18, 2) NULL,
+	[y] [decimal](18, 2) NULL,
+	[sv_id] [nvarchar](max) NULL,
+	[start_speed] [decimal](18, 2) NULL,
+	[end_speed] [decimal](18, 2) NULL,
+	[sz_top] [decimal](18, 2) NULL,
+	[sz_bot] [decimal](18, 2) NULL,
+	[pfx_x] [decimal](18, 2) NULL,
+	[pfx_z] [decimal](18, 2) NULL,
+	[px] [decimal](18, 3) NULL,
+	[pz] [decimal](18, 3) NULL,
+	[x0] [decimal](18, 3) NULL,
+	[y0] [decimal](18, 3) NULL,
+	[z0] [decimal](18, 3) NULL,
+	[vx0] [decimal](18, 3) NULL,
+	[vy0] [decimal](18, 3) NULL,
+	[vz0] [decimal](18, 3) NULL,
+	[ax] [decimal](18, 3) NULL,
+	[ay] [decimal](18, 3) NULL,
+	[az] [decimal](18, 3) NULL,
+	[break_y] [decimal](18, 2) NULL,
+	[break_angle] [decimal](18, 2) NULL,
+	[break_length] [decimal](18, 2) NULL,
+	[pitch_type] [nvarchar](max) NULL,
+	[type_confidence] [decimal](18, 3) NULL,
+	[zone] [int] NULL,
+	[nasty] [int] NULL,
+	[spin_dir] [decimal](18, 3) NULL,
+	[spin_rate] [decimal](18, 3) NULL,
+	[cc] [nvarchar](max) NULL,
+	[mt] [nvarchar](max) NULL,
+	[AtBatId] [int] NOT NULL,
+	[play_guid] [uniqueidentifier] NULL,
+	[GID] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Pitches] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AggPitches]    Script Date: 03/14/2017 21:07:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AggPitches](
+	[AtBatId] [int] NOT NULL,
+	[x] [decimal](18, 2) NULL,
+	[y] [decimal](18, 2) NULL,
+	[start_speed] [decimal](18, 2) NULL,
+	[end_speed] [decimal](18, 2) NULL,
+	[sz_top] [decimal](18, 2) NULL,
+	[sz_bot] [decimal](18, 2) NULL,
+	[pfx_x] [decimal](18, 2) NULL,
+	[pfx_z] [decimal](18, 2) NULL,
+	[px] [decimal](18, 3) NULL,
+	[pz] [decimal](18, 3) NULL,
+	[x0] [decimal](18, 3) NULL,
+	[y0] [decimal](18, 3) NULL,
+	[z0] [decimal](18, 3) NULL,
+	[vx0] [decimal](18, 3) NULL,
+	[vy0] [decimal](18, 3) NULL,
+	[vz0] [decimal](18, 3) NULL,
+	[ax] [decimal](18, 3) NULL,
+	[ay] [decimal](18, 3) NULL,
+	[az] [decimal](18, 3) NULL,
+	[break_y] [decimal](18, 2) NULL,
+	[break_angle] [decimal](18, 2) NULL,
+	[break_length] [decimal](18, 2) NULL,
+	[spin_dir] [decimal](18, 3) NULL,
+	[spin_rate] [decimal](18, 3) NULL,
+	[num_pitches] [int] NULL,
+ CONSTRAINT [PK_AggPitches] PRIMARY KEY CLUSTERED 
+(
+	[AtBatId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  ForeignKey [FK_AtBatAggPitch]    Script Date: 03/14/2017 21:07:51 ******/
+ALTER TABLE [dbo].[AggPitches]  WITH CHECK ADD  CONSTRAINT [FK_AtBatAggPitch] FOREIGN KEY([AtBatId])
+REFERENCES [dbo].[AtBats] ([Id])
+GO
+ALTER TABLE [dbo].[AggPitches] CHECK CONSTRAINT [FK_AtBatAggPitch]
+GO
+/****** Object:  ForeignKey [FK_GameAtBat]    Script Date: 03/14/2017 21:07:51 ******/
+ALTER TABLE [dbo].[AtBats]  WITH CHECK ADD  CONSTRAINT [FK_GameAtBat] FOREIGN KEY([GameId])
+REFERENCES [dbo].[Games] ([Id])
+GO
+ALTER TABLE [dbo].[AtBats] CHECK CONSTRAINT [FK_GameAtBat]
+GO
+/****** Object:  ForeignKey [FK_AtBatPitch]    Script Date: 03/14/2017 21:07:51 ******/
+ALTER TABLE [dbo].[Pitches]  WITH CHECK ADD  CONSTRAINT [FK_AtBatPitch] FOREIGN KEY([AtBatId])
+REFERENCES [dbo].[AtBats] ([Id])
+GO
+ALTER TABLE [dbo].[Pitches] CHECK CONSTRAINT [FK_AtBatPitch]
+GO
