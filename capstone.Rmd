@@ -6,19 +6,84 @@ output: word_document
 ---
 
 ```{r setup}
-setwd("F:/Capstone/workspace");
+setwd("F:/Capstone_Workspace/predictDL");
 library('RODBC');
 library('DBI');
 library('dplyr');
 library('ggplot2');
 library('stringi');
 library('sqldf');
+library('corrplot');
+library('reshape2');
+library('ggplot2');
 ```
 
 ```{r pitch from database}
+dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
+query <-
+'SELECT *
+FROM
+(
+	SELECT	year(gameDate) as season, 
+			pitcher, 
+			avg(x) as x, 
+			avg(y) as y, 
+			avg(start_speed) as start_speed,
+			avg(end_speed) as end_speed,
+			avg(sz_top) as sz_top,
+			avg(sz_bot) as sz_bot,
+			avg(pfx_x) as pfx_x,
+			avg(pfx_z) as pfx_z,
+			avg(px) as px,
+			avg(pz) as pz,
+			avg(x0) as x0,
+			avg(y0) as y0,
+			avg(z0) as z0,
+			avg(vx0) as vx0,
+			avg(vy0) as vy0,
+			avg(vz0) as vz0,
+			avg(ax) as ax,
+			avg(ay) as ay,
+			avg(az) as az,
+			avg(break_y) as break_y,
+			avg(break_angle) as break_angle,
+			avg(break_length) as break_length,
+			avg(spin_dir) as spin_dir,
+			avg(spin_rate) as spin_rate,
+			sum(num_pitches) as num_pitches
+	FROM pitchfx.dbo.GamesAtBatsAggregatePitches 
+	GROUP BY year(gameDate), pitcher
+) p
+INNER JOIN 
+(
+	select id, max(First) as nameFirst, max(last) as nameLast
+	from pitchfx.dbo.players
+	group by id
+) pl on p.pitcher = pl.id';
+
+pitches <- sqlQuery(dbhandle, query);
+pitches <- pitches[complete.cases(pitches),];
+
 
 ```
+```{r pitch summary}
+summary(pitches);
+```
 
+```{r pitch correlation}
+m <- cor(pitches[sapply(pitches, is.numeric)]);
+corrplot(m);
+```
+
+
+```{r histogram}
+d <- melt(pitches[sapply(pitches, is.numeric)]);
+
+ggplot(d,aes(x = value)) + 
+    facet_wrap(~variable,scales = "free_x") + 
+    geom_histogram();
+
+```
 
 ```{r lahmans database}
 pitching <- read.csv("data/baseballdatabank-2017.1/core/Pitching.csv", header=TRUE);
