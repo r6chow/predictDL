@@ -1,0 +1,121 @@
+---
+title: "Predicting Pitcher DL"
+author: "Roger Chow"
+date: "February 20, 2017"
+output: word_document
+---
+
+```{r setup}
+setwd("F:/Capstone/workspace");
+library('RODBC');
+library('DBI');
+library('dplyr');
+library('ggplot2');
+library('stringi');
+library('sqldf');
+```
+
+```{r pitch from database}
+
+```
+
+
+```{r lahmans database}
+pitching <- read.csv("data/baseballdatabank-2017.1/core/Pitching.csv", header=TRUE);
+master <- read.csv("data/baseballdatabank-2017.1/core/Master.csv", header =TRUE);
+salaries <- read.csv("data/baseballdatabank-2017.1/core/Salaries.csv", header =TRUE);
+
+#only players pitching between 2010 and 2016 and aggregate stats by playerID and year
+pitching <- pitching %>%
+  filter(yearID >= 2009 & yearID <= 2016) %>%
+  select(playerID,yearID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,WP,HBP,BK,BFP,GF,R,SH,SF,G) %>%
+  group_by(playerID, yearID) %>%
+  summarise(
+    totallW = sum(W),
+    totalL = sum(L),
+    totalG = sum(G),
+    totalGS = sum(GS),
+    totalCG = sum(CG),
+    totalSHO = sum(SHO),
+    totalSV = sum(SV),
+    totalIPouts = sum(IPouts),
+    totalH = sum(H),
+    totalER = sum(ER),
+    totalHR = sum(HR),
+    totalBB = sum(BB),
+    totalSO = sum(SO),
+    totalWP = sum(WP),
+    totalHBP = sum(HBP),
+    totalBK = sum(BK),
+    totalBFP = sum(BFP),
+    totalGF = sum(GF),
+    totalR = sum(R),
+    totalSH = sum(SH),
+    totalSF = sum(SF),
+    totalG = sum(G))
+
+
+pitching_master <- merge(x=pitching, y=master, by="playerID", all.x=TRUE);
+
+
+
+```
+
+
+```{r join disable list }
+
+dl2010 <- read.csv("data/2010DL.csv", header=TRUE);
+dl2010$Year <- format(as.Date(dl2010$Started, '%m/%d/%Y'), '%Y')
+
+dl2010_Pitchers <- dl2010 %>% 
+  filter(Pos == 'P' & TotalInSeasonDays > 0 & RSID != '') %>%
+  select(RSID, Pos, First, Last, TotalInSeasonDays) %>%
+  group_by(RSID, First, Last) %>%
+  summarise(
+    TotalDays2010 = sum(TotalInSeasonDays)
+  )
+
+#pitching_master_2009 <- pitching_master %>%
+  # filter(yearID == 2009);
+
+
+dl2010_Pitchers_Master <- merge(x=dl2010_Pitchers, y=master, by.x="RSID", by.y="retroID", all.x = TRUE, all.y=FALSE)
+
+
+# pitching_master_dl_09_10 <- merge(x=pitching_master_2009, y=dl2010_Pitchers, by.x="retroID", by.y="RSID", all.x = TRUE, all.y=TRUE)
+
+# write.csv(pitching_master_dl_09_10, file="pitching_master_dl_2009_2010.csv")
+
+
+dl2011 <- read.csv("data/2011DL.csv", header=TRUE);
+dl2011$Year <- format(as.Date(dl2011$Official.On.DL.Date, '%m/%d/%Y'), '%Y')
+
+dl2011_Pitchers <- dl2011 %>% 
+  filter((Position == 'RHP' | Position == 'LHP')  & Days > 0) %>%
+  select(RSID, Position, First, Last, Days) %>%
+  group_by(RSID, First, Last) %>%
+  summarise(
+    TotalDays2011 = sum(Days)
+  )
+
+dl2011_Pitchers_Master <- merge(x=dl2011_Pitchers, y=master, by.x="RSID", by.y="retroID", all.x = TRUE, all.y=FALSE)
+
+
+
+
+dl2012 <- read.csv("data/2012DL.csv", header=TRUE);
+dl2012$Year <- format(as.Date(dl2012$Dayon, '%m/%d/%Y'), '%Y')
+dl2012_Pitchers <- dl2012 %>% 
+  filter((Pos == 'RHP' | Pos == 'LHP')  & Days > 0) %>%
+  select(First, Last, Pos, Days) %>%
+  group_by(First, Last) %>%
+  summarise(
+    TotalDays2012 = sum(Days)
+  )
+
+dl2012_Pitchers_Master <- merge(x=dl2012_Pitchers, y=master, by.x=c("First", "Last"), by.y=c("nameFirst", "nameLast"), all.x = TRUE, all.y=FALSE)
+
+write.csv(dl2012_Pitchers_Master, file="dl2012_Pitchers_Master.csv")
+dl_Pitchers <- merge(x = dl2010_Pitchers, y=dl2011_Pitchers, by= "RSID", all=TRUE)
+
+```
