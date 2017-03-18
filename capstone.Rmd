@@ -21,63 +21,111 @@ library('ggplot2');
 ```{r pitch from database}
 dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
 query <-
-'SELECT *
-FROM
-(
-	SELECT	year(gameDate) as season, 
-			pitcher, 
-			avg(x) as x, 
-			avg(y) as y, 
-			avg(start_speed) as start_speed,
-			avg(end_speed) as end_speed,
-			avg(sz_top) as sz_top,
-			avg(sz_bot) as sz_bot,
-			avg(pfx_x) as pfx_x,
-			avg(pfx_z) as pfx_z,
-			avg(px) as px,
-			avg(pz) as pz,
-			avg(x0) as x0,
-			avg(y0) as y0,
-			avg(z0) as z0,
-			avg(vx0) as vx0,
-			avg(vy0) as vy0,
-			avg(vz0) as vz0,
-			avg(ax) as ax,
-			avg(ay) as ay,
-			avg(az) as az,
-			avg(break_y) as break_y,
-			avg(break_angle) as break_angle,
-			avg(break_length) as break_length,
-			avg(spin_dir) as spin_dir,
-			avg(spin_rate) as spin_rate,
-			sum(num_pitches) as num_pitches
-	FROM pitchfx.dbo.GamesAtBatsAggregatePitches 
-	GROUP BY year(gameDate), pitcher
-) p
-INNER JOIN 
-(
-	select id, max(First) as nameFirst, max(last) as nameLast
-	from pitchfx.dbo.players
-	group by id
-) pl on p.pitcher = pl.id';
+'SELECT	m.rsid, 
+		year(p.GameDate) as season, 
+		avg(p.x) as x, 
+		avg(p.y) as y, 
+		avg(p.start_speed) as start_speed, 
+		avg(p.end_speed) as end_speed, 
+		avg(p.sz_top) as sz_top,
+		avg(p.sz_bot) as sz_bot,
+		avg(p.pfx_x) as pfx_x, 
+		avg(p.pfx_z) as pfx_z,
+		avg(p.px) as px, 
+		avg(p.pz) as pz,
+		avg(p.x0) as x0, 
+		avg(p.y0) as y0, 
+		avg(p.z0) as z0,
+		avg(p.vx0) as vx0, 
+		avg(p.vy0) as vy0, 
+		avg(p.vz0) as vz0,
+		avg(p.ax) as ax, 
+		avg(p.ay) as ay, 
+		avg(p.az) as az,
+		avg(p.break_y) as break_y, 
+		avg(p.break_angle) as break_angle, 
+		avg(p.break_length) as break_length,
+		avg(p.spin_dir) as spin_dir, 
+		avg(p.spin_rate) as spin_rate,
+		sum(p.num_pitches) as num_pitches
+  FROM [PitchFx].[dbo].[GamesAtBatsAggregatePitches] p
+  INNER JOIN [Mapping].[dbo].[RSID_MLBID_MAP] m on p.pitcher = m.mlbid
+  GROUP BY m.rsid, year(p.GameDate)'
 
 pitches <- sqlQuery(dbhandle, query);
 pitches <- pitches[complete.cases(pitches),];
 
+```
+
+```{r disabled list}
+dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
+query <- " 
+SELECT rsid, 2011 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2011]
+  WHERE Position in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+UNION
+SELECT rsid, 2012 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2012]
+  WHERE Pos in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+UNION
+SELECT rsid, 2013 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2013]
+  WHERE Position in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+UNION
+SELECT rsid, 2014 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2014]
+  WHERE Position in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+UNION
+SELECT rsid, 2015 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2015]
+  WHERE Position in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+UNION
+SELECT rsid, 2016 as season_dl, sum(days) as DLDays
+  FROM [DisabledList].[dbo].[DL2016]
+  WHERE Position in ('LHP','RHP','RP','SP','P')
+  GROUP BY rsid
+";
+
+dl <- sqlQuery(dbhandle, query);
+dl <- dl[complete.cases(dl),];
+dl$season_1 <- dl$season-1;
 
 ```
+
+
+```{r merge pitches to disabled list}
+
+pitches_dl <- merge(x=pitches, y=dl, by.x=c("rsid", "season"), by.y=c("rsid", "season_1"), all.x = TRUE, all.y=FALSE)
+
+pitches_dl[pitches_dl==""] <- NA; #replace blanks with NA
+
+pitches_dl$DLDays[is.na(pitches_dl$DLDays)] <- 0; #no DL pitchers are on DL for 0 days
+
+drops <- c("season_dl");
+pitches_dl <- pitches_dl[ , !(names(pitches_dl) %in% drops)];
+
+pitches_dl <- pitches_dl[complete.cases(pitches_dl),];
+```
+
+
 ```{r pitch summary}
-summary(pitches);
+summary(pitches_dl);
+
 ```
 
 ```{r pitch correlation}
-m <- cor(pitches[sapply(pitches, is.numeric)]);
+m <- cor(pitches_dl[sapply(pitches_dl, is.numeric)]);
 corrplot(m);
 ```
 
 
 ```{r histogram}
-d <- melt(pitches[sapply(pitches, is.numeric)]);
+d <- melt(pitches_dl[sapply(pitches_dl, is.numeric)]);
 
 ggplot(d,aes(x = value)) + 
     facet_wrap(~variable,scales = "free_x") + 
