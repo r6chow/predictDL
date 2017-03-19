@@ -16,12 +16,13 @@ library('sqldf');
 library('corrplot');
 library('reshape2');
 library('ggplot2');
+library('caret');
 ```
 
 ```{r pitch from database}
 dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
 query <-
-'SELECT	m.rsid, 
+'SELECT	m.rsid, min(ms.nameLast) as nameLast, min(ms.nameFirst) as nameFirst,
 		year(p.GameDate) as season, 
 		avg(p.x) as x, 
 		avg(p.y) as y, 
@@ -50,11 +51,12 @@ query <-
 		sum(p.num_pitches) as num_pitches
   FROM [PitchFx].[dbo].[GamesAtBatsAggregatePitches] p
   INNER JOIN [Mapping].[dbo].[RSID_MLBID_MAP] m on p.pitcher = m.mlbid
+  INNER JOIN [Lahman].[dbo].[Master] ms on ms.retroID = m.rsID
   GROUP BY m.rsid, year(p.GameDate)'
 
 pitches <- sqlQuery(dbhandle, query);
 pitches <- pitches[complete.cases(pitches),];
-
+close(dbhandle);
 ```
 
 ```{r disabled list}
@@ -94,12 +96,14 @@ SELECT rsid, 2016 as season_dl, sum(days) as DLDays
 dl <- sqlQuery(dbhandle, query);
 dl <- dl[complete.cases(dl),];
 dl$season_1 <- dl$season-1;
+close(dbhandle);
 
 ```
 
 
 ```{r merge pitches to disabled list}
 
+#use previous season to predict DL in current season
 pitches_dl <- merge(x=pitches, y=dl, by.x=c("rsid", "season"), by.y=c("rsid", "season_1"), all.x = TRUE, all.y=FALSE)
 
 pitches_dl[pitches_dl==""] <- NA; #replace blanks with NA
@@ -110,125 +114,153 @@ drops <- c("season_dl");
 pitches_dl <- pitches_dl[ , !(names(pitches_dl) %in% drops)];
 
 pitches_dl <- pitches_dl[complete.cases(pitches_dl),];
+
+pitches_dl_dataset <- pitches_dl[pitches_dl$season < 2016,]; #for modeling
+pitches_dl_predict <- pitches_dl[pitches_dl$season == 2016,]; #for 2017 prediction
+
+pitches_dl_dataset$OnDL <- as.factor(ifelse(pitches_dl_dataset$DLDays>0, 'YES', 'NO'));
+
 ```
 
 
 ```{r pitch summary}
-summary(pitches_dl);
+summary(pitches_dl_dataset);
 
 ```
 
 ```{r pitch correlation}
-m <- cor(pitches_dl[sapply(pitches_dl, is.numeric)]);
+numeric_dataset <- pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)];
+#exclude season and DLDays
+numeric_dataset <- numeric_dataset[2:(ncol(numeric_dataset)-1)];
+m <- cor(numeric_dataset);
 corrplot(m);
 ```
+```{r highly pitch correlation}
+highlyCorrelated <- findCorrelation(m, cutoff=0.5);
+lowCorrelatedCols <- colnames(numeric_dataset[-highlyCorrelated]);
+print(lowCorrelatedCols);
 
+```
 
 ```{r histogram}
-d <- melt(pitches_dl[sapply(pitches_dl, is.numeric)]);
+d <- melt(pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)]);
 
-ggplot(d,aes(x = value)) + 
-    facet_wrap(~variable,scales = "free_x") + 
-    geom_histogram();
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
 
 ```
 
-```{r lahmans database}
-pitching <- read.csv("data/baseballdatabank-2017.1/core/Pitching.csv", header=TRUE);
-master <- read.csv("data/baseballdatabank-2017.1/core/Master.csv", header =TRUE);
-salaries <- read.csv("data/baseballdatabank-2017.1/core/Salaries.csv", header =TRUE);
+```{r qq plot for normality}
+par(mar=c(2,2,2,2))
+#for (i in 5:ncol(pitches_dl_dataset[,1: ncol(pitches_dl_dataset) - 1 ])){  
+for (i in 5:(ncol(pitches_dl_dataset)-2)){  
+  tmp <- pitches_dl_dataset[, i];
+  qqnorm(tmp, main = colnames(pitches_dl_dataset[i]));
+  qqline(tmp);
+}
+```
 
-#only players pitching between 2010 and 2016 and aggregate stats by playerID and year
-pitching <- pitching %>%
-  filter(yearID >= 2009 & yearID <= 2016) %>%
-  select(playerID,yearID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,WP,HBP,BK,BFP,GF,R,SH,SF,G) %>%
-  group_by(playerID, yearID) %>%
-  summarise(
-    totallW = sum(W),
-    totalL = sum(L),
-    totalG = sum(G),
-    totalGS = sum(GS),
-    totalCG = sum(CG),
-    totalSHO = sum(SHO),
-    totalSV = sum(SV),
-    totalIPouts = sum(IPouts),
-    totalH = sum(H),
-    totalER = sum(ER),
-    totalHR = sum(HR),
-    totalBB = sum(BB),
-    totalSO = sum(SO),
-    totalWP = sum(WP),
-    totalHBP = sum(HBP),
-    totalBK = sum(BK),
-    totalBFP = sum(BFP),
-    totalGF = sum(GF),
-    totalR = sum(R),
-    totalSH = sum(SH),
-    totalSF = sum(SF),
-    totalG = sum(G))
+```{r training and testing data set}
+train <- createDataPartition(pitches_dl_dataset$OnDL, p=0.65, list=FALSE);
+training <- pitches_dl_dataset[train,];
+testing <- pitches_dl_dataset[-train,];
+```
+
+```{r caret model}
+selected_variables <-lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate');
+
+selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
+  
+formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
+                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+mod_fit <- train(formula,  data=training, method="glm", family="binomial");
+summary(mod_fit);
+
+```
+
+```{r coefficients of model}
+
+coef(mod_fit$finalModel);
+
+```
+
+```{r evaluation}
+pred <- predict(mod_fit, newdata=testing);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+```{r significant varables}
+formula <- as.formula('OnDL ~ y + x0 + spin_dir + spin_rate + num_pitches');
+
+mod_fit <- train(formula,  data=training, method="glm", family="binomial");
+summary(mod_fit);
+
+```
+
+```{r coefficients of model}
+
+coef(mod_fit$finalModel);
+
+```
+
+```{r evaluation}
+pred <- predict(mod_fit, newdata=testing);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+
+```{r predictions for 2017}
+prediction <- predict(mod_fit, newdata=pitches_dl_predict, type='prob');
+prediction <- cbind(pitches_dl_predict, prediction);
+
+prediction_df <- as.data.frame(prediction);
+prediction_df <- prediction_df[order(prediction_df$YES, decreasing = TRUE),];
+head(prediction_df[c('nameFirst', 'nameLast', 'num_pitches', 'YES')]);
+```
 
 
-pitching_master <- merge(x=pitching, y=master, by="playerID", all.x=TRUE);
+```{r logisic regression with GLM }
+selected_variables <- lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir','num_pitches');
 
+selected_i <- which(colnames(pitches_dl_dataset) %in% selected_variables);
+  
+formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
+                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+mod_1 = glm(formula = formula , family=binomial(logit), data=training);
+summary(mod_1);
 
 
 ```
 
 
-```{r join disable list }
+```{r evaluation}
+pred <- ifelse(predict(mod_1, testing, type='response') > 0.5, 'YES', 'NO')
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
 
-dl2010 <- read.csv("data/2010DL.csv", header=TRUE);
-dl2010$Year <- format(as.Date(dl2010$Started, '%m/%d/%Y'), '%Y')
-
-dl2010_Pitchers <- dl2010 %>% 
-  filter(Pos == 'P' & TotalInSeasonDays > 0 & RSID != '') %>%
-  select(RSID, Pos, First, Last, TotalInSeasonDays) %>%
-  group_by(RSID, First, Last) %>%
-  summarise(
-    TotalDays2010 = sum(TotalInSeasonDays)
-  )
-
-#pitching_master_2009 <- pitching_master %>%
-  # filter(yearID == 2009);
+```{r nothing model}
+formula_text <- paste(names(training)[ncol(training)], "~1");
+formula <- as.formula(formula_text);
 
 
-dl2010_Pitchers_Master <- merge(x=dl2010_Pitchers, y=master, by.x="RSID", by.y="retroID", all.x = TRUE, all.y=FALSE)
+mod_nothing = glm(formula = formula , family=binomial(logit), data=training);
 
-
-# pitching_master_dl_09_10 <- merge(x=pitching_master_2009, y=dl2010_Pitchers, by.x="retroID", by.y="RSID", all.x = TRUE, all.y=TRUE)
-
-# write.csv(pitching_master_dl_09_10, file="pitching_master_dl_2009_2010.csv")
-
-
-dl2011 <- read.csv("data/2011DL.csv", header=TRUE);
-dl2011$Year <- format(as.Date(dl2011$Official.On.DL.Date, '%m/%d/%Y'), '%Y')
-
-dl2011_Pitchers <- dl2011 %>% 
-  filter((Position == 'RHP' | Position == 'LHP')  & Days > 0) %>%
-  select(RSID, Position, First, Last, Days) %>%
-  group_by(RSID, First, Last) %>%
-  summarise(
-    TotalDays2011 = sum(Days)
-  )
-
-dl2011_Pitchers_Master <- merge(x=dl2011_Pitchers, y=master, by.x="RSID", by.y="retroID", all.x = TRUE, all.y=FALSE)
+summary(mod_nothing);
+```
 
 
 
+```{r backaward selection (TO DO)}
+backward <- step(glm.out); 
 
-dl2012 <- read.csv("data/2012DL.csv", header=TRUE);
-dl2012$Year <- format(as.Date(dl2012$Dayon, '%m/%d/%Y'), '%Y')
-dl2012_Pitchers <- dl2012 %>% 
-  filter((Pos == 'RHP' | Pos == 'LHP')  & Days > 0) %>%
-  select(First, Last, Pos, Days) %>%
-  group_by(First, Last) %>%
-  summarise(
-    TotalDays2012 = sum(Days)
-  )
+summary(backwards);
+```
 
-dl2012_Pitchers_Master <- merge(x=dl2012_Pitchers, y=master, by.x=c("First", "Last"), by.y=c("nameFirst", "nameLast"), all.x = TRUE, all.y=FALSE)
 
-write.csv(dl2012_Pitchers_Master, file="dl2012_Pitchers_Master.csv")
-dl_Pitchers <- merge(x = dl2010_Pitchers, y=dl2011_Pitchers, by= "RSID", all=TRUE)
 
+```{r forward selection (TO DO)}
+forward <- step(glm.out, direction = "forward"); 
+
+summary(forward);
 ```
