@@ -1,0 +1,522 @@
+Name,PlayerId,Season,Team,Position,Location(major – back),Location(specific-left),Injury type(strain),On Date,Off Date,Days
+Albert Pujols,1177,2013,Angels,1B,foot,left,torn plantar fascia,7/27/2013,9/29/2013,64
+Alberto Callaspo,3336,2013,Angels,2B/3B,calf,right,tightness,4/12/2013,5/3/2013,21
+Andrew Taylor,7896,2013,Angels,P,shoulder,left,torn labrum,3/31/2013,9/29/2013,182
+Chris Nelson,8175,2013,Angels,3B,hamstring,right,strained,8/29/2013,9/17/2013,19
+Erick Aybar,4082,2013,Angels,SS,heel,left,bruised,4/10/2013,4/30/2013,20
+Howie Kendrick,4229,2013,Angels,2B,knee,left,sprained,8/5/2013,9/10/2013,36
+Jason Vargas,8044,2013,Angels,P,armpit,left,blood clot,6/18/2013,8/12/2013,55
+Jered Weaver,4235,2013,Angels,P,elbow,left,fractured,4/8/2013,5/29/2013,51
+Kevin Jepsen,6475,2013,Angels,P,triceps,right,injury,4/12/2013,5/26/2013,44
+Kevin Jepsen,6475,2013,Angels,P,,,appendectomy,8/21/2013,9/29/2013,39
+Mark Lowe,7416,2013,Angels,P,neck,,stiff,4/20/2013,5/6/2013,16
+Peter Bourjos,2578,2013,Angels,OF,wrist,right,fractured,6/30/2013,8/16/2013,47
+Peter Bourjos,2578,2013,Angels,OF,hamstring,left,strained,4/30/2013,6/10/2013,41
+Robert Coello,1149,2013,Angels,P,shoulder,right,inflammation,6/10/2013,9/16/2013,98
+Ryan Madson,1852,2013,Angels,P,elbow,,Tommy John Surgery,3/31/2013,8/5/2013,127
+Sean Burnett,1886,2013,Angels,P,elbow,left,inflammation/impingement,5/27/2013,9/29/2013,125
+Sean Burnett,1886,2013,Angels,P,forearm,left,irritation,4/27/2013,5/21/2013,24
+Tommy Hanson,9129,2013,Angels,P,forearm,right,strained,6/21/2013,7/23/2013,32
+Alex White,10054,2013,Astros,P,elbow,right,strained,3/31/2013,9/29/2013,182
+Carlos Corporan,5587,2013,Astros,C,head,,concussion,8/20/2013,9/9/2013,20
+Edgar Gonzalez,2963,2013,Astros,2B,shoulder,right,strained,5/26/2013,9/7/2013,104
+Fernando Martinez,9210,2013,Astros,OF,oblique,left,strained,3/31/2013,4/20/2013,20
+J.D. Martinez,6184,2013,Astros,OF,wrist,left,sprained,7/27/2013,9/13/2013,48
+J.D. Martinez,6184,2013,Astros,OF,knee,right,sprained,4/20/2013,5/6/2013,16
+Jason Castro,8722,2013,Astros,C,knee,right,cyst,9/17/2013,9/29/2013,12
+Josh Fields,5070,2013,Astros,P,forearm,right,strained,4/4/2013,5/31/2013,57
+Justin Maxwell,6827,2013,Astros,OF,hand,left,fractured,4/23/2013,6/17/2013,55
+Justin Maxwell,6827,2013,Astros,OF,head,,concussion,6/30/2013,7/13/2013,13
+Max Stassi,10059,2013,Astros,C/DH,head,,concussion,8/22/2013,9/23/2013,32
+Travis Blackley,3234,2013,Astros,P,shoulder,left,strained,4/5/2013,4/20/2013,15
+Trevor Crowe,3402,2013,Astros,OF,shoulder,right,sprained,6/20/2013,8/11/2013,52
+Adam Rosales,9682,2013,Athletics,2B/3B/SS,intercostal,,strained muscle,3/31/2013,4/25/2013,25
+Bartolo Colon,375,2013,Athletics,P,groin,left,strained,8/14/2013,8/29/2013,15
+Brett Anderson,8223,2013,Athletics,P,ankle,right,sprained,5/1/2013,8/28/2013,119
+Chris Young,3882,2013,Athletics,OF,quadriceps,left,strained,4/30/2013,5/18/2013,18
+Coco Crisp,1572,2013,Athletics,OF,hamstring,left,strained,4/30/2013,5/15/2013,15
+Derek Norris,6867,2013,Athletics,C,big toe,left,fractured,8/21/2013,9/5/2013,15
+Fernando Rodriguez Jr.,7558,2013,Athletics,P,elbow,right,surgery,3/31/2013,9/29/2013,182
+Hiroyuki Nakajima,14446,2013,Athletics,SS,hamstring,left,strained,3/31/2013,5/23/2013,53
+John Jaso,5887,2013,Athletics,C,head,,concussion,7/25/2013,9/29/2013,66
+Josh Reddick,3892,2013,Athletics,OF,wrist,right,sprained,5/7/2013,5/31/2013,24
+Josh Reddick,3892,2013,Athletics,OF,wrist,right,sprained,8/26/2013,9/10/2013,15
+Scott Sizemore,2881,2013,Athletics,2B/3B,knee,left,sprained,4/10/2013,9/29/2013,172
+Yoenis Cespedes,13110,2013,Athletics,OF,hand,left,strained,4/13/2013,4/28/2013,15
+Brandon Morrow,9346,2013,Blue Jays,P,forearm,right,strained,6/1/2013,9/29/2013,120
+Brett Cecil,2660,2013,Blue Jays,P,elbow,left,sore,9/13/2013,9/29/2013,16
+Brett Lawrie,5247,2013,Blue Jays,3B,ankle,left,sprained,5/29/2013,7/13/2013,45
+Brett Lawrie,5247,2013,Blue Jays,3B,rib cage,left,strained,3/31/2013,4/15/2013,15
+Colby Rasmus,9893,2013,Blue Jays,OF,oblique,left,strained,8/12/2013,9/13/2013,32
+Colby Rasmus,9893,2013,Blue Jays,OF,eye,left,bruised,9/21/2013,9/29/2013,8
+Darren Oliver,206,2013,Blue Jays,P,shoulder,left,strained,5/19/2013,6/10/2013,22
+Drew Hutchison,10732,2013,Blue Jays,P,elbow,right,Tommy John Surgery,3/31/2013,8/10/2013,132
+Dustin McGowan,1727,2013,Blue Jays,P,oblique,right,strained,8/1/2013,9/1/2013,31
+Dustin McGowan,8600,2013,Blue Jays,P,shoulder,right,injury,3/31/2013,6/8/2013,69
+Edwin Encarnacion,2151,2013,Blue Jays,3B,wrist,left,surgery,9/16/2013,9/29/2013,13
+J.A. Happ,7410,2013,Blue Jays,P,head,,bruised,5/8/2013,8/5/2013,89
+Jose Bautista,1887,2013,Blue Jays,3B/OF,hip,left,bone bruise,8/20/2013,9/29/2013,40
+Jose Reyes,1736,2013,Blue Jays,SS,ankle,left,sprained,4/23/2013,6/25/2013,63
+Josh Johnson,4567,2013,Blue Jays,P,forearm,right,strained,8/7/2013,9/29/2013,53
+Josh Johnson,4567,2013,Blue Jays,P,triceps,right,inflammation,4/29/2013,6/4/2013,36
+Kyle Drabek,4359,2013,Blue Jays,P,elbow,right,Tommy John Surgery,3/31/2013,7/5/2013,96
+Luis Perez,6389,2013,Blue Jays,P,elbow,left,Tommy John Surgery,3/31/2013,9/3/2013,156
+Maicer Izturis,2437,2013,Blue Jays,2B/3B/SS,ankle,left,sprained,8/21/2013,9/29/2013,39
+Melky Cabrera,4022,2013,Blue Jays,OF,knee,left,strained,8/1/2013,9/29/2013,59
+Melky Cabrera,4022,2013,Blue Jays,OF,knee,left,tendinitis,6/27/2013,7/21/2013,24
+Michael Schwimer,8103,2013,Blue Jays,P,shoulder,right,strained,3/31/2013,5/10/2013,40
+Rajai Davis,3708,2013,Blue Jays,OF,oblique,,strained,5/11/2013,6/4/2013,24
+Ramon Ortiz,27,2013,Blue Jays,P,elbow,right,strained,6/3/2013,9/29/2013,118
+Sergio Santos,4734,2013,Blue Jays,P,triceps,right,injury,4/14/2013,8/1/2013,109
+Steve Delabar,11827,2013,Blue Jays,P,shoulder,right,inflammation,8/3/2013,9/1/2013,29
+B.J. Upton,5015,2013,Braves,OF,abductor,right,strained,7/13/2013,8/3/2013,21
+Blake DeWitt,7485,2013,Braves,2B/3B,back,lower,strained,4/20/2013,8/17/2013,119
+Brandon Beachy,8851,2013,Braves,P,elbow,right,Tommy John Surgery,3/31/2013,7/29/2013,120
+Brandon Beachy,8851,2013,Braves,P,elbow,right,inflammation,8/21/2013,9/29/2013,39
+Brian McCann,4810,2013,Braves,C,shoulder,right,surgery,3/31/2013,5/6/2013,36
+Cristhian Martinez,5337,2013,Braves,P,shoulder,right,strained,4/7/2013,9/29/2013,175
+Dan Uggla,3442,2013,Braves,2B,eye,,surgery,8/13/2013,8/28/2013,15
+Eric O'Flaherty,5746,2013,Braves,P,elbow,left,strained,5/18/2013,9/29/2013,134
+Evan Gattis,11003,2013,Braves,C/OF,oblique,,strained,6/18/2013,7/14/2013,26
+Freddie Freeman,5361,2013,Braves,1B,oblique,right,strained,4/7/2013,4/22/2013,15
+Gerald Laird,1698,2013,Braves,C,kidney,,kidney stones,7/26/2013,8/10/2013,15
+Jason Heyward,4940,2013,Braves,OF,jaw,right,fractured,8/22/2013,9/20/2013,29
+Jason Heyward,4940,2013,Braves,OF,,,appendectomy,4/21/2013,5/17/2013,26
+Jonny Venters,7175,2013,Braves,P,elbow,left,Tommy John Surgery,3/31/2013,9/29/2013,182
+Jordan Schafer,9883,2013,Braves,OF,ankle,right,bruised,7/4/2013,8/9/2013,36
+Jordan Walden,3271,2013,Braves,P,shoulder,right,inflammation,5/12/2013,5/29/2013,17
+Luis Ayala,1650,2013,Braves,P,other,,anxiety disorder,4/25/2013,7/5/2013,71
+Paul Janish,7412,2013,Braves,SS,shoulder,left,surgery,3/31/2013,5/10/2013,40
+Paul Maholm,8678,2013,Braves,P,wrist,left,bruised,7/22/2013,8/22/2013,31
+Ramiro Pena,8841,2013,Braves,3B/SS,shoulder,right,injury,6/17/2013,9/29/2013,104
+Reed Johnson,1702,2013,Braves,OF,knee,left,Achilles tendon,7/29/2013,9/10/2013,43
+Tim Hudson,921,2013,Braves,P,ankle,right,fractured,7/25/2013,9/29/2013,66
+Tyler Pastornicky,6777,2013,Braves,SS,knee,left,torn ACL,8/15/2013,9/29/2013,45
+Alfredo Figaro,8404,2013,Brewers,P,oblique,right,strained,6/24/2013,7/24/2013,30
+Aramis Ramirez,1002,2013,Brewers,3B,knee,left,sprained,7/7/2013,8/13/2013,37
+Aramis Ramirez,1002,2013,Brewers,3B,knee,left,sprained,4/6/2013,5/2/2013,26
+Chris Narveson,2141,2013,Brewers,P,finger,left middle,sprained,4/7/2013,6/20/2013,74
+Corey Hart,1945,2013,Brewers,OF,knee,right,surgery,3/31/2013,9/29/2013,182
+Hiram Burgos,9412,2013,Brewers,P,shoulder,right,impingement,5/24/2013,6/28/2013,35
+Jeff Bianchi,9958,2013,Brewers,3B/SS,hip,left,bursitis,3/31/2013,5/2/2013,32
+Jim Henderson,6653,2013,Brewers,P,hamstring,right,strained,5/25/2013,6/9/2013,15
+Marco Estrada,1118,2013,Brewers,P,hamstring,left,strained,6/4/2013,8/7/2013,64
+Mark Rogers,4083,2013,Brewers,P,arm,right,instability,3/31/2013,8/30/2013,152
+Mat Gamel,4034,2013,Brewers,1B/3B,knee,right,surgery,3/31/2013,9/29/2013,182
+Rickie Weeks,1849,2013,Brewers,2B,hamstring,left,strained,8/8/2013,9/29/2013,52
+Ryan Braun,3410,2013,Brewers,OF,thumb,right,bruised,6/10/2013,7/8/2013,28
+Taylor Green,9147,2013,Brewers,1B/3B,hip,left,strained,3/31/2013,9/29/2013,182
+Tom Gorzelanny,6244,2013,Brewers,P,shoulder,left,tendinitis,5/8/2013,5/24/2013,16
+Yovani Gallardo,8173,2013,Brewers,P,hamstring,left,strained,6/1/2013,8/16/2013,76
+Chris Carpenter,1292,2013,Cardinals,P,shoulder,right,nerve irritation,3/31/2013,9/29/2013,182
+David Freese,9549,2013,Cardinals,3B,back,lower,strained,3/31/2013,4/8/2013,8
+Fernando Salas,4971,2013,Cardinals,P,shoulder,right,irritation/inflammation,5/22/2013,6/26/2013,35
+Jaime Garcia,8137,2013,Cardinals,P,shoulder,left,strained,5/18/2013,9/29/2013,134
+Jake Westbrook,412,2013,Cardinals,P,elbow,right,inflammation,5/9/2013,6/14/2013,36
+Jake Westbrook,412,2013,Cardinals,P,back,lower,strained,8/22/2013,9/6/2013,15
+Jason Motte,5861,2013,Cardinals,P,elbow,right,strained,3/31/2013,9/29/2013,182
+John Gast,11133,2013,Cardinals,P,shoulder,left,tightness,5/26/2013,9/29/2013,126
+Matt Adams,9393,2013,Cardinals,1B,oblique,right,strained,4/22/2013,5/7/2013,15
+Matt Holliday,1873,2013,Cardinals,OF,hamstring,right,strained,7/12/2013,7/27/2013,15
+Rafael Furcal,88,2013,Cardinals,SS,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Shane Robinson,4249,2013,Cardinals,OF,shoulder,right,strained,7/31/2013,8/15/2013,15
+Tony Cruz,2802,2013,Cardinals,C,forearm,left,stress fraction,8/15/2013,9/1/2013,17
+Yadier Molina,7007,2013,Cardinals,C,knee,right,sprained,7/31/2013,8/15/2013,15
+Arodys Vizcaino,5498,2013,Cubs,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Brian Bogusevic,4719,2013,Cubs,OF,hamstring,left,strained,7/15/2013,8/19/2013,35
+Darwin Barney,2430,2013,Cubs,2B,knee,left,laceration,3/31/2013,4/16/2013,16
+David DeJesus,1825,2013,Cubs,OF,shoulder,right,strained,6/15/2013,7/24/2013,39
+Ian Stewart,5950,2013,Cubs,3B,quadriceps,left,strained,3/31/2013,5/3/2013,33
+Kyuji Fujikawa,14443,2013,Cubs,P,elbow,right,surgery,5/27/2013,9/29/2013,125
+Kyuji Fujikawa,14443,2013,Cubs,P,forearm,right,strained,4/13/2013,5/10/2013,27
+Luis Valbuena,4969,2013,Cubs,2B/3B,oblique,right,strained,8/3/2013,9/1/2013,29
+Matt Garza,3340,2013,Cubs,P,latissimus dorsi,left,strained,3/31/2013,5/21/2013,51
+Matt Guerrier,2061,2013,Cubs,P,elbow,right,sore,8/8/2013,9/29/2013,52
+Rafael Dolis,4185,2013,Cubs,P,forearm,right,strained,5/27/2013,9/29/2013,125
+Ryan Sweeney,6352,2013,Cubs,OF,rib,left,fractured,6/30/2013,9/1/2013,63
+Scott Baker,6176,2013,Cubs,P,elbow,right,Tommy John Surgery,3/31/2013,9/8/2013,161
+Shawn Camp,1855,2013,Cubs,P,big toe,right,sprained,5/22/2013,6/15/2013,24
+Steve Clevenger,9542,2013,Cubs,C,oblique,left,strained,4/14/2013,6/28/2013,75
+Thomas Neal,9461,2013,Cubs,OF,shoulder,right,dislocated,8/8/2013,9/29/2013,52
+Welington Castillo,3256,2013,Cubs,C,knee,right,surgery,9/20/2013,9/29/2013,9
+Zach Putnam,9080,2013,Cubs,P,elbow,right,sore,6/12/2013,9/29/2013,109
+Aaron Hill,6104,2013,Diamondbacks,2B,hand,left,fractured,4/15/2013,6/24/2013,70
+Adam Eaton,11205,2013,Diamondbacks,OF,elbow,left,strained,3/31/2013,7/9/2013,100
+Brandon McCarthy,4662,2013,Diamondbacks,P,shoulder,right,inflammation,5/31/2013,8/4/2013,65
+Cody Ross,1760,2013,Diamondbacks,OF,hip,right,dislocated,8/12/2013,9/29/2013,48
+Cody Ross,1760,2013,Diamondbacks,OF,calf,left,strained,3/31/2013,4/13/2013,13
+Daniel Hudson,7146,2013,Diamondbacks,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Didi Gregorius,6012,2013,Diamondbacks,SS,elbow,right,strained,3/31/2013,4/16/2013,16
+Didi Gregorius,6012,2013,Diamondbacks,SS,head,,concussion,4/28/2013,5/4/2013,6
+Eric Chavez,906,2013,Diamondbacks,3B,oblique,right,strained,5/31/2013,6/28/2013,28
+Eric Chavez,906,2013,Diamondbacks,3B,knee,left,strained,8/10/2013,8/26/2013,16
+J.J. Putz,1795,2013,Diamondbacks,P,elbow,right,strained,5/8/2013,6/29/2013,52
+J.J. Putz,1795,2013,Diamondbacks,P,finger,right pinky,dislocated,8/24/2013,9/16/2013,23
+Jason Kubel,2161,2013,Diamondbacks,DH/OF,quadriceps,left,strained,4/13/2013,4/28/2013,15
+Matt Reynolds,8887,2013,Diamondbacks,P,elbow,left,strained,6/10/2013,9/29/2013,111
+Miguel Montero,3364,2013,Diamondbacks,C,back,lower,strained,7/29/2013,8/26/2013,28
+Trevor Cahill,6249,2013,Diamondbacks,P,hip,right,bruised,7/1/2013,8/17/2013,47
+Willie Bloomquist,1066,2013,Diamondbacks,SS/OF,intercostal,right,strained,3/31/2013,5/31/2013,61
+Willie Bloomquist,1066,2013,Diamondbacks,SS/OF,hand,left,bruised,6/28/2013,8/28/2013,61
+A.J. Ellis,5677,2013,Dodgers,C,oblique,left,strained,5/30/2013,6/14/2013,15
+Brian Wilson,6485,2013,Dodgers,P,elbow,right,surgery,7/30/2013,8/19/2013,20
+Carl Crawford,1201,2013,Dodgers,OF,hamstring,left,strained,6/2/2013,7/5/2013,33
+Chad Billingsley,5842,2013,Dodgers,P,elbow,right,sore,4/16/2013,9/29/2013,166
+Chad Billingsley,5842,2013,Dodgers,P,finger,right index,bruised,3/31/2013,4/10/2013,10
+Chris Capuano,1701,2013,Dodgers,P,shoulder,left,strained,5/30/2013,6/19/2013,20
+Chris Capuano,1701,2013,Dodgers,P,calf,left,strained,4/17/2013,5/6/2013,19
+Hanley Ramirez,8001,2013,Dodgers,SS,hamstring,left,strained,5/4/2013,6/4/2013,31
+Hanley Ramirez,8001,2013,Dodgers,SS,thumb,right,torn ligament,3/31/2013,4/29/2013,29
+Jerry Hairston Jr.,144,2013,Dodgers,OF,groin,left,strained,5/6/2013,5/26/2013,20
+Jose Dominguez,11571,2013,Dodgers,P,quadricep,left,strained,7/23/2013,9/29/2013,68
+Josh Beckett,510,2013,Dodgers,P,groin,left,strained,5/14/2013,9/29/2013,138
+Mark Ellis,1443,2013,Dodgers,2B,quadriceps,right,strained,4/27/2013,5/19/2013,22
+Matt Kemp,5631,2013,Dodgers,OF,ankle,left,sprained,7/22/2013,9/16/2013,56
+Matt Kemp,5631,2013,Dodgers,OF,hamstring,right,strained,5/30/2013,6/25/2013,26
+Matt Kemp,5631,2013,Dodgers,OF,shoulder,left,irritation/imflammation,7/6/2013,7/21/2013,15
+Scott Elbert,7489,2013,Dodgers,P,elbow,left,surgery,3/31/2013,9/29/2013,182
+Scott Van Slyke,4365,2013,Dodgers,OF,shoulder,left,bursitis,6/11/2013,6/28/2013,17
+Shawn Tolleson,10481,2013,Dodgers,P,back,lower,strained,4/13/2013,9/29/2013,169
+Stephen Fife,8077,2013,Dodgers,P,shoulder,right,bursitis,4/27/2013,5/30/2013,33
+Stephen Fife,8077,2013,Dodgers,P,shoulder,right,bursitis,7/7/2013,8/4/2013,28
+Ted Lilly,833,2013,Dodgers,P,neck,,sprained,6/5/2013,7/24/2013,49
+Ted Lilly,833,2013,Dodgers,P,shoulder,left,surgery,3/31/2013,4/24/2013,24
+Ted Lilly,833,2013,Dodgers,P,rib cage,right,strained,4/30/2013,5/20/2013,20
+Zack Greinke,1943,2013,Dodgers,P,collarbone,left,fractured,4/12/2013,5/15/2013,33
+Andres Torres,1488,2013,Giants,OF,Achilles tendon,left,injury,8/22/2013,9/29/2013,38
+Angel Pagan,2918,2013,Giants,OF,hamstring,left,strained,5/28/2013,8/30/2013,94
+Brett Pill,5834,2013,Giants,1B,knee,right,surgery,3/31/2013,4/15/2013,15
+Chad Gaudin,1783,2013,Giants,P,Hand,,carpal tunnel syndrome,8/17/2013,9/29/2013,43
+Chad Gaudin,1783,2013,Giants,P,elbow,right,bruised,6/21/2013,7/7/2013,16
+Eric Surkamp,2540,2013,Giants,P,elbow,left,Tommy John Surgery,3/31/2013,6/27/2013,88
+Hector Sanchez,10289,2013,Giants,C,shoulder,right,strained,7/9/2013,7/24/2013,15
+Jeremy Affeldt,583,2013,Giants,P,groin,left,strained,7/21/2013,9/12/2013,53
+Jeremy Affeldt,583,2013,Giants,P,oblique,right,strained,4/15/2013,5/3/2013,18
+Joaquin Arias,3817,2013,Giants,2B/3B/SS,,,appendicitis,7/8/2013,7/26/2013,18
+Juan Perez,5371,2013,Giants,OF,elbow,left,torn UCL,8/10/2013,9/29/2013,50
+Matt Cain,4732,2013,Giants,P,forearm,right,bruised,8/23/2013,9/7/2013,15
+Pablo Sandoval,5409,2013,Giants,3B,foot,left,strained,6/9/2013,6/24/2013,15
+Ryan Vogelsong,1011,2013,Giants,P,hand,right,fractured,5/21/2013,8/9/2013,80
+Santiago Casilla,2873,2013,Giants,P,knee,right,cyst,5/21/2013,7/13/2013,53
+Tony Abreu,5053,2013,Giants,2B/3B,quadricep/knee,left,strained,3/31/2013,6/8/2013,69
+Tony Abreu,5053,2013,Giants,2B/3B,knee,left,bursitis,7/29/2013,9/1/2013,34
+Asdrubal Cabrera,4962,2013,Indians,SS,quadriceps,right,strained,6/4/2013,6/26/2013,22
+Blake Wood,1345,2013,Indians,P,elbow,right,Tommy John Surgery,3/31/2013,7/14/2013,105
+Brett Myers,962,2013,Indians,P,elbow,right,inflammation,4/20/2013,8/29/2013,131
+Chris Perez,5213,2013,Indians,P,shoulder,right,sore,5/27/2013,6/27/2013,31
+Cord Phelps,8631,2013,Indians,2B,wrist,right,inflammation,8/28/2013,9/29/2013,32
+Corey Kluber,2429,2013,Indians,P,finger,right,sprained,8/6/2013,9/7/2013,32
+Frank Herrmann,7960,2013,Indians,P,elbow,,Tommy John Surgery,3/31/2013,9/29/2013,182
+Jason Giambi,818,2013,Indians,1B/DH,back,lower,strained,3/31/2013,4/12/2013,12
+Josh Tomlin,9388,2013,Indians,P,elbow,,Tommy John Surgery,3/31/2013,8/25/2013,147
+Lou Marson,7610,2013,Indians,C,shoulder,right,inflammation,4/25/2013,9/29/2013,157
+Lou Marson,7610,2013,Indians,C,neck,,strained,4/9/2013,4/24/2013,15
+Michael Bourn,6387,2013,Indians,OF,hand/finger,right,laceration,4/15/2013,5/9/2013,24
+Ryan Raburn,2218,2013,Indians,OF,Achilles,left,strained,8/19/2013,9/3/2013,15
+Scott Barnes,8718,2013,Indians,P,wrist,left,sprained,8/30/2013,9/29/2013,30
+Scott Kazmir,4897,2013,Indians,P,rib cage,right,strained,4/2/2013,4/20/2013,18
+Vinnie Pestano,4782,2013,Indians,P,elbow,right,tendinitis,5/1/2013,5/17/2013,16
+Zach McAllister,2895,2013,Indians,P,finger,right middle,sprained,6/3/2013,7/23/2013,50
+Franklin Gutierrez,3255,2013,Mariners,OF,hamstring,right,strained,6/24/2013,8/26/2013,63
+Franklin Gutierrez,3255,2013,Mariners,OF,hamstring,right,strained,4/23/2013,6/22/2013,60
+Jesus Sucre,5942,2013,Mariners,C,wrist,left,sprained,6/8/2013,8/17/2013,70
+Josh Kinney,3638,2013,Mariners,P,shoulder/ribs,left,Stress reaction,3/31/2013,6/28/2013,89
+Justin Smoak,9054,2013,Mariners,1B,oblique,right,strained,5/30/2013,6/18/2013,19
+Michael Saunders,9981,2013,Mariners,OF,shoulder,right,sprained,4/11/2013,4/29/2013,18
+Mike Morse,3035,2013,Mariners,OF,quadriceps,right,strained,6/21/2013,7/29/2013,38
+Mike Zunino,13265,2013,Mariners,C,hand,left,fractured,7/26/2013,9/2/2013,38
+Stephen Pryor,10663,2013,Mariners,P,shoulder,right,torn latissimus dorsi muscle,4/15/2013,9/29/2013,167
+Adeiny Hechavarria,10459,2013,Marlins,SS,elbow,right,bruised,4/17/2013,5/2/2013,15
+Alex Sanabia,5350,2013,Marlins,P,groin,right,injury,5/27/2013,9/29/2013,125
+Alfredo Silverio,sa392355,2013,Marlins,OF,elbow,,Tommy John Surgery,3/31/2013,9/29/2013,182
+Casey Kotchman,1930,2013,Marlins,1B,hamstring,left,strained,4/4/2013,6/3/2013,178
+Casey Kotchman,1930,2013,Marlins,1B,oblique,left,strained,6/9/2013,8/26/2013,78
+Chris Coghlan,6878,2013,Marlins,OF,calf,right,nerve irritation,6/9/2013,9/1/2013,84
+Donovan Solano,8623,2013,Marlins,2B,intercostal,,strained muscle,5/7/2013,6/9/2013,33
+Giancarlo Stanton,4949,2013,Marlins,OF,hamstring,right,strained,4/30/2013,6/10/2013,41
+Henderson Alvarez,5669,2013,Marlins,P,shoulder,right,inflammation,3/31/2013,7/4/2013,95
+Jeff Mathis,3448,2013,Marlins,C,collarbone,right,fractured,3/31/2013,5/14/2013,44
+Joe Mahoney,8179,2013,Marlins,1B,hamstring,right,strained,4/30/2013,6/9/2013,40
+Joe Mahoney,8179,2013,Marlins,1B,intercostal,,strained,3/31/2013,4/17/2013,17
+Jose Ceda,2377,2013,Marlins,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Kevin Slowey,9918,2013,Marlins,P,forearm,right,injury,7/27/2013,9/29/2013,64
+Logan Morrison,9205,2013,Marlins,1B/OF,knee,right,surgery,3/31/2013,6/9/2013,70
+Marcell Ozuna,10324,2013,Marlins,OF,thumb,left,torn ligament,7/23/2013,9/29/2013,68
+Matt Diaz,1771,2013,Marlins,OF,knee,left,bone bruise,5/19/2013,9/29/2013,133
+Nathan Eovaldi,9132,2013,Marlins,P,shoulder,right,inflammation,3/31/2013,6/18/2013,79
+Placido Polanco,1176,2013,Marlins,2B/3B,head,,concussion,8/17/2013,8/27/2013,10
+Bobby Parnell,9926,2013,Mets,P,neck,,stiff,7/31/2013,9/29/2013,60
+David Wright,3787,2013,Mets,3B,hamstring,right,strained,8/3/2013,9/20/2013,48
+Eric Beaulac,sa455051,2013,Mets,P,hip,right,torn labrum,8/31/2013,9/29/2013,29
+Frank Francisco,1933,2013,Mets,P,elbow,right,inflammation,3/31/2013,9/7/2013,160
+Ike Davis,8433,2013,Mets,1B,oblique,,strained,9/9/2013,9/29/2013,20
+Jenrry Mejia,8476,2013,Mets,P,elbow,right,inflammation,3/31/2013,7/26/2013,117
+Jenrry Mejia,8476,2013,Mets,P,elbow,right,bone spur,8/18/2013,9/29/2013,42
+Jeremy Hefner,1989,2013,Mets,P,elbow,right,torn ligament,8/10/2013,9/29/2013,50
+Jeurys Familia,5114,2013,Mets,P,biceps,right,tendinitis,5/9/2013,9/14/2013,128
+Johan Santana,755,2013,Mets,P,shoulder,left,surgery,3/31/2013,9/29/2013,182
+Jon Niese,4424,2013,Mets,P,rotator cuff,left,torn,6/21/2013,8/11/2013,51
+Josh Edgin,10796,2013,Mets,P,ribcage,,stress fraction,7/30/2013,9/29/2013,61
+Justin Turner,5235,2013,Mets,2B/3B,intercostal,,strained muscle,6/17/2013,7/22/2013,35
+Lucas Duda,2502,2013,Mets,1B/OF,intercostal/oblique,left,strained,6/23/2013,8/7/2013,45
+Matt Harvey,11713,2013,Mets,P,elbow,right,torn UCL,8/27/2013,9/29/2013,33
+Ruben Tejada,5519,2013,Mets,2B/SS,quadriceps,right,strained,5/30/2013,7/6/2013,37
+Scott Atchison,2642,2013,Mets,P,elbow,right,inflammation,5/14/2013,6/18/2013,35
+Scott Atchison,2642,2013,Mets,P,groin,right,strained,6/19/2013,7/14/2013,25
+Scott Rice,2743,2013,Mets,P,groin,,sports hernia,9/9/2013,9/29/2013,20
+Shaun Marcum,6204,2013,Mets,P,shoulder,right,strained,3/31/2013,4/27/2013,27
+Shaun Marcum,6204,2013,Mets,P,shoulder,,thoracic outlet syndrome,7/8/2013,7/23/2013,15
+Bryce Harper,11579,2013,Nationals,OF,knee,left,bursitis,5/27/2013,7/1/2013,35
+Christian Garcia,4067,2013,Nationals,P,forearm,right,strained tendon,3/31/2013,9/29/2013,182
+Dan Haren,1757,2013,Nationals,P,shoulder,right,inflammation,6/23/2013,7/8/2013,15
+Danny Espinosa,9219,2013,Nationals,2B,wrist,right,fractured,6/4/2013,6/19/2013,15
+Jayson Werth,1327,2013,Nationals,OF,hamstring,right,strained,5/3/2013,6/4/2013,32
+Ross Detwiler,2859,2013,Nationals,P,back,lower,strained,7/4/2013,9/29/2013,87
+Ross Detwiler,2859,2013,Nationals,P,oblique,right,strained,5/16/2013,6/13/2013,28
+Ross Ohlendorf,8268,2013,Nationals,P,shoulder,right,inflammation,8/1/2013,8/20/2013,19
+Ryan Mattheus,7169,2013,Nationals,P,hand,right,fractured,5/20/2013,7/26/2013,67
+Ryan Zimmerman,4220,2013,Nationals,3B,hamstring,left,strained,4/18/2013,5/3/2013,15
+Stephen Strasburg,10131,2013,Nationals,P,latissimus dorsi,right,strained,6/1/2013,6/16/2013,15
+Taylor Jordan,10466,2013,Nationals,P,back,lower,strained,8/17/2013,9/29/2013,43
+Wilson Ramos,1433,2013,Nationals,C,hamstring,left,strained,5/16/2013,7/4/2013,49
+Wilson Ramos,1433,2013,Nationals,C,hamstring,left,strained,4/14/2013,4/29/2013,15
+Brian Roberts,166,2013,Orioles,2B,knee,right,ruptured tendon,4/5/2013,6/30/2013,86
+Chris Tillman,5279,2013,Orioles,P,abdominal,left,strained,3/31/2013,4/6/2013,6
+Jason Hammel,4538,2013,Orioles,P,forearm,right,tendinitis,7/29/2013,9/5/2013,38
+Manny Machado,11493,2013,Orioles,3B,knee,left,torn ligament,9/24/2013,9/29/2013,5
+Miguel Gonzalez,7024,2013,Orioles,P,thumb,right,blister,5/4/2013,5/21/2013,17
+Nolan Reimold,3441,2013,Orioles,OF,cervical spine,,nerve inflammation,7/14/2013,9/29/2013,77
+Nolan Reimold,3441,2013,Orioles,OF,hamstring,right,strained,5/12/2013,7/2/2013,51
+Pedro Strop,4070,2013,Orioles,P,back,lower,strained,5/24/2013,6/8/2013,15
+Steve Johnson,4053,2013,Orioles,P,oblique,left,sprained,6/6/2013,8/2/2013,57
+Steve Johnson,4053,2013,Orioles,P,latissimus dorsi,right,strained,3/31/2013,4/30/2013,30
+Steve Pearce,9957,2013,Orioles,1B/OF,wrist,left,tendinitis,6/20/2013,7/31/2013,41
+Steve Pearce,9957,2013,Orioles,1B/OF,wrist,left,inflammation/tendinitis,8/28/2013,9/17/2013,20
+Taylor Teagarden,5199,2013,Orioles,C,thumb,left,dislocated,4/28/2013,6/4/2013,37
+Tsuyoshi Wada,sa637062,2013,Orioles,P,elbow,left,Tommy John Surgery,3/31/2013,6/14/2013,75
+Wei-Yin Chen,13071,2013,Orioles,P,oblique,right,strained,5/13/2013,7/10/2013,58
+Wilson Betemit,1861,2013,Orioles,3B,knee,right,sprained/torn,3/31/2013,8/27/2013,149
+Cameron Maybin,5223,2013,Padres,OF,knee,left,torn ligament,6/10/2013,9/29/2013,111
+Cameron Maybin,5223,2013,Padres,OF,wrist,right,impingement,4/16/2013,6/6/2013,51
+Carlos Quentin,6274,2013,Padres,OF,knee,right,strained/sore,7/31/2013,9/29/2013,60
+Casey Kelly,9174,2013,Padres,P,elbow,right,surgery,3/31/2013,6/3/2013,64
+Chase Headley,4720,2013,Padres,3B,thumb,left,fractured,3/31/2013,4/17/2013,17
+Clayton Richard,3551,2013,Padres,P,shoulder,left,strained,6/22/2013,9/29/2013,99
+Clayton Richard,3551,2013,Padres,P,intestinal,,virus,5/5/2013,5/27/2013,22
+Cory Luebke,1984,2013,Padres,P,elbow,left,Tommy John Surgery,3/31/2013,9/29/2013,182
+Everth Cabrera,8155,2013,Padres,SS,hamstring,left,strained,6/17/2013,7/5/2013,18
+Huston Street,8258,2013,Padres,P,calf,left,strained,5/30/2013,6/14/2013,15
+James Darnell,9060,2013,Padres,3B/OF,oblique,left,strained,3/31/2013,5/4/2013,34
+Jason Marquis,105,2013,Padres,P,elbow,right,strained,7/20/2013,9/29/2013,71
+Jedd Gyorko,10816,2013,Padres,2B,groin,right,strained,6/10/2013,7/12/2013,32
+Joe Wieland,6109,2013,Padres,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Joe Wieland,6109,2013,Padres,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Kyle Blanks,49,2013,Padres,OF,Achilles,left,tendinitis,7/12/2013,8/31/2013,50
+Logan Forsythe,7185,2013,Padres,2B,foot,Right,plantar faciitis,3/31/2013,6/10/2013,71
+Tyson Ross,7872,2013,Padres,P,shoulder,left,subluxation,4/18/2013,5/5/2013,17
+Yasmani Grandal,11368,2013,Padres,C,knee,right,sprained,7/7/2013,9/29/2013,84
+Yonder Alonso,2530,2013,Padres,1B,Hand,Right ,Contusion,6/7/2013,7/12/2013,35
+Ben Revere,4712,2013,Phillies,OF,foot,right,fractured,7/14/2013,9/29/2013,77
+Carlos Ruiz,2579,2013,Phillies,C,hamstring,right,strained,5/20/2013,6/18/2013,29
+Casper Wells,9700,2013,Phillies,OF,eye,,injury,8/26/2013,9/27/2013,32
+Chase Utley,1679,2013,Phillies,2B,oblique,right,strained,5/21/2013,6/21/2013,31
+Delmon Young,2140,2013,Phillies,OF,ankle,right,surgery,3/31/2013,4/30/2013,30
+Domonic Brown,3154,2013,Phillies,OF,head,,concussion,7/24/2013,8/6/2013,13
+Erik Kratz,4403,2013,Phillies,C,knee,left,injury,6/9/2013,7/14/2013,35
+Jeremy Horst,596,2013,Phillies,P,elbow,left,strained,6/16/2013,9/29/2013,105
+Joe Savery,2835,2013,Phillies,P,elbow,left,stiffness,7/23/2013,8/28/2013,36
+John Lannan,7080,2013,Phillies,P,quadriceps,left,strained,4/18/2013,6/17/2013,60
+John Lannan,7080,2013,Phillies,P,knee,left,tendinitis,8/15/2013,9/29/2013,45
+Jonathan Pettibone,7106,2013,Phillies,P,shoulder,right,strained,7/29/2013,9/29/2013,62
+Kyle Kendrick,6230,2013,Phillies,P,shoulder,right,tendinitis/inflammation,9/14/2013,9/29/2013,15
+Michael Stutes,6550,2013,Phillies,P,biceps,right,tendinitis,6/24/2013,9/20/2013,88
+Mike Adams,1937,2013,Phillies,P,biceps,right,tendinitis,6/20/2013,9/29/2013,101
+Mike Adams,1937,2013,Phillies,P,back,right,strained,5/11/2013,5/26/2013,15
+Roy Halladay,1303,2013,Phillies,P,shoulder,right,injury,5/6/2013,8/25/2013,111
+Ryan Howard,2154,2013,Phillies,1B,knee,left,inflammation,7/6/2013,9/29/2013,85
+A.J. Burnett,512,2013,Pirates,P,calf,right,strained,6/9/2013,7/7/2013,28
+Brandon Inge,470,2013,Pirates,3B,shoulder,right,surgery,3/31/2013,4/23/2013,23
+Charlie Morton,4676,2013,Pirates,P,elbow,right,Tommy John Surgery,3/31/2013,6/13/2013,74
+Chase d'Arnaud,6652,2013,Pirates,3B/SS,thumb,left,torn ligament,3/31/2013,5/31/2013,61
+Francisco Liriano,3201,2013,Pirates,P,forearm,right,fractured,3/31/2013,5/11/2013,41
+James McDonald,5523,2013,Pirates,P,shoulder,right,injury,5/1/2013,9/7/2013,129
+Jared Hughes,9325,2013,Pirates,P,shoulder,right,inflammation,6/8/2013,8/2/2013,55
+Jason Grilli,521,2013,Pirates,P,forearm,right,strained,7/23/2013,9/3/2013,42
+Jeanmar Gomez,9033,2013,Pirates,P,forearm,right,inflammation,6/3/2013,6/26/2013,23
+Jeff Karstens,5879,2013,Pirates,P,shoulder,right,inflammation,3/31/2013,9/29/2013,182
+John McDonald,395,2013,Pirates,SS,back,lower,discomfort,5/15/2013,6/10/2013,26
+Jose Contreras,1660,2013,Pirates,P,back,lower,inflammation,5/28/2013,6/13/2013,16
+Jose Tabata,2411,2013,Pirates,OF,oblique,left,strained,5/25/2013,7/3/2013,39
+Kyle McPherson,5009,2013,Pirates,P,elbow,right,surgery,8/27/2013,9/29/2013,33
+Michael McKenry,9628,2013,Pirates,C,knee,left,sprained,7/28/2013,9/29/2013,63
+Neil Walker,7539,2013,Pirates,2B,finger,right index,lacerated,4/27/2013,5/13/2013,16
+Neil Walker,7539,2013,Pirates,2B,oblique,right,strained,7/7/2013,7/23/2013,16
+Phil Irwin,9489,2013,Pirates,P,elbow,right,tendinitis/fatigue,6/3/2013,9/29/2013,118
+Starling Marte,9241,2013,Pirates,OF,hand,right,bruised/sprained,8/19/2013,9/7/2013,19
+Travis Snider,2830,2013,Pirates,OF,toe,left big,injury,7/29/2013,9/1/2013,34
+Wandy Rodriguez,2586,2013,Pirates,P,forearm,left,tightness,6/6/2013,9/29/2013,115
+A.J. Pierzynski,746,2013,Rangers,C,oblique,right,strained,5/6/2013,5/21/2013,15
+Alexi Ogando,10261,2013,Rangers,P,shoulder,right,inflammation,6/7/2013,7/23/2013,46
+Alexi Ogando,10261,2013,Rangers,P,biceps,right,tendinitis,5/16/2013,6/5/2013,20
+Alexi Ogando,10261,2013,Rangers,P,shoulder,right,inflammation,8/14/2013,9/3/2013,20
+Colby Lewis,1259,2013,Rangers,P,elbow,right,surgery,3/31/2013,9/29/2013,182
+Craig Gentry,9571,2013,Rangers,OF,hand,left,fractured,6/21/2013,7/18/2013,27
+Ian Kinsler,6195,2013,Rangers,2B,intercostal,right,strained,5/18/2013,6/15/2013,28
+Jeff Baker,2073,2013,Rangers,2B,thumb,right,sprained,6/13/2013,7/18/2013,35
+Joakim Soria,6941,2013,Rangers,P,elbow,right,Tommy John Surgery,3/31/2013,7/7/2013,98
+Justin Miller,1313,2013,Rangers,P,elbow,right,Tommy John Surgery,4/11/2013,6/12/2013,62
+Lance Berkman,548,2013,Rangers,1B/OF,hip,left,inflammation,7/7/2013,9/1/2013,56
+Martin Perez,6902,2013,Rangers,P,wrist/forearm,left,fractured,3/31/2013,5/12/2013,42
+Matt Harrison,5551,2013,Rangers,P,back,lower,strained,4/7/2013,9/29/2013,175
+Matt West,sa390320,2013,Rangers,3B,elbow,right,Tommy John Surgery,8/20/2013,9/29/2013,40
+Michael Kirkman,9877,2013,Rangers,P,triceps,right,lymphoma,6/7/2013,9/1/2013,86
+Mitch Moreland,3086,2013,Rangers,1B,hamstring,right,strained,6/6/2013,6/21/2013,15
+Neftali Feliz,18,2013,Rangers,P,elbow,right,Tommy John Surgery,3/31/2013,9/1/2013,154
+Nick Tepesch,11716,2013,Rangers,P,elbow,right,inflammation,7/6/2013,9/1/2013,57
+Yu Darvish,13074,2013,Rangers,P,shoulder,right,strained,7/7/2013,7/22/2013,15
+Alex Cobb,6562,2013,Rays,P,head,,concussion,6/14/2013,8/15/2013,62
+Alex Colome,6661,2013,Rays,P,elbow,right,strained,8/30/2013,9/29/2013,30
+Brandon Gomes,2267,2013,Rays,P,latissimus dorsi,right,strained,5/8/2013,8/17/2013,101
+Brandon Guyer,2636,2013,Rays,OF,finger,right middle,fractured,8/2/2013,9/29/2013,58
+David Price,3184,2013,Rays,P,triceps,left,strained,5/16/2013,7/2/2013,47
+Desmond Jennings,1965,2013,Rays,OF,finger,left middle,fractured,8/4/2013,8/19/2013,15
+Jeff Niemann,8591,2013,Rays,P,shoulder,right,sore,3/31/2013,9/29/2013,182
+Juan Carlos Oviedo,2886,2013,Rays,P,elbow,right,Tommy John Surgery,3/31/2013,9/29/2013,182
+Luke Scott,3469,2013,Rays,DH/OF,calf,right,strained,3/31/2013,4/30/2013,30
+Luke Scott,3469,2013,Rays,DH/OF,back,lower,spasms,8/15/2013,9/1/2013,17
+Matt Moore,1890,2013,Rays,P,elbow,left,sore,7/29/2013,9/3/2013,36
+Alex Wilson,9239,2013,Red Sox,P,thumb,right,sprained,7/9/2013,9/29/2013,82
+Andrew Bailey,1368,2013,Red Sox,P,shoulder,right,strained,7/13/2013,9/29/2013,78
+Andrew Bailey,1368,2013,Red Sox,P,biceps,right,inflammation,4/29/2013,5/20/2013,21
+Andrew Miller,6785,2013,Red Sox,P,foot,left,surgery,7/7/2013,9/29/2013,84
+Brandon Snyder,9856,2013,Red Sox,1B/3B,elbow,left,ulnar neuritis,8/8/2013,9/1/2013,24
+Clay Buchholz,3543,2013,Red Sox,P,neck,,strained,6/9/2013,9/10/2013,93
+Clayton Mortensen,3166,2013,Red Sox,P,groin,right,strained,6/11/2013,6/26/2013,15
+Craig Breslow,4363,2013,Red Sox,P,shoulder,left,tendinitis,3/31/2013,5/6/2013,36
+David Ortiz,745,2013,Red Sox,DH,Achilles,right,sore,3/31/2013,4/19/2013,19
+David Ross,1551,2013,Red Sox,C,head,,concussion,6/18/2013,8/19/2013,62
+David Ross,1551,2013,Red Sox,C,head,,concussion,5/12/2013,5/24/2013,12
+Franklin Morales,5088,2013,Red Sox,P,back,lower,strained,3/31/2013,5/28/2013,58
+Franklin Morales,5088,2013,Red Sox,P,pectoral,left,strained,6/23/2013,8/10/2013,48
+Joel Hanrahan,2186,2013,Red Sox,P,forearm,right,strained,5/7/2013,9/29/2013,145
+Joel Hanrahan,2186,2013,Red Sox,P,hamstring,right,sore/strained,4/14/2013,4/30/2013,16
+John Lackey,1507,2013,Red Sox,P,biceps,right,strained,4/7/2013,4/27/2013,20
+Matt Thornton,1918,2013,Red Sox,P,oblique,right,strained,8/5/2013,8/25/2013,20
+Ryan Kalish,6962,2013,Red Sox,OF,shoulder,right,surgery,3/31/2013,9/29/2013,182
+Shane Victorino,1677,2013,Red Sox,OF,hamstring,left,strained,5/21/2013,6/8/2013,18
+Stephen Drew,4251,2013,Red Sox,SS,hamstring,right,tightness,6/29/2013,7/20/2013,21
+Stephen Drew,4251,2013,Red Sox,SS,head,,concussion,3/31/2013,4/10/2013,10
+Will Middlebrooks,7002,2013,Red Sox,3B,back,lower,spasms,5/24/2013,6/10/2013,17
+Chris Heisey,3978,2013,Reds,OF,hamstring,right,strained,4/28/2013,6/25/2013,58
+Chris Valaika,1165,2013,Reds,2B,wrist,left,fractured,5/8/2013,7/23/2013,76
+Corky Miller,342,2013,Reds,C,quadriceps,right,injury,8/8/2013,9/2/2013,25
+Johnny Cueto,6893,2013,Reds,P,latissimus dorsi,right,strained,6/29/2013,9/16/2013,79
+Johnny Cueto,6893,2013,Reds,P,latissimus dorsi,right,strained,4/14/2013,5/20/2013,36
+Johnny Cueto,6893,2013,Reds,P,shoulder,right,strained,6/1/2013,6/16/2013,15
+Jonathan Broxton,4759,2013,Reds,P,elbow,right,strained,6/14/2013,8/7/2013,54
+Jonathan Broxton,4759,2013,Reds,P,forearm,right,strained flexor muscle,8/22/2013,9/29/2013,38
+Manny Parra,4279,2013,Reds,P,pectoral,,strained muscle,4/24/2013,5/24/2013,30
+Nick Masset,7267,2013,Reds,P,shoulder,right,surgery,3/31/2013,9/29/2013,182
+Ryan Hanigan,4952,2013,Reds,C,wrist,left,sprained,7/10/2013,8/9/2013,30
+Ryan Hanigan,4952,2013,Reds,C,oblique,left,strained,4/20/2013,5/10/2013,20
+Ryan Ludwick,1260,2013,Reds,OF,shoulder,right,torn cartilage,4/2/2013,8/11/2013,131
+Sean Marshall,5905,2013,Reds,P,shoulder,left,sprained,5/21/2013,9/16/2013,118
+Sean Marshall,5905,2013,Reds,P,shoulder,left,tendinitis,4/8/2013,4/26/2013,18
+Tony Cingrani,12555,2013,Reds,P,back,lower,strained,8/21/2013,9/5/2013,15
+Carlos Gonzalez,7287,2013,Rockies,OF,finger,right middle,sprained,8/5/2013,9/3/2013,29
+Christian Friedrich,7942,2013,Rockies,P,back,lower,inflammation,8/8/2013,9/29/2013,52
+Dexter Fowler,4062,2013,Rockies,OF,wrist,right,bruised,6/26/2013,7/11/2013,15
+Drew Pomeranz,11426,2013,Rockies,P,biceps,left,tendinitis,7/23/2013,9/6/2013,45
+Edgmer Escalona,8574,2013,Rockies,P,elbow,right,inflammation,6/10/2013,7/2/2013,22
+Edwar Cabrera,9211,2013,Rockies,P,shoulder,left,impingement,3/31/2013,9/29/2013,182
+Jeff Francis,4684,2013,Rockies,P,groin,left,strained,5/15/2013,6/8/2013,24
+Jhoulys Chacin,2608,2013,Rockies,P,back,left lower,strained,4/20/2013,5/5/2013,15
+Michael Cuddyer,1534,2013,Rockies,OF,neck,,bulging disc,5/9/2013,5/24/2013,15
+Rafael Betancourt,177,2013,Rockies,P,elbow,right,sprained,8/23/2013,9/29/2013,37
+Rafael Betancourt,177,2013,Rockies,P,,,appendicitis,7/15/2013,8/17/2013,33
+Rafael Betancourt,177,2013,Rockies,P,groin,right,strained,6/1/2013,6/28/2013,27
+Roy Oswalt,571,2013,Rockies,P,hamstring,left,strained,7/8/2013,9/6/2013,60
+Todd Helton,432,2013,Rockies,1B,forearm,left,inflammation,4/20/2013,5/5/2013,15
+Troy Tulowitzki,3531,2013,Rockies,SS,ribs,,fractured,6/14/2013,7/11/2013,27
+Tyler Chatwood,4338,2013,Rockies,P,elbow,right,inflammation,8/8/2013,9/1/2013,24
+Yorvit Torrealba,1135,2013,Rockies,C,head,,concussion,8/19/2013,8/27/2013,8
+Carlos Pena,934,2013,Royals,1B,,,appendectomy,9/17/2013,9/29/2013,12
+Chris Getz,3388,2013,Royals,2B,knee,left,sprained,7/28/2013,8/12/2013,15
+Danny Duffy,3542,2013,Royals,P,elbow,left,Tommy John Surgery,3/31/2013,6/24/2013,85
+Danny Duffy,3542,2013,Royals,P,elbow,left,strained,9/8/2013,9/29/2013,21
+Felipe Paulino,3777,2013,Royals,P,elbow,,Tommy John Surgery,3/31/2013,9/29/2013,182
+Jarrod Dyson,4866,2013,Royals,OF,ankle,right,sprained,5/16/2013,6/22/2013,37
+Lorenzo Cain,9077,2013,Royals,OF,oblique,left,strained,8/9/2013,9/5/2013,27
+Miguel Tejada,941,2013,Royals,SS,calf,right,strained,8/11/2013,9/29/2013,49
+Noel Arguelles,sa536642,2013,Royals,P,groin,left,injury,9/3/2013,9/29/2013,26
+Salvador Perez,7304,2013,Royals,C,head,,concussion,8/4/2013,8/11/2013,7
+Name,PlayerId,Season,Team,Position,Location(major – back),Location(specific-left),Injury type(strain),On Date,Off Date,Days
+Alex Avila,7476,2013,Tigers,C,head,,concussion,8/11/2013,8/27/2013,16
+Alex Avila,7476,2013,Tigers,C,forearm,left,bruised,6/17/2013,7/1/2013,14
+Anibal Sanchez,3284,2013,Tigers,P,shoulder,right,strained,6/16/2013,7/5/2013,19
+Austin Jackson,9848,2013,Tigers,OF,hamstring,right,strained,5/12/2013,6/14/2013,33
+Avisail Garcia,5760,2013,Tigers,OF,heel,right,bruised,3/31/2013,4/30/2013,30
+Danny Worth,198,2013,Tigers,2B,shoulder,right,dislocated,9/25/2013,9/29/2013,4
+Darin Downs,5903,2013,Tigers,P,rotator cuff,left,tendinitis,7/7/2013,8/4/2013,28
+Luis Marte,8651,2013,Tigers,P,shoulder,right,surgery,7/31/2013,9/29/2013,60
+Matt Tuiasosopo,8272,2013,Tigers,OF,intercostal,left,strained,6/20/2013,7/5/2013,15
+Octavio Dotel,555,2013,Tigers,P,elbow,right,inflammation,4/20/2013,9/29/2013,162
+Omar Infante,1609,2013,Tigers,2B,head,,concussion,8/20/2013,9/29/2013,40
+Omar Infante,1609,2013,Tigers,2B,ankle,left,sprained,7/4/2013,8/12/2013,39
+Phil Coke,5535,2013,Tigers,P,groin,left,strained,4/26/2013,5/10/2013,14
+Aaron Hicks,5297,2013,Twins,OF,hamstring,left,strained,6/10/2013,7/2/2013,22
+Anthony Swarzak,7466,2013,Twins,P,ribs,,fractured,3/31/2013,4/7/2013,7
+Cole DeVries,8201,2013,Twins,P,forearm,right,strained,3/31/2013,5/17/2013,47
+Darin Mastroianni,7316,2013,Twins,OF,ankle,left,sore,4/16/2013,8/15/2013,121
+Joe Mauer,1857,2013,Twins,C,head,,concussion,8/20/2013,9/29/2013,40
+Josh Willingham,2103,2013,Twins,OF,knee,left,torn meniscus,7/1/2013,8/9/2013,39
+Mike Pelfrey,5203,2013,Twins,P,back,,strained,6/19/2013,7/4/2013,15
+Ryan Doumit,2113,2013,Twins,C,head,,concussion,8/8/2013,8/16/2013,8
+Samuel Deduno,5285,2013,Twins,P,shoulder,right,sore,8/30/2013,9/29/2013,30
+Scott Diamond,5089,2013,Twins,P,elbow,left,surgery,3/31/2013,4/13/2013,13
+Tim Wood,3775,2013,Twins,P,rotator cuff,right,strained,3/31/2013,8/28/2013,150
+Trevor Plouffe,7462,2013,Twins,3B,calf,left,strained,5/29/2013,6/14/2013,16
+Trevor Plouffe,7462,2013,Twins,3B,head,,concussion,5/22/2013,5/29/2013,7
+Wilkin Ramirez,5219,2013,Twins,OF,head,,concussion,5/26/2013,8/12/2013,78
+Wilkin Ramirez,5219,2013,Twins,OF,tibia,left,fractured,8/30/2013,9/29/2013,30
+Angel Sanchez,3492,2013,White Sox,SS,back,lower,strained,4/14/2013,5/25/2013,41
+Brian Omogrosso,1353,2013,White Sox,P,elbow,right,surgery,9/3/2013,9/29/2013,26
+Dayan Viciedo,3917,2013,White Sox,OF,oblique,left,strained,4/19/2013,5/10/2013,21
+DeWayne Wise,1554,2013,White Sox,OF,hamstring,right,strained,5/30/2013,8/3/2013,65
+Gavin Floyd,3886,2013,White Sox,P,elbow,right,strained flexor mass,4/27/2013,9/29/2013,155
+Gordon Beckham,9015,2013,White Sox,2B,wrist,left,fractured,4/10/2013,6/3/2013,54
+Jake Peavy,1051,2013,White Sox,P,ribs,,fractured,6/5/2013,7/19/2013,44
+Jesse Crain,4817,2013,White Sox,P,shoulder,right,strained,6/30/2013,9/23/2013,85
+John Danks,6329,2013,White Sox,P,shoulder,left,surgery,3/31/2013,5/24/2013,54
+Leyson Septimo,341,2013,White Sox,P,shoulder,left,strained,3/31/2013,6/11/2013,72
+Paul Konerko,242,2013,White Sox,1B,back,lower,strained,7/3/2013,7/22/2013,19
+Ramon Troncoso,4685,2013,White Sox,P,heart,,Pericarditis,8/16/2013,9/6/2013,21
+Tyler Flowers,9134,2013,White Sox,C,shoulder,right,surgery,9/3/2013,9/29/2013,26
+Alex Rodriguez,1274,2013,Yankees,3B/SS,hip,left,surgery,3/31/2013,8/5/2013,127
+Andy Pettitte,840,2013,Yankees,P,trapezius,,strained,5/17/2013,6/3/2013,17
+C.C. Sabathia,404,2013,Yankees,P,hamstring,left,strained,9/25/2013,9/29/2013,4
+Cesar Cabral,6741,2013,Yankees,P,elbow,left,stress fraction,3/31/2013,6/14/2013,75
+Corban Joseph,5503,2013,Yankees,1B/2B,shoulder,right,surgery,9/6/2013,9/29/2013,23
+Curtis Granderson,4747,2013,Yankees,OF,finger,left pinky,fractured,5/25/2013,8/2/2013,69
+Curtis Granderson,4747,2013,Yankees,OF,forearm,right,fractured,3/31/2013,5/14/2013,44
+David Phelps,6316,2013,Yankees,P,forearm,right,strained,7/5/2013,9/14/2013,71
+Derek Jeter,826,2013,Yankees,SS,ankle,left,surgery,3/31/2013,7/11/2013,102
+Derek Jeter,826,2013,Yankees,SS,calf,right,strained,8/3/2013,8/26/2013,23
+Derek Jeter,826,2013,Yankees,SS,ankle,left,injury,9/8/2013,9/29/2013,21
+Derek Jeter,826,2013,Yankees,SS,quadriceps,right,strained,7/12/2013,7/29/2013,17
+Eduardo Nunez,6848,2013,Yankees,3B/SS,rib cage,left,strained/sore,5/6/2013,7/6/2013,61
+Francisco Cervelli,5275,2013,Yankees,C,hand,right,fractured,4/27/2013,9/29/2013,155
+Ivan Nova,1994,2013,Yankees,P,triceps,right,inflammation,4/27/2013,5/24/2013,27
+Jayson Nix,3790,2013,Yankees,2B/3B,hand,left,fractured,8/22/2013,9/29/2013,38
+Jayson Nix,3790,2013,Yankees,2B/3B,hamstring,right,strained,7/2/2013,7/29/2013,27
+Joba Chamberlain,2692,2013,Yankees,P,oblique,right,strained,4/28/2013,5/28/2013,30
+Kevin Youkilis,1935,2013,Yankees,1B/3B,back,,strained,6/14/2013,9/29/2013,107
+Kevin Youkilis,1935,2013,Yankees,1B/3B,back,,sprained,4/28/2013,5/31/2013,33
+Luis Cruz,3188,2013,Yankees,3B/SS,knee,right,sprained,7/23/2013,8/16/2013,24
+Mark Teixeira,1281,2013,Yankees,1B,wrist,right,inflammation,6/18/2013,9/29/2013,103
+Mark Teixeira,1281,2013,Yankees,1B,wrist,right,strained,3/31/2013,5/31/2013,61
+Michael Pineda,5372,2013,Yankees,P,shoulder,right,surgery,3/31/2013,7/7/2013,98
+Phil Hughes,7450,2013,Yankees,P,back,right upper,thoracic injury,3/31/2013,4/6/2013,6
+Travis Hafner,1573,2013,Yankees,DH,rotator cuff,right,strained,7/27/2013,9/25/2013,60
+Vidal Nuno,9674,2013,Yankees,P,groin,left,strained,9/7/2013,9/29/2013,22
+Zoilo Almonte,6732,2013,Yankees,OF,ankle,left,sprained,7/20/2013,9/9/2013,51

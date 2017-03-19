@@ -1,0 +1,572 @@
+Name,Season,Team,Position,on_DL,off_dl,days,Location,Injury Type,Side/Location,Location id,PlayerId,Teamid
+A.J. Griffin,2016,Rangers,RHP,05/08/16,10/03/16,148,shoulder,stiffness,right,18,11132,13
+A.J. Morris,2016,Reds,RHP,06/16/16,10/03/16,109,shoulder,strained,right,18,9919,18
+A.J. Pierzynski,2016,Braves,C,08/17/16,09/01/16,15,hamstring,strained,left,5,746,16
+A.J. Pierzynski,2016,Braves,C,09/11/16,10/03/16,22,hamstring,strained,,5,746,16
+A.J. Pollock,2016,Diamondbacks,CF,04/03/16,08/26/16,145,elbow,fractured,right,8,9256,15
+A.J. Ramos,2016,Marlins,RHP,08/06/16,08/21/16,15,finger,fractured,right,3,8350,20
+A.J. Schugel,2016,Pirates,RHP,09/23/16,10/03/16,10,shoulder,discomfort,right,18,11432,27
+Aaron Altherr,2016,Phillies,CF,04/03/16,07/28/16,116,wrist,surgery,left,19,11270,26
+Aaron Barrett,2016,Nationals,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,11243,24
+Aaron Blair,2016,Braves,RHP,08/29/16,09/18/16,20,knee,strain,left,21,14934,16
+Aaron Brooks,2016,Cubs,RHP,04/03/16,10/03/16,183,hip,contusion,,4,12272,17
+Aaron Hicks,2016,Yankees,RF,09/01/16,09/20/16,19,hamstring,strain,right,5,5297,9
+Aaron Judge,2016,Yankees,RF,09/14/16,10/03/16,19,oblique,strain,right,6,15640,9
+Aaron Loup,2016,Blue Jays,LHP,04/03/16,10/03/16,183,elbow,dysfunction,left,8,10343,14
+Aaron Nola,2016,Phillies,RHP,07/29/16,10/03/16,66,elbow,strained,right,8,16149,26
+Aaron Nola,2016,Phillies,RHP,08/17/16,10/03/16,47,elbow,strained,right,8,16149,26
+Adam Conley,2016,Marlins,LHP,08/14/16,09/26/16,43,third-finger,tendinitis,left,3,14457,20
+Adam Liberatore,2016,Dodgers,LHP,07/30/16,08/19/16,20,elbow,inflammation,left,8,10637,22
+Adam Ottavino,2016,Rockies,RHP,04/03/16,07/05/16,93,elbow,Tommy John surgery,,8,1247,19
+Adrian Sampson,2016,Mariners,RHP,06/24/16,10/03/16,101,flexor bundle,strain,right,5,13339,11
+Aledmys Diaz,2016,Cardinals,SS,08/01/16,09/11/16,41,thumb,fracture,right,3,15937,28
+Alex Avila,2016,White Sox,C,04/24/16,05/09/16,15,hamstring,strained,right,5,7476,4
+Alex Avila,2016,White Sox,C,07/06/16,08/26/16,51,hamstring,strained,right,5,7476,4
+Alex Cobb,2016,Rays,RHP,04/03/16,08/29/16,148,elbow,Tommy John surgery,,8,6562,12
+Alex Cobb,2016,Rays,RHP,04/03/16,08/29/16,148,elbow,Tommy John surgery,,8,6562,12
+Alex Colome,2016,Rays,RHP,06/19/16,07/05/16,16,biceps,tendinitis,right,2,6661,12
+Alex Gordon,2016,Royals,LF,05/23/16,06/25/16,33,wrist,scaphoid fracture,right,19,5209,7
+Alex Guerrero,2016,Dodgers,LF,04/03/16,10/03/16,183,knee,bruised,left,21,15670,22
+Alex Rodriguez,2016,Yankees,DH,05/04/16,05/26/16,22,hamstring,strained,right,5,1274,9
+Alex Wilson,2016,Tigers,RHP,04/03/16,04/16/16,13,shoulder,soreness,right,18,9239,6
+Alex Wood,2016,Dodgers,LHP,05/31/16,09/20/16,112,tricep,soreness,left,2,13781,22
+Alexi Amarista,2016,Padres,SS,04/20/16,05/18/16,28,hamstring,strain,right,5,9063,29
+Alexi Amarista,2016,Padres,2B,08/02/16,09/02/16,31,hamstring,strain,left,5,9063,29
+Alfredo Simon,2016,Reds,RHP,06/21/16,08/29/16,69,shoulder,inflammation,right,18,2155,18
+Alfredo Simon,2016,Reds,RHP,09/12/16,10/03/16,21,shoulder,surgery,right,18,2155,18
+Andre Ethier,2016,Dodgers,RF,04/03/16,09/10/16,160,tibia,broken,right,5,6265,22
+Andrelton Simmons,2016,Angels,SS,05/09/16,06/15/16,37,thumb ligament,torn,left,3,10847,1
+Andres Blanco,2016,Phillies,2B,07/25/16,09/02/16,39,index finger,fractured,left,3,1907,26
+Andrew Bailey,2016,Phillies,RHP,06/23/16,07/08/16,15,hamstring,strain,left,5,1368,26
+Andrew Benintendi,2016,Red Sox,LF,08/25/16,09/13/16,19,knee,sprained,left,21,17901,3
+Andrew Cashner,2016,Padres,RHP,05/09/16,05/24/16,15,hamstring,strain,right,5,8782,29
+Andrew Cashner,2016,Padres,RHP,06/11/16,07/03/16,22,neck,strained,,7,8782,29
+Andrew Chafin,2016,Diamondbacks,LHP,07/04/16,09/06/16,64,shoulder,tendinitis,left,18,12988,15
+Andrew Heaney,2016,Angels,LHP,04/06/16,10/03/16,180,flexor muscle,strain,left,5,15423,1
+Andrew Lambo,2016,Athletics,RF,07/04/16,10/03/16,91,testicular,surgery,,9,5386,10
+Andrew McKirahan,2016,Braves,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,12870,16
+Andrew McKirahan,2016,Braves,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,12870,16
+Andrew Triggs,2016,Athletics,RHP,07/18/16,10/03/16,77,shin,contusion,left,11,13533,10
+Angel Nesbitt,2016,Tigers,RHP,04/03/16,10/03/16,183,ankle,sprained,right,11,13415,6
+Angel Pagan,2016,Giants,LF,05/24/16,06/14/16,21,hamstring,strain,left,5,2918,30
+Anthony DeSclafani,2016,Reds,RHP,04/03/16,06/10/16,68,oblique,mild strain,,6,13050,18
+Anthony Swarzak,2016,Yankees,RHP,08/23/16,09/18/16,26,rotator cuff,inflammation,right,18,7466,9
+Arodys Vizcaino,2016,Braves,RHP,07/16/16,08/18/16,33,oblique,strained,,6,5498,16
+Arodys Vizcaino,2016,Braves,RHP,08/29/16,10/03/16,35,shoulder,inflammation,right,18,5498,16
+Arquimedes Caminero,2016,Pirates,RHP,05/25/16,06/11/16,17,quadriceps,strain,left,5,8992,27
+Asdrubal Cabrera,2016,Mets,SS,08/01/16,08/19/16,18,knee,strained patella tendon,left,21,4962,25
+Austin Jackson,2016,White Sox,CF,06/10/16,10/03/16,115,knee,medial meniscus tear,left,21,9848,4
+Avisail Garcia,2016,White Sox,DH,08/07/16,08/23/16,16,knee,sprained,right,21,5760,4
+Ben Revere,2016,Nationals,LF,04/05/16,05/06/16,31,oblique,strain,right,6,4712,24
+Billy Hamilton,2016,Reds,CF,06/09/16,06/17/16,8,head,concussion,,1,10199,18
+Billy Hamilton,2016,Reds,CF,09/05/16,10/03/16,28,oblique,strain,,6,10199,18
+Blaine Hardy,2016,Tigers,LHP,04/03/16,04/18/16,15,shoulder,impingement,left,18,6499,6
+Blake Swihart,2016,Red Sox,LF,06/05/16,10/03/16,120,ankle,sprain,left,11,13176,3
+Bo Schultz,2016,Blue Jays,RHP,04/03/16,10/03/16,183,hip,surgery,left,4,5028,14
+Boone Logan,2016,Rockies,LHP,05/18/16,06/06/16,19,shoulder,inflammation,left,18,5525,19
+Brad Boxberger,2016,Rays,RHP,06/01/16,07/29/16,58,oblique,injury,left,6,10133,12
+Brad Boxberger,2016,Rays,RHP,04/03/16,05/30/16,57,groin,surgery,,9,10133,12
+Brad Boxberger,2016,Rays,RHP,04/03/16,05/30/16,57,groin,surgery,,9,10133,12
+Branden Pinder,2016,Yankees,RHP,04/21/16,10/03/16,165,elbow,strain,right,8,12093,9
+Brandon Guyer,2016,Rays,LF,06/05/16,06/29/16,24,hamstring,strained,left,5,2636,12
+Brandon McCarthy,2016,Dodgers,RHP,08/14/16,09/25/16,42,hip,stiffness,right,4,4662,22
+Brandon McCarthy,2016,Dodgers,RHP,04/03/16,07/03/16,91,elbow,Tommy John surgery,,8,4662,22
+Brandon Moss,2016,Cardinals,1B,07/05/16,08/02/16,28,ankle,sprain,left,11,4467,28
+Brandon Workman,2016,Red Sox,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,11428,3
+Brayan Pena,2016,Cardinals,C,04/03/16,06/28/16,86,knee,injury,left,21,3231,28
+Brayan Pena,2016,Cardinals,C,07/06/16,09/04/16,60,knee,inflammation,left,21,3231,28
+Brett Anderson,2016,Dodgers,LHP,08/21/16,09/22/16,32,index finger,blister,left,3,8223,22
+Brett Anderson,2016,Dodgers,LHP,04/03/16,08/14/16,133,back,bulging disc surgery,,15,8223,22
+Brett Cecil,2016,Blue Jays,LHP,05/15/16,06/30/16,46,triceps,strain,left,2,2660,14
+Brett Eibner,2016,Royals,CF,06/01/16,10/03/16,124,ankle,sprain,left,11,11369,7
+Brett Lawrie,2016,White Sox,2B,07/22/16,10/03/16,73,hamstring,strained,left,5,5247,4
+Brian Duensing,2016,Orioles,LHP,06/20/16,09/05/16,77,elbow,inflammation,left,8,4064,2
+Brian Matusz,2016,Orioles,LHP,04/03/16,04/23/16,20,intercostal,strain,left,6,2646,2
+Brock Holt,2016,Red Sox,LF,05/19/16,07/01/16,43,head,concussion,,1,9345,3
+Brock Holt,2016,Red Sox,LF,06/02/16,07/01/16,29,head,concussion,,1,9345,3
+Bryan Holaday,2016,Rangers,C,07/05/16,10/03/16,90,thumb,bruised,left,3,11287,13
+Bryan Mitchell,2016,Yankees,RHP,04/03/16,10/03/16,183,great toe,tear,left,17,11479,9
+Bryan Morris,2016,Marlins,RHP,05/25/16,09/20/16,118,lumbar disc,herniation,,6,10234,20
+Bud Norris,2016,Dodgers,RHP,08/06/16,08/19/16,13,back,strain,mid,15,9492,22
+Buddy Baumann,2016,Padres,LHP,04/03/16,07/01/16,89,back,strain,low,15,9309,29
+Buddy Boshers,2016,Twins,LHP,08/11/16,09/02/16,22,elbow,inflammation,left,8,8490,8
+C.J. Cron,2016,Angels,1B,07/09/16,08/20/16,42,hand,fractured,left,3,12546,1
+C.J. Wilson,2016,Angels,LHP,04/03/16,10/03/16,183,shoulder,tendinitis,left,18,3580,1
+Caleb Cotham,2016,Reds,RHP,05/29/16,10/03/16,127,shoulder,inflammation,right,18,10075,18
+Cam Bedrosian,2016,Angels,RHP,08/04/16,10/03/16,60,finger,tendinitis,right,3,13360,1
+Cameron Maybin,2016,Tigers,CF,08/04/16,08/21/16,17,thumb,sprain,left,3,5223,6
+Cameron Maybin,2016,Tigers,CF,04/03/16,05/16/16,43,wrist,fracture,left,19,5223,6
+Carl Crawford,2016,Dodgers,LF,04/09/16,04/26/16,17,back,tightness,lower,15,1201,22
+Carlos Carrasco,2016,Indians,RHP,09/17/16,10/03/16,16,hand,broken,right,3,6632,5
+Carlos Carrasco,2016,Indians,RHP,04/25/16,06/02/16,38,hamstring,strained,left,5,6632,5
+Carlos Frias,2016,Dodgers,RHP,09/09/16,10/03/16,24,oblique,impingement,right,6,3547,22
+Carlos Gomez,2016,Astros,CF,05/16/16,05/31/16,15,rib,bruised,left,6,4881,21
+Carlos Rodon,2016,White Sox,LHP,07/06/16,07/31/16,25,wrist,sprained,left,19,16137,4
+Carson Smith,2016,Red Sox,RHP,04/03/16,05/03/16,30,elbow,strain,right,8,13172,3
+Carson Smith,2016,Red Sox,RHP,05/15/16,10/03/16,141,elbow,soreness,right,8,13172,3
+Carter Capps,2016,Marlins,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,12803,20
+Casey Fien,2016,Dodgers,RHP,07/17/16,10/03/16,78,elbow,tendinitis,right,8,3926,22
+CC Sabathia,2016,Yankees,LHP,05/05/16,05/20/16,15,groin,strained,left,9,404,9
+Cesar Vargas,2016,Padres,RHP,05/29/16,10/03/16,127,elbow,soreness,right,8,14099,29
+Chad Green,2016,Yankees,RHP,09/03/16,10/03/16,30,forearm tendon,injury,right,2,15552,9
+Chad Qualls,2016,Rockies,RHP,07/16/16,08/19/16,34,internal,colitis,,23,2170,19
+Charlie Blackmon,2016,Rockies,CF,04/14/16,04/29/16,15,foot,turf toe,left,17,7859,19
+Charlie Furbush,2016,Mariners,LHP,04/03/16,10/03/16,183,biceps,tendinitis,left,2,1370,11
+Charlie Morton,2016,Phillies,RHP,04/24/16,10/03/16,162,hamstring,strained,left,5,4676,26
+Charlie Tilson,2016,White Sox,CF,08/03/16,10/03/16,61,hamstring,strained,left,5,12983,4
+Chase Whitley,2016,Rays,RHP,04/03/16,08/17/16,136,elbow,Tommy John surgery,,8,10982,12
+Chasen Shreve,2016,Yankees,LHP,05/26/16,06/19/16,24,shoulder ac joint,sprain,left,18,10855,9
+Chien-Ming Wang,2016,Royals,RHP,08/31/16,09/17/16,17,biceps,tendinitis,right,2,2074,7
+Chin-hui Tsao,2016,Dodgers,RHP,05/22/16,10/03/16,134,triceps,strain,right,2,1776,22
+Chris Bassitt,2016,Athletics,RHP,04/29/16,10/03/16,157,elbow,strained,right,8,12304,10
+Chris Capuano,2016,Brewers,LHP,04/03/16,10/03/16,183,elbow,soreness,left,8,1701,23
+Chris Coghlan,2016,Cubs,LF,08/17/16,09/01/16,15,rib,contusion,right,6,6878,17
+Chris Coghlan,2016,Cubs,LF,07/03/16,07/29/16,26,rib cage,strain,right,6,6878,17
+Chris Gimenez,2016,Rangers,C,04/03/16,10/03/16,183,ankle,infection,left,11,7324,13
+Chris Herrmann,2016,Diamondbacks,C,07/17/16,09/06/16,51,hamstring,strained,right,5,9284,15
+Chris Heston,2016,Giants,RHP,06/29/16,10/03/16,96,oblique,strain,,6,10302,30
+Chris Lee,2016,Orioles,LHP,09/15/16,10/03/16,18,shoulder,strain,left,18,sa550044,2
+Chris Owings,2016,Diamondbacks,CF,06/06/16,07/23/16,47,foot,plantar faciitis,left,17,10030,15
+Chris Parmelee,2016,Yankees,1B,06/10/16,08/13/16,64,hamstring,strain,right,5,2554,9
+Chris Rusin,2016,Rockies,LHP,06/14/16,07/27/16,43,shoulder,strain,left,18,9895,19
+Chris Stewart,2016,Pirates,C,07/02/16,09/02/16,62,knee,discomfort,left,21,3878,27
+Chris Stewart,2016,Pirates,C,09/13/16,10/03/16,20,knee,discomfort,left,21,3878,27
+Chris Tillman,2016,Orioles,RHP,08/21/16,09/11/16,21,shoulder,bursitis,right,18,5279,2
+Chris Withrow,2016,Braves,RHP,08/05/16,09/01/16,27,elbow,inflammation,right,8,7161,16
+Chris Young,2016,Red Sox,LF,06/24/16,08/22/16,59,hamstring,strained,right,5,3882,3
+Chris Young,2016,Royals,RHP,05/10/16,05/28/16,18,forearm,strain,right,2,3196,7
+Christian Bergman,2016,Rockies,RHP,05/20/16,07/10/16,51,oblique,strained,left,6,10925,19
+Christian Bethancourt,2016,Padres,C,08/31/16,10/03/16,33,intercostal,strain,left,6,10028,29
+Christian Vazquez,2016,Red Sox,C,04/03/16,04/15/16,12,elbow,Tommy John surgery,,8,9774,3
+Christian Villanueva,2016,Cubs,3B,04/03/16,10/03/16,183,fibula,fractured,right,5,sa505993,17
+Clayton Kershaw,2016,Dodgers,LHP,06/27/16,09/09/16,74,disc,herniation,,15,2036,22
+Clayton Richard,2016,Cubs,LHP,06/21/16,07/15/16,24,finger,blister,left,3,3551,17
+Cliff Pennington,2016,Angels,2B,05/13/16,05/28/16,15,hamstring,strain,left,5,3395,1
+Cliff Pennington,2016,Angels,2B,06/01/16,08/02/16,62,hamstring,strain,left,5,3395,1
+Cody Asche,2016,Phillies,LF,04/03/16,06/02/16,60,oblique,strain,right,6,11997,26
+Cody Reed,2016,Reds,LHP,09/05/16,10/03/16,28,back,spasms,,15,15232,18
+Colby Lewis,2016,Rangers,RHP,04/03/16,09/11/16,161,latissimus dorsi muscle,strained,right,6,1259,13
+Colby Rasmus,2016,Astros,LF,08/05/16,08/30/16,25,unknown,undisclosed injury,,24,9893,21
+Colin Rea,2016,Padres,RHP,08/01/16,10/03/16,63,elbow,sprain,right,8,12317,29
+Conor Mullee,2016,Yankees,RHP,07/02/16,10/03/16,93,wrist,carpal tunnel syndrome,,19,11580,9
+Corey Knebel,2016,Brewers,RHP,04/03/16,06/09/16,67,oblique,strained,left,6,15010,23
+Cory Gearrin,2016,Giants,RHP,07/06/16,08/18/16,43,shoulder,strain,right,18,7947,30
+Cory Luebke,2016,Pirates,LHP,04/14/16,10/03/16,172,hamstring,tightness,right,5,1984,27
+Cory Rasmus,2016,Angels,RHP,05/13/16,06/09/16,27,groin,strain,left,9,2413,1
+Cory Rasmus,2016,Angels,RHP,06/13/16,09/14/16,93,groin,strain,right,9,2413,1
+Cory Spangenberg,2016,Padres,2B,04/20/16,10/03/16,166,quad,strain,left,5,12294,29
+Craig Gentry,2016,Angels,LF,04/26/16,07/30/16,95,lumbar spine,strain,right,6,9571,1
+Craig Kimbrel,2016,Red Sox,RHP,07/09/16,08/01/16,23,knee medial meniscus,,left,21,6655,3
+Dalier Hinojosa,2016,Phillies,RHP,04/29/16,10/03/16,157,hand,contusion,right,3,15671,26
+Dallas Beeler,2016,Cubs,RHP,04/03/16,10/03/16,183,shoulder,inflammation,right,18,11471,17
+Daniel Descalso,2016,Rockies,SS,04/03/16,05/13/16,40,hand,fractured,left,3,8392,19
+Daniel Nava,2016,Angels,LF,05/17/16,06/17/16,31,groin,strain,left,9,5450,1
+Daniel Nava,2016,Angels,LF,04/16/16,05/06/16,20,knee,patella tendinitis,left,21,5450,1
+Daniel Norris,2016,Tigers,LHP,07/05/16,08/02/16,28,oblique,strain,right,6,13475,6
+Daniel Norris,2016,Tigers,LHP,04/03/16,08/02/16,121,back,injury,,15,13475,6
+Daniel Webb,2016,White Sox,RHP,04/29/16,10/03/16,157,elbow flexor,inflammation,right,8,10558,4
+Daniel Winkler,2016,Braves,RHP,04/11/16,10/03/16,175,elbow,fracture,right,8,12237,16
+Danny Salazar,2016,Indians,RHP,08/02/16,08/18/16,16,elbow,inflammation,right,8,5867,5
+Danny Santana,2016,Twins,CF,04/10/16,04/25/16,15,hamstring,strained,right,5,10322,8
+Danny Santana,2016,Twins,CF,05/31/16,06/17/16,17,hamstring,strain,left,5,10322,8
+Danny Santana,2016,Twins,CF,08/29/16,10/03/16,35,shoulder joint,sprain,left,18,10322,8
+Danny Valencia,2016,Athletics,3B,04/21/16,05/06/16,15,hamstring,strained,left,5,6364,10
+Darin Mastroianni,2016,Twins,RF,05/22/16,07/04/16,43,oblique,strain,left,6,7316,8
+Darren O'Day,2016,Orioles,RHP,06/03/16,07/24/16,51,hamstring,strain,right,5,3321,2
+Darren O'Day,2016,Orioles,RHP,08/12/16,09/18/16,37,shoulder cuff,strain,right,18,3321,2
+David Peralta,2016,Diamondbacks,RF,06/15/16,07/29/16,44,back,sprain,low,15,2136,15
+David Peralta,2016,Diamondbacks,RF,05/09/16,07/29/16,81,wrist,inflammation,right,19,2136,15
+David Peralta,2016,Diamondbacks,RF,08/06/16,10/03/16,58,wrist,inflammation,right,19,2136,15
+David Phelps,2016,Marlins,RHP,08/27/16,09/11/16,15,oblique,strain,left,6,6316,20
+David Ross,2016,Cubs,C,07/06/16,07/15/16,9,head,concussion,,1,1551,17
+David Wright,2016,Mets,3B,05/30/16,10/03/16,126,neck,herniated disc,,7,3787,25
+Derek Dietrich,2016,Marlins,2B,08/19/16,09/03/16,15,knee,contusion,right,21,10542,20
+Derek Holland,2016,Rangers,LHP,06/21/16,08/23/16,63,shoulder,inflammation,left,18,4141,13
+Derek Law,2016,Giants,RHP,08/28/16,09/14/16,17,elbow,strain,right,8,13133,30
+Desmond Jennings,2016,Rays,LF,07/01/16,08/01/16,31,hamstring,strain,left,5,1965,12
+Desmond Jennings,2016,Rays,LF,07/01/16,08/01/16,31,hamstring,strain,left,5,1965,12
+Desmond Jennings,2016,Rays,LF,08/03/16,10/03/16,61,knee,contusion,left,21,1965,12
+Devin Mesoraco,2016,Reds,C,04/28/16,10/03/16,158,shoulder,torn labrum,left,18,5666,18
+Devon Travis,2016,Blue Jays,2B,04/03/16,05/25/16,52,shoulder,surgery,left,18,13862,14
+Dexter Fowler,2016,Cubs,CF,06/19/16,07/22/16,33,hamstring,discomfort,right,5,4062,17
+Domingo Santana,2016,Brewers,RF,06/08/16,08/19/16,72,elbow,soreness,right,8,10348,23
+Domingo Santana,2016,Brewers,RF,05/19/16,06/03/16,15,shoulder,strain,right,18,10348,23
+Drew Storen,2016,Mariners,RHP,08/20/16,09/04/16,15,shoulder,inflammation,right,18,6983,11
+Drew Stubbs,2016,Rangers,CF,05/23/16,08/10/16,79,little toe,sprained,left,17,9328,13
+Drew VerHagen,2016,Tigers,RHP,05/23/16,10/03/16,133,collarbone,injury,,18,13424,6
+Dustin Ackley,2016,Yankees,RF,05/30/16,10/03/16,126,shoulder,dislocation,right,18,10099,9
+Eddie Rosario,2016,Twins,LF,09/18/16,10/03/16,15,thumb,fracture,left,3,12155,8
+Eduardo Escobar,2016,Twins,SS,05/07/16,05/23/16,16,groin,strain,left,9,6153,8
+Eduardo Rodriguez,2016,Red Sox,LHP,04/03/16,05/31/16,58,knee,injury,right,21,13164,3
+Edwin Jackson,2016,Marlins,RHP,04/18/16,05/20/16,32,triceps,strain,right,2,1841,20
+Ehire Adrianza,2016,Giants,SS,04/15/16,08/02/16,109,foot,broken bone,left,17,8418,30
+Elias Diaz,2016,Pirates,C,04/03/16,10/03/16,183,elbow,strain,right,8,11680,27
+Elias Diaz,2016,Pirates,C,09/13/16,10/03/16,20,knee,cellulitis,left,21,11680,27
+Ender Inciarte,2016,Braves,RF,04/09/16,05/07/16,28,hamstring,strain,left,5,4922,16
+Enny Romero,2016,Rays,LHP,08/04/16,08/20/16,16,back,strain,,15,4001,12
+Enrique Hernandez,2016,Dodgers,LF,06/28/16,07/31/16,33,rib,inflammation,left,6,10472,22
+Eric O'Flaherty,2016,Braves,LHP,08/18/16,10/03/16,46,elbow,neuritis,left,8,5746,16
+Eric O'Flaherty,2016,Braves,LHP,06/13/16,07/16/16,33,knee,strain,right,21,5746,16
+Eric Sogard,2016,Athletics,2B,04/03/16,10/03/16,183,cervical,strain,,7,7927,10
+Erick Aybar,2016,Braves,SS,05/28/16,06/12/16,15,foot,contusion,right,17,4082,16
+Erik Johnson,2016,Padres,RHP,06/29/16,10/03/16,96,elbow,sprain,right,8,12520,29
+Ervin Santana,2016,Twins,RHP,04/20/16,05/06/16,16,back,strain,lower,15,3200,8
+Evan Gattis,2016,Astros,C,04/03/16,04/12/16,9,groin,sports hernia,,9,11003,21
+Evan Scribner,2016,Mariners,RHP,04/03/16,09/01/16,151,lat,strain,right,6,7525,11
+Ezequiel Carrera,2016,Blue Jays,LF,08/01/16,08/16/16,15,achilles,tendon strain,left,11,9048,14
+Felix Doubront,2016,Athletics,LHP,04/04/16,10/03/16,182,elbow,sprained,left,8,1478,10
+Felix Hernandez,2016,Mariners,RHP,05/28/16,07/20/16,53,calf,strained,right,5,4772,11
+Fernando Rodriguez,2016,Athletics,RHP,07/04/16,10/03/16,91,shoulder,strain,right,18,7558,10
+Francisco Cervelli,2016,Pirates,C,06/11/16,07/19/16,38,hand,broken hamate bone,left,3,5275,27
+Frankie Montas,2016,Dodgers,RHP,04/03/16,10/03/16,183,rib,surgery,,6,14309,22
+Franklin Morales,2016,Blue Jays,LHP,04/07/16,07/22/16,106,shoulder,fatigue,left,18,5088,14
+Garrett Richards,2016,Angels,RHP,05/06/16,10/03/16,150,elbow,ucl tear,right,8,9784,1
+Gavin Floyd,2016,Blue Jays,RHP,06/26/16,10/03/16,99,shoulder,tightness,right,18,3886,14
+George Kontos,2016,Giants,RHP,04/18/16,05/17/16,29,elbow,flexor strain,right,8,9486,30
+Geovany Soto,2016,Angels,C,07/16/16,08/10/16,25,knee,inflammation,left,21,3707,1
+Geovany Soto,2016,Angels,C,08/15/16,10/03/16,49,knee,inflammation,right,21,3707,1
+Geovany Soto,2016,Angels,C,05/18/16,07/09/16,52,meniscus,torn,right,21,3707,1
+Gerardo Parra,2016,Rockies,LF,06/15/16,08/07/16,53,ankle,sprained,left,11,8553,19
+Gerrit Cole,2016,Pirates,RHP,06/11/16,07/16/16,35,triceps,strain,right,2,13125,27
+Gerrit Cole,2016,Pirates,RHP,08/25/16,09/12/16,18,elbow,posterior inflammation,right,8,13125,27
+Gerrit Cole,2016,Pirates,RHP,09/13/16,10/03/16,20,elbow,inflammation,right,8,13125,27
+Giancarlo Stanton,2016,Marlins,RF,08/14/16,09/06/16,23,groin,strain,left,9,4949,20
+Glen Perkins,2016,Twins,LHP,04/11/16,10/03/16,175,posterior shoulder,strain,left,19,8041,8
+Gordon Beckham,2016,Braves,3B,04/17/16,05/09/16,22,hamstring,strained,left,5,9015,16
+Gordon Beckham,2016,Braves,3B,06/02/16,07/07/16,35,hamstring,strain,left,5,9015,16
+Greg Bird,2016,Yankees,1B,04/03/16,10/03/16,183,labrum,surgery,right,18,14131,9
+Gregor Blanco,2016,Giants,RF,08/22/16,09/16/16,25,shoulder,impingement,right,18,3123,30
+Hector Rondon,2016,Cubs,RHP,08/17/16,09/06/16,20,triceps,strain,right,2,2391,17
+Henderson Alvarez,2016,Athletics,RHP,04/03/16,10/03/16,183,shoulder,surgery,right,18,5669,10
+Homer Bailey,2016,Reds,RHP,04/03/16,07/28/16,116,elbow,Tommy John surgery,,8,8362,18
+Howie Kendrick,2016,Dodgers,2B,04/03/16,04/12/16,9,calf,strain,left,5,4229,22
+Hunter Pence,2016,Giants,RF,06/02/16,07/30/16,58,hamstring,strain,right,5,8252,30
+Huston Street,2016,Angels,RHP,04/28/16,05/30/16,32,oblique,strain,left,6,8258,1
+Huston Street,2016,Angels,RHP,08/01/16,10/03/16,63,knee,inflammation,right,21,8258,1
+Hyun Soo Kim,2016,Orioles,LF,07/19/16,10/03/16,76,hamstring,strained,right,21,18718,2
+Hyun-Jin Ryu,2016,Dodgers,LHP,07/09/16,10/03/16,86,elbow,tendinitis,left,8,14444,22
+Hyun-Jin Ryu,2016,Dodgers,LHP,04/03/16,07/07/16,95,shoulder,surgery,left,18,14444,22
+J.D. Martinez,2016,Tigers,RF,06/17/16,08/03/16,47,elbow,fractured,right,8,6184,6
+J.J. Hardy,2016,Orioles,SS,05/02/16,06/18/16,47,foot,fracture,left,17,3797,2
+Jabari Blash,2016,Padres,RF,08/19/16,10/03/16,45,finger,sprained,left,3,11247,29
+Jacob Barnes,2016,Brewers,RHP,07/26/16,09/02/16,38,elbow,soreness,right,8,12323,23
+Jairo Diaz,2016,Rockies,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,12774,19
+Jake Diekman,2016,Rangers,LHP,07/06/16,07/22/16,16,index finger,lacerated,left,3,5003,13
+Jake McGee,2016,Rockies,LHP,06/11/16,07/02/16,21,knee,inflammation,left,21,7550,19
+Jake Peavy,2016,Giants,RHP,08/21/16,09/07/16,17,back,strain,low,15,1051,30
+Jake Petricka,2016,White Sox,RHP,05/02/16,10/03/16,154,hip,impingement,right,4,10534,4
+James McCann,2016,Tigers,C,04/12/16,05/03/16,21,ankle,sprain,right,11,12859,6
+James Paxton,2016,Mariners,LHP,08/08/16,08/25/16,17,elbow,contusion,left,8,11828,11
+Jameson Taillon,2016,Pirates,RHP,07/04/16,07/19/16,15,shoulder,fatigue,right,18,11674,27
+Jared Hughes,2016,Pirates,RHP,04/03/16,04/30/16,27,lat,strain,left,6,9325,27
+Jarrod Dyson,2016,Royals,RF,04/03/16,04/19/16,16,oblique,strain,right,6,4866,7
+Jarrod Parker,2016,Athletics,RHP,04/03/16,10/03/16,183,medial epicondyle,fractured,right,8,4913,10
+Jason Motte,2016,Rockies,RHP,07/26/16,09/08/16,44,rotator cuff,strain,right,18,5861,19
+Jason Motte,2016,Rockies,RHP,04/03/16,05/25/16,52,shoulder,strain,right,18,5861,19
+Jason Vargas,2016,Royals,LHP,04/03/16,09/17/16,167,elbow,Tommy John surgery,,8,8044,7
+Javier Baez,2016,Cubs,SS,04/03/16,04/15/16,12,thumb,contusion,left,3,12979,17
+Jed Lowrie,2016,Athletics,2B,05/10/16,05/25/16,15,shin,contusion,right,11,4418,10
+Jed Lowrie,2016,Athletics,2B,08/04/16,10/03/16,60,foot,bunion,left,17,4418,10
+Jeff Ferrell,2016,Tigers,RHP,04/03/16,10/03/16,183,shoulder,impingement,right,18,11506,6
+Jeff Manship,2016,Indians,RHP,07/27/16,08/11/16,15,wrist,tendinitis,right,19,6865,5
+Jemile Weeks,2016,Padres,2B,05/08/16,10/03/16,148,hamstring,strain,right,5,2498,29
+Jesse Biddle,2016,Braves,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,sa548186,16
+Jesse Biddle,2016,Braves,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,sa548186,16
+Jesse Hahn,2016,Athletics,RHP,08/05/16,09/01/16,27,shoulder,strained,right,18,13287,10
+Jesus Sucre,2016,Mariners,C,04/03/16,07/06/16,94,fibula,fractured,,5,5942,11
+Jhonny Peralta,2016,Cardinals,SS,04/03/16,06/07/16,65,thumb,torn ligament,left,3,1738,28
+Jhonny Peralta,2016,Cardinals,SS,07/18/16,08/02/16,15,thumb,ligament strain,left,3,1738,28
+Jim Henderson,2016,Mets,RHP,06/19/16,08/20/16,62,biceps,tendinitis,right,2,6653,25
+Jim Johnson,2016,Braves,RHP,05/09/16,06/03/16,25,groin,strain,right,9,3656,16
+Jimmy Paredes,2016,Orioles,DH,04/03/16,10/03/16,183,wrist,sprain,left,19,5481,2
+Joaquin Benoit,2016,Mariners,RHP,04/22/16,05/17/16,25,shoulder,inflammation,right,18,1437,11
+Joba Chamberlain,2016,Indians,RHP,05/22/16,06/08/16,17,intercostal,strain,left,6,2692,5
+Joc Pederson,2016,Dodgers,CF,06/29/16,07/19/16,20,ac joint,sprained,right,18,11899,22
+Joe Kelly,2016,Red Sox,RHP,04/20/16,05/21/16,31,shoulder,impingement,right,18,9761,3
+Joe Panik,2016,Giants,2B,06/29/16,07/28/16,29,head,concussion-like,,1,11936,30
+Joe Panik,2016,Giants,2B,07/13/16,07/28/16,15,head,concussion-like,,1,11936,30
+Joe Ross,2016,Nationals,RHP,07/03/16,09/18/16,77,shoulder,inflammation,right,18,12972,24
+Joe Smith,2016,Cubs,RHP,08/17/16,09/01/16,15,hamstring,strain,left,5,3281,17
+Joe Smith,2016,Angels,RHP,06/05/16,07/01/16,26,hamstring,strain,left,5,3281,1
+Joey Rickard,2016,Orioles,LF,07/21/16,10/03/16,74,thumb ligament,injury,right,3,13277,2
+John Gant,2016,Braves,RHP,06/28/16,10/03/16,97,oblique,strain,left,6,13684,16
+John Lackey,2016,Cubs,RHP,08/15/16,09/04/16,20,shoulder,strain,right,18,1507,17
+John Lamb,2016,Reds,LHP,04/03/16,05/03/16,30,back,surgery,,15,8493,18
+Jon Edwards,2016,Padres,RHP,04/03/16,10/03/16,183,flexor,strain,right,5,1483,29
+Jon Gray,2016,Rockies,RHP,04/03/16,04/22/16,19,abdominal,strain,,6,14916,19
+Jon Jay,2016,Padres,CF,06/20/16,09/06/16,78,forearm,fracture,right,2,5227,29
+Jon Moscot,2016,Reds,RHP,04/03/16,04/17/16,14,intercostal,strain,right,6,13849,18
+Jon Moscot,2016,Reds,RHP,05/03/16,05/31/16,28,shoulder,inflammation,left,18,13849,18
+Jonathan Papelbon,2016,Nationals,RHP,06/13/16,07/04/16,21,intercostal,strain,right,6,5975,24
+Jonathon Niese,2016,Mets,LHP,08/24/16,10/03/16,40,knee,injury,left,21,4424,25
+Jordan Pacheco,2016,Reds,C,06/03/16,06/21/16,18,shoulder,tendinitis,right,18,2677,18
+Jordan Walden,2016,Cardinals,RHP,04/03/16,10/03/16,183,shoulder,strain,right,18,3271,28
+Jordan Zimmermann,2016,Tigers,RHP,08/05/16,09/06/16,32,lat,tightness,right,6,4505,6
+Jordan Zimmermann,2016,Tigers,RHP,07/01/16,08/04/16,34,neck,strain,right,7,4505,6
+Jorge De La Rosa,2016,Rockies,LHP,04/27/16,05/24/16,27,groin,strained,left,9,2047,19
+Jorge Soler,2016,Cubs,LF,06/07/16,08/05/16,59,hamstring,strain,left,5,14221,17
+Jose Bautista,2016,Blue Jays,RF,08/10/16,08/25/16,15,knee,sprain,left,21,1887,14
+Jose Bautista,2016,Blue Jays,RF,06/17/16,07/25/16,38,big toe,injury,left,17,1887,14
+Jose Iglesias,2016,Tigers,SS,08/12/16,08/27/16,15,hamstring,strain,left,5,10231,6
+Jose Lobaton,2016,Nationals,C,07/20/16,08/20/16,31,elbow,tendinitis,left,8,4243,24
+Jose Reyes,2016,Mets,SS,07/27/16,08/13/16,17,oblique,strain,left,6,1736,25
+Joseph Colon,2016,Indians,RHP,07/19/16,08/15/16,27,shoulder,inflammation,right,18,4920,5
+Josh Collmenter,2016,Diamondbacks,RHP,04/03/16,05/27/16,54,shoulder,tightness,right,18,7312,15
+Josh Edgin,2016,Mets,LHP,04/03/16,05/10/16,37,elbow,Tommy John surgery,,8,10796,25
+Josh Hamilton,2016,Rangers,LF,04/03/16,10/03/16,183,knee,surgery,left,21,1875,13
+Josh Harrison,2016,Pirates,2B,09/26/16,10/03/16,7,groin,strain,right,9,8202,27
+Josh Osich,2016,Giants,LHP,07/24/16,09/01/16,39,forearm,strain,left,2,11528,30
+Josh Phegley,2016,Athletics,C,05/10/16,05/27/16,17,knee,inflammation,right,21,9308,10
+Josh Phegley,2016,Athletics,C,07/02/16,10/03/16,93,knee,strained,right,21,9308,10
+Josh Ravin,2016,Dodgers,RHP,08/14/16,09/02/16,19,triceps,inflammation,right,2,2951,22
+Josh Ravin,2016,Dodgers,RHP,04/03/16,09/02/16,152,forearm,fractured,left,2,2951,22
+Josh Reddick,2016,Athletics,RF,05/20/16,06/28/16,39,thumb,fractured,left,3,3892,10
+Josh Rutledge,2016,Red Sox,3B,06/15/16,10/03/16,110,knee,tendinitis,left,21,11167,3
+Juan Lagares,2016,Mets,CF,06/15/16,07/02/16,17,thumb,sprained,left,3,5384,25
+Juan Lagares,2016,Mets,CF,07/29/16,09/16/16,49,thumb,torn ligament,left,3,5384,25
+Julio Teheran,2016,Braves,RHP,08/02/16,08/19/16,17,lat,strain,right,6,6797,16
+Jung Ho Kang,2016,Pirates,3B,08/20/16,09/05/16,16,shoulder,injury,left,18,17182,27
+Jung Ho Kang,2016,Pirates,3B,04/03/16,05/06/16,33,knee,injury,left,21,17182,27
+Junichi Tazawa,2016,Red Sox,RHP,07/04/16,07/22/16,18,shoulder,impingement,right,18,4079,3
+Junior Guerra,2016,Brewers,RHP,08/04/16,09/02/16,29,elbow,inflammation,right,8,5702,23
+Justin Bour,2016,Marlins,1B,07/03/16,09/06/16,65,ankle,sprain,right,11,9744,20
+Justin Bour,2016,Marlins,1B,07/03/16,09/06/16,65,ankle,sprain,right,11,9744,20
+Justin Miller,2016,Rockies,RHP,07/03/16,09/02/16,61,oblique,strain,left,6,8580,19
+Justin Morneau,2016,White Sox,1B,06/09/16,07/15/16,36,elbow,surgery,left,8,1737,4
+Justin Ruggiano,2016,Mets,RF,08/02/16,08/18/16,16,hamstring,strain,left,5,7620,25
+Justin Ruggiano,2016,Mets,CF,08/27/16,10/03/16,37,shoulder,injury,left,18,7620,25
+Kelby Tomlinson,2016,Giants,2B,06/09/16,07/11/16,32,thumb,sprained,left,3,13005,30
+Kendry Flores,2016,Marlins,RHP,05/15/16,10/03/16,141,shoulder,strain,right,18,12118,20
+Keone Kela,2016,Rangers,RHP,04/20/16,07/15/16,86,elbow,impingement,right,8,14696,13
+Ketel Marte,2016,Mariners,SS,05/22/16,06/06/16,15,thumb,sprained,left,3,13613,11
+Ketel Marte,2016,Mariners,SS,07/20/16,08/09/16,20,internal,mononucleosis,,23,13613,11
+Kevan Smith,2016,White Sox,C,04/26/16,10/03/16,160,sacroiliac joint back,dysfunction,,15,12284,4
+Kevin Gausman,2016,Orioles,RHP,04/03/16,04/25/16,22,shoulder,strain,right,18,14107,2
+Kevin Kiermaier,2016,Rays,CF,05/22/16,07/15/16,54,hand,fractured,left,3,11038,12
+Kevin Pillar,2016,Blue Jays,CF,08/07/16,08/23/16,16,thumb,sprain,left,3,12434,14
+Kevin Siegrist,2016,Cardinals,LHP,06/30/16,07/15/16,15,internal,mononucleosis,,23,8180,28
+Koji Uehara,2016,Red Sox,RHP,07/20/16,09/05/16,47,pectoral,strain,right,6,9227,3
+Kris Medlen,2016,Royals,RHP,05/11/16,10/03/16,145,rotator cuff,inflammation,right,18,9417,7
+Kyle Gibson,2016,Twins,RHP,04/23/16,06/10/16,48,shoulder,strain,right,18,10123,8
+Kyle Schwarber,2016,Cubs,LF,04/08/16,10/03/16,178,knee,torn ligaments,left,21,16478,17
+Kyle Skipworth,2016,Reds,C,04/03/16,06/09/16,67,ankle,surgery,left,11,5298,18
+Lance Lynn,2016,Cardinals,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,2520,28
+Lance McCullers,2016,Astros,RHP,08/03/16,10/03/16,61,elbow,discomfort,right,8,14120,21
+Lance McCullers,2016,Astros,RHP,04/03/16,05/13/16,40,shoulder,soreness,right,18,14120,21
+Leonys Martin,2016,Mariners,CF,05/26/16,06/10/16,15,hamstring,strained,left,5,11846,11
+Liam Hendriks,2016,Athletics,RHP,05/08/16,06/19/16,42,triceps,strain,right,2,3548,10
+Liam Hendriks,2016,Athletics,RHP,07/20/16,10/03/16,75,middle finger,blister,left,3,3548,10
+Logan Forsythe,2016,Rays,2B,05/10/16,06/10/16,31,shoulder,hairline fracture,left,18,7185,12
+Logan Morrison,2016,Rays,1B,07/28/16,08/15/16,18,forearm,strain,right,2,9205,12
+Logan Morrison,2016,Rays,1B,09/16/16,10/03/16,17,wrist,strain,left,19,9205,12
+Lonnie Chisenhall,2016,Indians,RF,04/03/16,04/20/16,17,wrist,impingement,left,19,7571,5
+Lorenzo Cain,2016,Royals,CF,06/29/16,07/29/16,30,hamstring,strain,left,5,9077,7
+Louis Coleman,2016,Dodgers,RHP,08/03/16,09/02/16,30,shoulder,fatigue,right,18,9720,22
+Lucas Duda,2016,Mets,1B,05/21/16,09/17/16,119,back,stress fracture,lower,15,2502,25
+Lucas Harrell,2016,Rangers,RHP,08/17/16,10/03/16,47,groin,strain,right,9,7541,13
+Luis Severino,2016,Yankees,RHP,05/14/16,05/30/16,16,triceps,strain,right,2,15890,9
+Luis Valbuena,2016,Astros,3B,07/27/16,10/03/16,68,hamstring,injury,right,5,4969,21
+Luke Gregerson,2016,Astros,RHP,07/28/16,08/12/16,15,oblique,strain,left,6,4090,21
+Luke Hochevar,2016,Royals,RHP,07/25/16,10/03/16,70,shoulder,thoracic outlet syndrome,,18,6943,7
+Luke Jackson,2016,Rangers,RHP,04/03/16,10/03/16,183,back,stress reaction,lower,15,11752,13
+Mac Williamson,2016,Giants,RF,08/01/16,09/01/16,31,shoulder,strain,left,18,14158,30
+Mac Williamson,2016,Giants,RF,09/27/16,10/03/16,6,quadricep,strained,,21,14158,30
+Mallex Smith,2016,Braves,CF,06/20/16,09/16/16,88,thumb,fractured,left,3,13608,16
+Manny Banuelos,2016,Braves,LHP,04/03/16,05/23/16,50,elbow,inflammation,left,8,5365,16
+Marco Estrada,2016,Blue Jays,RHP,04/03/16,04/10/16,7,back,soreness,,15,1118,14
+Marco Estrada,2016,Blue Jays,RHP,07/03/16,07/22/16,19,back,injury,,15,1118,14
+Mario Hollands,2016,Phillies,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,10504,26
+Mark Canha,2016,Athletics,1B,05/09/16,10/03/16,147,back,strain,,15,11445,10
+Mark Reynolds,2016,Rockies,1B,08/12/16,08/31/16,19,hamate,broken,left,19,7619,19
+Mark Teixeira,2016,Yankees,1B,06/04/16,10/03/16,121,knee cartilage,tear,right,21,1281,9
+Mason Williams,2016,Yankees,CF,04/03/16,07/18/16,106,shoulder,surgery,right,18,11859,9
+Matt Adams,2016,Cardinals,1B,08/10/16,09/02/16,23,shoulder,inflammation,left,18,9393,28
+Matt Belisle,2016,Nationals,RHP,04/27/16,06/14/16,48,calf,strain,right,5,1837,24
+Matt Cain,2016,Giants,RHP,05/28/16,06/13/16,16,hamstring,strain,right,5,4732,30
+Matt Cain,2016,Giants,RHP,06/14/16,07/20/16,36,hamstring,strain,right,5,4732,30
+Matt Cain,2016,Giants,RHP,08/18/16,09/02/16,15,back,strain,lower,15,4732,30
+Matt Carpenter,2016,Cardinals,2B,07/07/16,08/05/16,29,oblique,strain,right,6,8090,28
+Matt Davidson,2016,White Sox,3B,07/01/16,10/03/16,94,foot,broken,right,17,7226,4
+Matt Duffy,2016,Giants,3B,06/20/16,08/11/16,52,achilles,strained,left,11,13836,30
+Matt Duffy,2016,Rays,SS,09/08/16,10/03/16,25,achilles,injury,left,11,12181,12
+Matt Garza,2016,Brewers,RHP,04/03/16,06/14/16,72,lat,strain,right,6,3340,23
+Matt Harrison,2016,Phillies,LHP,04/03/16,10/03/16,183,back,injury,,15,5551,26
+Matt Harvey,2016,Mets,RHP,07/05/16,10/03/16,90,shoulder,discomfort,right,18,11713,25
+Matt Holliday,2016,Cardinals,LF,08/12/16,09/30/16,49,thumb,fracture,,3,1873,28
+Matt Marksberry,2016,Braves,LHP,07/31/16,10/03/16,64,rotator cuff,inflammation,left,18,15089,16
+Matt Shoemaker,2016,Angels,RHP,09/05/16,10/03/16,28,skull,fracture,,1,4776,1
+Matt Szczur,2016,Cubs,LF,05/03/16,05/21/16,18,hamstring,strain,right,5,11255,17
+Matt Thornton,2016,Padres,LHP,04/04/16,05/28/16,54,achilles,tendinitis,left,11,1918,29
+Max Stassi,2016,Astros,C,04/03/16,10/03/16,183,hamate,fractured,left,19,10059,21
+Michael Blazek,2016,Brewers,RHP,08/14/16,09/03/16,20,forearm,strain,right,2,9654,23
+Michael Blazek,2016,Brewers,RHP,05/29/16,06/19/16,21,elbow,impingement,right,8,9654,23
+Michael Brantley,2016,Indians,LF,04/03/16,04/25/16,22,shoulder,surgery,right,18,4106,5
+Michael Brantley,2016,Indians,LF,05/10/16,10/03/16,146,shoulder,inflammation,right,18,4106,5
+Michael Lorenzen,2016,Reds,RHP,04/03/16,06/22/16,80,elbow,sprain,right,8,14843,18
+Michael Mariot,2016,Phillies,RHP,04/03/16,10/03/16,183,ankle,strain,right,11,10835,26
+Michael Wacha,2016,Cardinals,RHP,08/09/16,09/14/16,36,shoulder,inflammation,right,18,14078,28
+Miguel Castro,2016,Rockies,RHP,04/18/16,10/03/16,168,shoulder,inflammation,right,18,15684,19
+Miguel Gonzalez,2016,White Sox,RHP,08/12/16,09/06/16,25,groin,strained,right,9,7024,4
+Miguel Montero,2016,Cubs,C,04/25/16,05/14/16,19,back,tightness,lower,15,3364,17
+Miguel Sano,2016,Twins,RF,06/01/16,07/01/16,30,hamstring,strain,left,5,12164,8
+Mike Bolsinger,2016,Dodgers,RHP,04/03/16,10/03/16,183,oblique,strain,left,6,11137,22
+Mike Dunn,2016,Marlins,LHP,04/03/16,05/31/16,58,forearm,strain,left,2,9948,20
+Mike Foltynewicz,2016,Braves,RHP,06/04/16,06/30/16,26,elbow,soreness,right,8,10811,16
+Mike Leake,2016,Cardinals,RHP,08/22/16,09/07/16,16,skin,shingles,,24,10130,28
+Mike Minor,2016,Royals,LHP,04/03/16,10/03/16,183,labrum,surgery,left,18,10021,7
+Mike Moustakas,2016,Royals,3B,05/05/16,05/21/16,16,thumb,fracture,left,3,4892,7
+Mike Moustakas,2016,Royals,3B,05/23/16,10/03/16,133,acl,torn,right,21,4892,7
+Mike Pelfrey,2016,Tigers,RHP,08/01/16,09/05/16,35,back,strain,,15,5203,6
+Mikie Mahtook,2016,Rays,CF,06/21/16,10/03/16,104,hand,broken,left,3,13130,12
+Mitch Harris,2016,Cardinals,RHP,04/03/16,10/03/16,183,elbow,strain,right,8,4530,28
+Nathan Eovaldi,2016,Yankees,RHP,08/11/16,10/03/16,53,elbow tendon,injury,right,8,9132,9
+Nathan Karns,2016,Mariners,RHP,07/30/16,10/03/16,65,back,strain,low,15,12638,11
+Nefi Ogando,2016,Marlins,RHP,05/09/16,10/03/16,147,rib,fracture,right,6,12253,20
+Neil Walker,2016,Mets,2B,08/26/16,10/03/16,38,back,herniated disc,lower,15,7539,25
+Nick Ahmed,2016,Diamondbacks,SS,07/23/16,10/03/16,72,hip,impingement,right,4,12147,15
+Nick Castellanos,2016,Tigers,3B,08/07/16,09/27/16,51,hand,fractured,left,3,11737,6
+Nick Franklin,2016,Rays,LF,08/20/16,08/27/16,7,head,concussion,,1,10166,12
+Nick Hundley,2016,Rockies,C,04/14/16,04/25/16,11,head,concussion,,1,3376,19
+Nick Hundley,2016,Rockies,C,05/06/16,06/03/16,28,oblique,strained,left,6,3376,19
+Nick Rumbelow,2016,Yankees,RHP,09/02/16,10/03/16,31,elbow,Tommy John surgery,,8,14867,9
+Nick Tropeano,2016,Angels,RHP,07/19/16,10/03/16,76,elbow,ucl injury,right,8,12385,1
+Nick Vincent,2016,Mariners,RHP,06/27/16,08/07/16,41,back,strain,mid,15,7555,11
+Oswaldo Arcia,2016,Rays,LF,07/27/16,10/03/16,68,elbow,strain,right,8,10306,12
+Pablo Sandoval,2016,Red Sox,3B,04/11/16,10/03/16,175,shoulder,strain,left,18,5409,3
+Paco Rodriguez,2016,Braves,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,13398,16
+Pedro Strop,2016,Cubs,RHP,08/11/16,09/23/16,43,meniscus,tear,left,21,4070,17
+Peter Bourjos,2016,Phillies,RF,07/28/16,08/12/16,15,shoulder,sprain,right,18,2578,26
+Phil Hughes,2016,Twins,RHP,06/10/16,10/03/16,115,knee,contusion,left,21,7450,8
+Preston Tucker,2016,Astros,LF,08/12/16,10/03/16,52,shoulder,strained,right,18,13633,21
+Prince Fielder,2016,Rangers,DH,07/19/16,10/03/16,76,arm,weakness,left,2,4613,13
+R.J. Alvarez,2016,Athletics,RHP,04/03/16,10/03/16,183,elbow,surgery,right,8,13401,10
+Raisel Iglesias,2016,Reds,RHP,04/26/16,06/21/16,56,shoulder,impingement,right,18,17130,18
+Raudel Lazo,2016,Marlins,LHP,04/03/16,10/03/16,183,shoulder,strain,left,18,14077,20
+Ray Black,2016,Giants,RHP,09/03/16,10/03/16,30,elbow,bone spur,right,8,sa579473,30
+Rich Hill,2016,Dodgers,LHP,08/01/16,08/24/16,23,finger,blister,left,3,4806,22
+Rich Hill,2016,Athletics,LHP,07/20/16,08/24/16,35,middle finger,blister,left,3,4806,10
+Rich Hill,2016,Athletics,LHP,05/30/16,07/02/16,33,groin,strain,left,9,4806,10
+Rob Whalen,2016,Braves,RHP,08/25/16,10/03/16,39,shoulder,fatigue,right,18,14165,16
+Robbie Erlin,2016,Padres,LHP,04/18/16,10/03/16,168,elbow,strain,left,8,10354,29
+Roberto Perez,2016,Indians,C,05/01/16,07/18/16,78,thumb,injury,right,3,2900,5
+Robinson Chirinos,2016,Rangers,C,04/10/16,06/09/16,60,forearm,fractured,right,2,3142,13
+Rubby De La Rosa,2016,Diamondbacks,RHP,05/26/16,09/09/16,106,elbow,inflammation,right,8,3862,15
+Ruben Tejada,2016,Cardinals,SS,04/03/16,04/18/16,15,quadriceps,strain,left,5,5519,28
+Ryan Cook,2016,Mariners,RHP,04/03/16,10/03/16,183,latissimus dorsi muscle,strained,right,6,8855,11
+Ryan Goins,2016,Blue Jays,2B,07/02/16,10/03/16,93,forearm,tightness,right,2,9807,14
+Ryan Hanigan,2016,Red Sox,C,06/05/16,07/05/16,30,neck,strain,,7,4952,3
+Ryan Hanigan,2016,Red Sox,C,08/05/16,09/02/16,28,ankle,tendinitis,left,11,4952,3
+Ryan Vogelsong,2016,Pirates,RHP,05/24/16,08/04/16,72,facial,fractures,,1,1011,27
+Ryan Webb,2016,Rays,RHP,05/27/16,06/26/16,30,pectoral,strain,right,6,7474,12
+Ryan Zimmerman,2016,Nationals,1B,07/07/16,07/26/16,19,rib cage,strain,left,6,4220,24
+Ryan Zimmerman,2016,Nationals,1B,08/01/16,08/20/16,19,wrist,contusion,left,19,4220,24
+Rymer Liriano,2016,Brewers,LF,04/03/16,10/03/16,183,facial,fractures,,1,4779,23
+Sam Fuld,2016,Athletics,LF,04/03/16,10/03/16,183,shoulder,strained,left,18,8254,10
+Sammy Solis,2016,Nationals,LHP,08/16/16,09/26/16,41,shoulder,inflammation,left,18,11457,24
+Sammy Solis,2016,Nationals,LHP,07/08/16,07/25/16,17,knee,sore,right,21,11457,24
+Scooter Gennett,2016,Brewers,2B,04/25/16,05/12/16,17,oblique,tightness,right,6,10339,23
+Scott Kazmir,2016,Dodgers,LHP,08/23/16,09/23/16,31,neck,inflammation,,7,4897,22
+Scott Oberg,2016,Rockies,RHP,08/20/16,10/03/16,44,arm,axillary artery thrombosis,right,2,13911,19
+Scott Van Slyke,2016,Dodgers,LF,04/10/16,06/03/16,54,back,irritation,low,15,4365,22
+Scott Van Slyke,2016,Dodgers,LF,08/08/16,10/03/16,56,wrist,irritation,right,19,4365,22
+Scott Van Slyke,2016,Dodgers,LF,08/08/16,10/03/16,56,wrist,irritation,right,19,4365,22
+Sean Doolittle,2016,Athletics,LHP,06/26/16,09/02/16,68,shoulder,strained,left,18,1581,10
+Sean Manaea,2016,Athletics,LHP,06/14/16,06/29/16,15,forearm pronator,strain,left,2,15873,10
+Sean Nolin,2016,Brewers,LHP,04/03/16,10/03/16,183,elbow,sore,left,8,11341,23
+Sean O'Sullivan,2016,Red Sox,RHP,07/10/16,08/11/16,32,knee,tendinitis,left,21,9137,3
+Sergio Romo,2016,Giants,RHP,04/11/16,07/04/16,84,elbow,flexor strain,right,8,9817,30
+Seth Maness,2016,Cardinals,RHP,05/13/16,06/19/16,37,elbow,inflammation,right,8,12235,28
+Seth Maness,2016,Cardinals,RHP,08/14/16,10/03/16,50,elbow,strain,right,8,12235,28
+Shae Simmons,2016,Braves,RHP,04/03/16,08/08/16,127,elbow,Tommy John surgery,,8,14200,16
+Shae Simmons,2016,Braves,RHP,04/03/16,08/08/16,127,elbow,Tommy John surgery,,8,14200,16
+Shane Greene,2016,Tigers,RHP,04/25/16,06/04/16,40,finger,blister,right,3,10756,6
+Shane Robinson,2016,Angels,LF,08/13/16,09/06/16,24,hip,strain,right,4,4249,1
+Shane Robinson,2016,Angels,LF,07/06/16,07/30/16,24,ankle,sprain,right,11,4249,1
+Shawn Tolleson,2016,Rangers,RHP,08/23/16,10/03/16,41,back,sprain,lower,15,10481,13
+Shelby Miller,2016,Diamondbacks,RHP,05/25/16,06/20/16,26,index finger,sprained,right,3,10197,15
+Shin-Soo Choo,2016,Rangers,RF,08/16/16,09/30/16,45,forearm,fracture,left,2,3174,13
+Shin-Soo Choo,2016,Rangers,RF,04/09/16,05/20/16,41,calf,strain,right,5,3174,13
+Shin-Soo Choo,2016,Rangers,RF,05/21/16,06/13/16,23,hamstring,strain,left,5,3174,13
+Shin-Soo Choo,2016,Rangers,RF,07/20/16,08/04/16,15,back,inflammation,lower,15,3174,13
+Socrates Brito,2016,Diamondbacks,CF,06/24/16,08/05/16,42,toe,fracture,right,17,12944,15
+Sonny Gray,2016,Athletics,RHP,08/07/16,09/28/16,52,forearm,strained,right,2,12768,10
+Sonny Gray,2016,Athletics,RHP,05/21/16,06/05/16,15,trapezius,strained,right,18,12768,10
+Starling Marte,2016,Pirates,LF,09/28/16,10/03/16,5,back,tightness,,15,9241,27
+Stephen Drew,2016,Nationals,2B,07/24/16,09/07/16,45,head,vertigo-like symptoms,,1,4251,24
+Stephen Strasburg,2016,Nationals,RHP,08/21/16,09/07/16,17,elbow,soreness,right,8,10131,24
+Stephen Strasburg,2016,Nationals,RHP,06/16/16,07/03/16,17,back,strain,upper,15,10131,24
+Steve Cishek,2016,Mariners,RHP,08/02/16,08/19/16,17,hip,labrum tear,left,4,6483,11
+Steve Clevenger,2016,Mariners,C,06/30/16,10/03/16,95,hand,fractured metacarpal,right,3,9542,11
+Steve Pearce,2016,Orioles,LF,09/18/16,10/03/16,15,flexor mass,strain,right,5,9957,2
+Steve Pearce,2016,Rays,1B,06/21/16,07/19/16,28,hamstring,strain,right,5,9957,12
+Steven Matz,2016,Mets,LHP,08/15/16,10/03/16,49,shoulder,tightness,left,18,13361,25
+Steven Souza Jr.,2016,Rays,RF,09/22/16,10/03/16,11,hip,impingement and labral tear,left,4,5667,12
+Steven Souza Jr.,2016,Rays,RF,06/15/16,07/02/16,17,hip,bruised,left,4,5667,12
+Steven Wright,2016,Red Sox,RHP,08/08/16,08/26/16,18,shoulder,bursitis,right,18,8185,3
+T.J. McFarland,2016,Orioles,LHP,06/29/16,08/26/16,58,knee,inflammation,left,21,3237,2
+Taijuan Walker,2016,Mariners,RHP,07/06/16,10/03/16,89,foot,tendinitis,right,17,11836,11
+Tanner Scheppers,2016,Rangers,RHP,04/03/16,09/06/16,156,knee cartilage,torn,left,21,10267,13
+Tim Adleman,2016,Reds,RHP,05/20/16,08/02/16,74,oblique,strained,left,6,10968,18
+Tim Collins,2016,Royals,LHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,3164,7
+Tom Wilhelmsen,2016,Mariners,RHP,08/26/16,09/10/16,15,back,spasms,lower,15,9975,11
+Tommy Hunter,2016,Indians,RHP,04/03/16,04/29/16,26,core,surgery,right,9,1157,5
+Tommy Hunter,2016,Indians,RHP,07/10/16,10/03/16,85,unknown,non-baseball related injury,,24,1157,5
+Tommy La Stella,2016,Cubs,3B,06/08/16,07/06/16,28,hamstring,strain,right,5,12371,17
+Tommy Milone,2016,Twins,LHP,08/12/16,09/09/16,28,biceps,tendinitis,left,2,7608,8
+Tommy Pham,2016,Cardinals,CF,04/04/16,10/03/16,182,oblique,strain,left,6,2967,28
+Tony Wolters,2016,Rockies,C,06/03/16,06/14/16,11,head,concussion,,1,11470,19
+Tony Zych,2016,Mariners,RHP,05/02/16,08/23/16,113,shoulder,rotator cuff tendinitis,right,18,12876,11
+Travis d'Arnaud,2016,Mets,C,04/26/16,06/21/16,56,rotator cuff,inflammation,right,18,7739,25
+Trayce Thompson,2016,Dodgers,LF,07/10/16,10/03/16,85,back,irritation,lower,15,9952,22
+Trevor Cahill,2016,Cubs,RHP,07/09/16,08/16/16,38,knee,tendinitis,right,21,6249,17
+Trevor May,2016,Twins,RHP,06/10/16,07/05/16,25,back,spasms,low,15,6398,8
+Trevor May,2016,Twins,RHP,08/07/16,09/09/16,33,back,strain,low,15,6398,8
+Trevor May,2016,Twins,RHP,09/12/16,10/03/16,21,back,strain,low,15,6398,8
+Trevor Plouffe,2016,Twins,3B,04/18/16,05/03/16,15,intercostal,strain,right,6,7462,8
+Trevor Plouffe,2016,Twins,3B,09/07/16,10/03/16,26,oblique,strain,left,6,7462,8
+Trevor Plouffe,2016,Twins,3B,07/02/16,08/08/16,37,rib,fractured,left,6,7462,8
+Trevor Plouffe,2016,Twins,3B,07/02/16,08/08/16,37,rib,fractured,left,6,7462,8
+Trevor Rosenthal,2016,Cardinals,RHP,07/26/16,09/15/16,51,shoulder,inflammation,right,18,10745,28
+Trevor Story,2016,Rockies,SS,08/02/16,10/03/16,62,thumb,torn ulc ligament,left,3,12564,19
+Troy Tulowitzki,2016,Blue Jays,SS,05/28/16,06/18/16,21,quad,strain,right,5,3531,14
+Tyler Anderson,2016,Rockies,LHP,04/03/16,10/03/16,183,oblique,strain,right,6,12880,19
+Tyler Chatwood,2016,Rockies,RHP,06/19/16,07/05/16,16,back,strain,mid,15,4338,19
+Tyler Chatwood,2016,Rockies,RHP,08/15/16,09/02/16,18,back,strain,upper,15,4338,19
+Tyler Flowers,2016,Braves,C,07/10/16,08/17/16,38,hand,fractured,left,3,9134,16
+Tyler Glasnow,2016,Pirates,RHP,07/24/16,08/28/16,35,shoulder,discomfort,right,18,14374,27
+Tyler Ladendorf,2016,Athletics,2B,08/17/16,10/03/16,47,wrist,sprained,left,19,3211,10
+Tyler Lyons,2016,Cardinals,LHP,07/31/16,10/03/16,64,knee,stress reaction,right,21,11334,28
+Tyler Matzek,2016,Rockies,LHP,04/03/16,10/03/16,183,internal,anxiety,,23,10058,19
+Tyler Saladino,2016,White Sox,SS,09/22/16,10/03/16,11,back,herniated disc,,15,10807,4
+Tyson Ross,2016,Padres,RHP,04/05/16,10/03/16,181,shoulder,inflammation,right,18,7872,29
+Vance Worley,2016,Orioles,RHP,06/13/16,06/30/16,17,groin,strain,right,9,6435,2
+Vince Velasquez,2016,Phillies,RHP,06/09/16,06/27/16,18,biceps,strain,right,2,11189,26
+Wade Davis,2016,Royals,RHP,07/01/16,07/16/16,15,forearm,strain,right,2,7441,7
+Wade Davis,2016,Royals,RHP,07/27/16,09/02/16,37,flexor,strain,right,5,7441,7
+Wade Miley,2016,Mariners,LHP,06/17/16,06/29/16,12,shoulder,impingement,left,18,8779,11
+Warwick Saupold,2016,Tigers,RHP,06/01/16,07/17/16,46,groin,strain,right,9,13211,6
+Wei-Yin Chen,2016,Marlins,LHP,07/21/16,09/19/16,60,elbow,sprain,left,8,13071,20
+Will Middlebrooks,2016,Brewers,3B,07/25/16,10/03/16,70,leg,strain,right lower,5,7002,23
+Will Smith,2016,Brewers,LHP,04/03/16,06/01/16,59,knee,injury,right,21,8048,23
+Williams Perez,2016,Braves,RHP,06/08/16,09/02/16,86,rotator cuff,strained,,18,11592,16
+Wilmer Flores,2016,Mets,2B,05/11/16,05/29/16,18,hamstring,strained,left,5,5827,25
+Yan Gomes,2016,Indians,C,07/18/16,09/30/16,74,shoulder,separated,right,18,9627,5
+Yangervis Solarte,2016,Padres,3B,04/10/16,05/21/16,41,hamstring,strain,right,5,5352,29
+Yasiel Puig,2016,Dodgers,RF,06/03/16,06/21/16,18,hamstring,strained,left,5,14225,22
+Yasmani Grandal,2016,Dodgers,C,04/03/16,04/12/16,9,forearm,sore,right,2,11368,22
+Yhonathan Barrios,2016,Brewers,RHP,04/03/16,10/03/16,183,shoulder,injury,right,18,11166,23
+Yimi Garcia,2016,Dodgers,RHP,04/23/16,10/03/16,163,biceps,soreness,right,2,12095,22
+Yoenis Cespedes,2016,Mets,CF,08/04/16,08/19/16,15,quad,strained,right,5,13110,25
+Yorman Rodriguez,2016,Reds,CF,04/03/16,10/03/16,183,hamstring,strain,left,5,9922,18
+Yovani Gallardo,2016,Orioles,RHP,04/23/16,06/18/16,56,shoulder bicep,tendinitis,right,18,8173,2
+Yu Darvish,2016,Rangers,RHP,04/03/16,05/28/16,55,elbow,Tommy John surgery,,4,13074,13
+Yu Darvish,2016,Rangers,RHP,06/09/16,07/16/16,37,shoulder,discomfort,right,18,13074,13
+Yunel Escobar,2016,Angels,3B,08/20/16,09/02/16,13,head,concussion,,1,4191,1
+Zac Rosscup,2016,Cubs,LHP,04/03/16,10/03/16,183,shoulder,inflammation,left,18,9419,17
+Zach Eflin,2016,Phillies,RHP,08/09/16,10/03/16,55,knees,patellar tendinopathy,,21,13774,26
+Zach McAllister,2016,Indians,RHP,07/07/16,07/29/16,22,hip,discomfort,right,4,2895,5
+Zach Putnam,2016,White Sox,RHP,06/21/16,10/03/16,104,elbow,ulnar neuritis,right,8,9080,4
+Zack Cozart,2016,Reds,SS,09/16/16,10/03/16,17,knee,injury,right,21,2616,18
+Zack Greinke,2016,Diamondbacks,RHP,06/29/16,08/09/16,41,oblique,strain,left,6,1943,15
+Zack Jones,2016,Brewers,RHP,04/03/16,10/03/16,183,shoulder,strain,right,18,sa502134,23
+Zack Wheeler,2016,Mets,RHP,04/03/16,10/03/16,183,elbow,Tommy John surgery,,8,10310,25
