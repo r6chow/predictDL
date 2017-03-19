@@ -2,15 +2,16 @@
 title: "Predicting Pitcher DL"
 author: "Roger Chow"
 date: "February 20, 2017"
-output: word_document
+output:
+  word_document: default
+  pdf_document: default
 ---
 
 ```{r setup}
-setwd("F:/Capstone_Workspace/predictDL");
+setwd("F:/Capstone_Workspace/predictDL/");
 library('RODBC');
 library('DBI');
 library('dplyr');
-library('ggplot2');
 library('stringi');
 library('sqldf');
 library('corrplot');
@@ -150,7 +151,7 @@ ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histo
 ```
 
 ```{r qq plot for normality}
-par(mar=c(2,2,2,2))
+par(mar=c(4,4,4,4))
 #for (i in 5:ncol(pitches_dl_dataset[,1: ncol(pitches_dl_dataset) - 1 ])){  
 for (i in 5:(ncol(pitches_dl_dataset)-2)){  
   tmp <- pitches_dl_dataset[, i];
@@ -159,13 +160,17 @@ for (i in 5:(ncol(pitches_dl_dataset)-2)){
 }
 ```
 
+```{r outlier detection}
+#outliers <- mvOutlier(numeric_dataset, qqplot = TRUE, method = "quan");
+```
+
 ```{r training and testing data set}
 train <- createDataPartition(pitches_dl_dataset$OnDL, p=0.65, list=FALSE);
 training <- pitches_dl_dataset[train,];
 testing <- pitches_dl_dataset[-train,];
 ```
 
-```{r caret model}
+```{r caret model 1}
 selected_variables <-lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate');
 
 selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
@@ -179,13 +184,13 @@ summary(mod_fit);
 
 ```
 
-```{r coefficients of model}
+```{r coefficients of model 1}
 
 coef(mod_fit$finalModel);
 
 ```
 
-```{r evaluation}
+```{r evaluation of model 1}
 pred <- predict(mod_fit, newdata=testing);
 confusionMatrix(data=pred, reference=testing$OnDL);
 ```
@@ -197,18 +202,18 @@ summary(mod_fit);
 
 ```
 
-```{r coefficients of model}
+```{r coefficients of model 2}
 
 coef(mod_fit$finalModel);
 
 ```
 
-```{r evaluation}
+```{r evaluation of model 2}
 pred <- predict(mod_fit, newdata=testing);
 confusionMatrix(data=pred, reference=testing$OnDL);
 ```
 
-```{r predictions for 2017}
+```{r predictions for 2017 using model 2}
 prediction <- predict(mod_fit, newdata=pitches_dl_predict, type='prob');
 prediction <- cbind(pitches_dl_predict, prediction);
 
@@ -234,7 +239,7 @@ summary(mod_1);
 ```
 
 
-```{r evaluation}
+```{r evaluation of glm model}
 pred <- ifelse(predict(mod_1, testing, type='response') > 0.5, 'YES', 'NO')
 confusionMatrix(data=pred, reference=testing$OnDL);
 ```
@@ -252,15 +257,15 @@ summary(mod_nothing);
 
 
 ```{r backaward selection (TO DO)}
-backward <- step(glm.out); 
+#backward <- step(glm.out); 
 
-summary(backwards);
+#summary(backwards);
 ```
 
 
 
 ```{r forward selection (TO DO)}
-forward <- step(glm.out, direction = "forward"); 
+#forward <- step(glm.out, direction = "forward"); 
 
-summary(forward);
+#summary(forward);
 ```
