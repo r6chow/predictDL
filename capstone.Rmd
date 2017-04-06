@@ -17,6 +17,7 @@ library('stringi');
 library('sqldf');
 library('corrplot');
 library('reshape2');
+library('lattice');
 library('ggplot2');
 library('caret');
 ```
@@ -64,204 +65,245 @@ library('caret');
 
 
 
+```{r load data from cache if exists}
+need_load <- TRUE;
+if (file.exists("pitches_dl_dataset.csv")){
+  pitches_dl_dataset <- read.csv("pitches_dl_dataset.csv");
+  pitches_dl_predict <- read.csv("pitches_dl_predict.csv");
+  need_load <- FALSE;
+}
+
+```
 
 ```{r pitch data for each year from database}
 
-years <- c(2010, 2011, 2012, 2013, 2014, 2015, 2016);
-
-dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
-
-impute <- function(x, fun) {
-  missing <- is.na(x)
-  replace(x, missing, fun(x[!missing]))
+if (need_load) {
+  years <- c(2010, 2011, 2012, 2013, 2014, 2015, 2016);
+  
+  dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
+  
+  impute <- function(x, fun) {
+    missing <- is.na(x)
+    replace(x, missing, fun(x[!missing]))
+  }
+  
+    
+  centroid_fun <- median;
+  impute_fun <- mean;
+  
+  
+  for (i in 2010:2016)
+  {
+    query <-
+   paste("SELECT	", i, " as season, m.rsID, p.id, p.atbatid, a.pitcher, 
+            p.x, p.y, p.start_speed, p.end_speed, p.sz_top, p.sz_bot,
+            p.px, p.pz, p.x0, p.y0, p.z0, p.vx0, p.vy0, p.vz0, p.ax, p.ay, p.az,
+            p.break_y, p.break_length, p.spin_dir, p.spin_rate, 
+            1 as type_ALL,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'AB' THEN 1 ELSE 0 END AS type_AB,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'AS' THEN 1 ELSE 0 END AS type_AS,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'CH' THEN 1 ELSE 0 END AS type_CH,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'CU' THEN 1 ELSE 0 END AS type_CU,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'EP' THEN 1 ELSE 0 END AS type_EP,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FA' THEN 1 ELSE 0 END AS type_FA,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FC' THEN 1 ELSE 0 END AS type_FC,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FF' THEN 1 ELSE 0 END AS type_FF,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FO' THEN 1 ELSE 0 END AS type_FO,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FS' THEN 1 ELSE 0 END AS type_FS,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'FT' THEN 1 ELSE 0 END AS type_FT,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'IN' THEN 1 ELSE 0 END AS type_IN,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'KC' THEN 1 ELSE 0 END AS type_KC,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'KN' THEN 1 ELSE 0 END AS type_KN,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'PO' THEN 1 ELSE 0 END AS type_PO,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'SC' THEN 1 ELSE 0 END AS type_SC,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'SI' THEN 1 ELSE 0 END AS type_SI,
+            CASE WHEN ISNULL(p.pitch_type,'UN') = 'SL' THEN 1 ELSE 0 END AS type_SL,
+            CASE WHEN ISNULL(p.pitch_type,'UN') not in ('AS', 'CH', 'CU', 'EP', 'FA', 'FC', 'FF', 'FO', 'FS', 'FT', 'IN', 'KC', 'KN', 'PO', 'SC', 'SI') THEN 1 ELSE 0 END as type_UN
+          FROM [PitchFx",i,"].[dbo].[Pitches] p
+          INNER JOIN [PitchFx",i,"].[dbo].[AtBats] a on a.ID = p.AtBatID
+          INNER JOIN [Mapping].[dbo].[RSID_MLBID_MAP] m on a.pitcher = m.mlbid
+          INNER JOIN [Lahman].[dbo].[Master] ms on ms.retroID = m.rsID", sep="");
+    
+    pitches_raw <-sqlQuery(dbhandle, query);
+  
+    
+    pitches_impute_centroid <- ddply(pitches_raw, ~rsID, transform,
+                    x = impute(x, impute_fun),
+                    y = impute(y, impute_fun),
+                    start_speed = impute(start_speed, impute_fun),
+                    end_speed = impute(end_speed, impute_fun),
+                    sz_top = impute(sz_top, impute_fun),
+                    sz_bot = impute(sz_bot, impute_fun),
+                    px = impute(px, impute_fun),
+                    pz = impute(pz, impute_fun),
+                    x0 = impute(x0, impute_fun),
+                    y0 = impute(y0, impute_fun),
+                    z0 = impute(z0, impute_fun), 
+                    vx0 = impute(vx0, impute_fun),
+                    vy0 = impute(vy0, impute_fun),
+                    vz0 = impute(vz0, impute_fun),
+                    ax = impute(ax, impute_fun),
+                    ay = impute(ay, impute_fun),
+                    az = impute(az, impute_fun),
+                    break_y = impute(break_y, impute_fun),
+                    break_length = impute(break_length, impute_fun),
+                    spin_dir = impute(spin_dir, impute_fun),
+                    spin_rate =  impute(spin_rate, impute_fun)
+                    );
+  
+   pitches_aggregate <- ddply(pitches_impute_centroid, ~rsID, summarise,
+                    season = max(season),
+                    x  = centroid_fun(x),
+                    y = centroid_fun(y),
+                    start_speed = centroid_fun(start_speed),
+                    end_speed = centroid_fun(end_speed),
+                    sz_top = centroid_fun(sz_top),
+                    sz_bot = centroid_fun(sz_bot),
+                    px = centroid_fun(px),
+                    pz = centroid_fun(pz),
+                    x0 = centroid_fun(x0),
+                    y0 = centroid_fun(y0),
+                    z0 = centroid_fun(z0), 
+                    vx0 = centroid_fun(vx0),
+                    vy0 = centroid_fun(vy0),
+                    vz0 = centroid_fun(vz0),
+                    ax = centroid_fun(ax),
+                    ay = centroid_fun(ay),
+                    az = centroid_fun(az),
+                    break_y = centroid_fun(break_y),
+                    break_length = centroid_fun(break_length),
+                    spin_dir = centroid_fun(spin_dir),
+                    spin_rate =  centroid_fun(spin_rate),
+                    num_pitches = sum(type_ALL),
+                    num_AB = sum(type_AB),
+                    num_AS = sum(type_AS),
+                    num_CH = sum(type_CH),
+                    num_CU = sum(type_CU),
+                    num_EP = sum(type_EP),
+                    num_FA = sum(type_FA),
+                    num_FC = sum(type_FC),
+                    num_FF = sum(type_FF),
+                    num_FO = sum(type_FO),
+                    num_FS = sum(type_FS),
+                    num_FT = sum(type_FT),
+                    num_IN = sum(type_IN),
+                    num_KC = sum(type_KC),
+                    num_KN = sum(type_KN),
+                    num_PO = sum(type_PO),
+                    num_SC = sum(type_SC),
+                    num_SI = sum(type_SI),
+                    num_SL = sum(type_SL),
+                    num_UN = sum(type_UN)
+                    );
+                 
+    assign(paste("pitches",i,sep=""), pitches_aggregate);
+    
+  };
+  
+  pitches <- rbind(pitches2010, pitches2011, pitches2012, pitches2013, pitches2014, pitches2015, pitches2016);
+  pitches <- pitches[complete.cases(pitches),];
+  
+  
+  close(dbhandle);
 }
-
-  
-centroid_fun <- median;
-impute_fun <- mean;
-
-
-for (i in 2010:2016)
-{
-  query <-
- paste("SELECT	", i, " as season, m.rsID, p.id, p.atbatid, a.pitcher, 
-          p.x, p.y, p.start_speed, p.end_speed, p.sz_top, p.sz_bot,
-          p.px, p.pz, p.x0, p.y0, p.z0, p.vx0, p.vy0, p.vz0, p.ax, p.ay, p.az,
-          p.break_y, p.break_length, p.spin_dir, p.spin_rate, 
-          1 as type_ALL,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'AB' THEN 1 ELSE 0 END AS type_AB,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'AS' THEN 1 ELSE 0 END AS type_AS,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'CH' THEN 1 ELSE 0 END AS type_CH,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'CU' THEN 1 ELSE 0 END AS type_CU,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'EP' THEN 1 ELSE 0 END AS type_EP,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FA' THEN 1 ELSE 0 END AS type_FA,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FC' THEN 1 ELSE 0 END AS type_FC,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FF' THEN 1 ELSE 0 END AS type_FF,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FO' THEN 1 ELSE 0 END AS type_FO,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FS' THEN 1 ELSE 0 END AS type_FS,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'FT' THEN 1 ELSE 0 END AS type_FT,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'IN' THEN 1 ELSE 0 END AS type_IN,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'KC' THEN 1 ELSE 0 END AS type_KC,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'KN' THEN 1 ELSE 0 END AS type_KN,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'PO' THEN 1 ELSE 0 END AS type_PO,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'SC' THEN 1 ELSE 0 END AS type_SC,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'SI' THEN 1 ELSE 0 END AS type_SI,
-          CASE WHEN ISNULL(p.pitch_type,'UN') = 'SL' THEN 1 ELSE 0 END AS type_SL,
-          CASE WHEN ISNULL(p.pitch_type,'UN') not in ('AS', 'CH', 'CU', 'EP', 'FA', 'FC', 'FF', 'FO', 'FS', 'FT', 'IN', 'KC', 'KN', 'PO', 'SC', 'SI') THEN 1 ELSE 0 END as type_UN
-        FROM [PitchFx",i,"].[dbo].[Pitches] p
-        INNER JOIN [PitchFx",i,"].[dbo].[AtBats] a on a.ID = p.AtBatID
-        INNER JOIN [Mapping].[dbo].[RSID_MLBID_MAP] m on a.pitcher = m.mlbid
-        INNER JOIN [Lahman].[dbo].[Master] ms on ms.retroID = m.rsID", sep="");
-  
-  pitches_raw <-sqlQuery(dbhandle, query);
-
-  
-  pitches_impute_centroid <- ddply(pitches_raw, ~rsID, transform,
-                  x = impute(x, impute_fun),
-                  y = impute(y, impute_fun),
-                  start_speed = impute(start_speed, impute_fun),
-                  end_speed = impute(end_speed, impute_fun),
-                  sz_top = impute(sz_top, impute_fun),
-                  sz_bot = impute(sz_bot, impute_fun),
-                  px = impute(px, impute_fun),
-                  pz = impute(pz, impute_fun),
-                  x0 = impute(x0, impute_fun),
-                  y0 = impute(y0, impute_fun),
-                  z0 = impute(z0, impute_fun), 
-                  vx0 = impute(vx0, impute_fun),
-                  vy0 = impute(vy0, impute_fun),
-                  vz0 = impute(vz0, impute_fun),
-                  ax = impute(ax, impute_fun),
-                  ay = impute(ay, impute_fun),
-                  az = impute(az, impute_fun),
-                  break_y = impute(break_y, impute_fun),
-                  break_length = impute(break_length, impute_fun),
-                  spin_dir = impute(spin_dir, impute_fun),
-                  spin_rate =  impute(spin_rate, impute_fun)
-                  );
-
- pitches_aggregate <- ddply(pitches_impute_centroid, ~rsID, summarise,
-                  season = max(season),
-                  x  = centroid_fun(x),
-                  y = centroid_fun(y),
-                  start_speed = centroid_fun(start_speed),
-                  end_speed = centroid_fun(end_speed),
-                  sz_top = centroid_fun(sz_top),
-                  sz_bot = centroid_fun(sz_bot),
-                  px = centroid_fun(px),
-                  pz = centroid_fun(pz),
-                  x0 = centroid_fun(x0),
-                  y0 = centroid_fun(y0),
-                  z0 = centroid_fun(z0), 
-                  vx0 = centroid_fun(vx0),
-                  vy0 = centroid_fun(vy0),
-                  vz0 = centroid_fun(vz0),
-                  ax = centroid_fun(ax),
-                  ay = centroid_fun(ay),
-                  az = centroid_fun(az),
-                  break_y = centroid_fun(break_y),
-                  break_length = centroid_fun(break_length),
-                  spin_dir = centroid_fun(spin_dir),
-                  spin_rate =  centroid_fun(spin_rate),
-                  num_pitches = sum(type_ALL),
-                  num_AB = sum(type_AB),
-                  num_AS = sum(type_AS),
-                  num_CH = sum(type_CH),
-                  num_CU = sum(type_CU),
-                  num_EP = sum(type_EP),
-                  num_FA = sum(type_FA),
-                  num_FC = sum(type_FC),
-                  num_FF = sum(type_FF),
-                  num_FO = sum(type_FO),
-                  num_FS = sum(type_FS),
-                  num_FT = sum(type_FT),
-                  num_IN = sum(type_IN),
-                  num_KC = sum(type_KC),
-                  num_KN = sum(type_KN),
-                  num_PO = sum(type_PO),
-                  num_SC = sum(type_SC),
-                  num_SI = sum(type_SI),
-                  num_SL = sum(type_SL),
-                  num_UN = sum(type_UN)
-                  );
-               
-  assign(paste("pitches",i,sep=""), pitches_aggregate);
-  
-};
-
-pitches <- rbind(pitches2010, pitches2011, pitches2012, pitches2013, pitches2014, pitches2015, pitches2016);
-pitches <- pitches[complete.cases(pitches),];
-
-
-close(dbhandle);
 ```
 
 
 ```{r disabled list}
-dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
-query <- " 
-SELECT rsid, 2011 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2011]
-  WHERE Position in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-UNION
-SELECT rsid, 2012 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2012]
-  WHERE Pos in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-UNION
-SELECT rsid, 2013 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2013]
-  WHERE Position in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-UNION
-SELECT rsid, 2014 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2014]
-  WHERE Position in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-UNION
-SELECT rsid, 2015 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2015]
-  WHERE Position in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-UNION
-SELECT rsid, 2016 as season_dl, sum(days) as DLDays
-  FROM [DisabledList].[dbo].[DL2016]
-  WHERE Position in ('LHP','RHP','RP','SP','P')
-  GROUP BY rsid
-";
-
-dl <- sqlQuery(dbhandle, query);
-dl <- dl[complete.cases(dl),];
-dl$season_1 <- dl$season-1;
-close(dbhandle);
-
+if (need_load) {
+  dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
+  query <- " 
+  SELECT rsid, 2011 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2011]
+    WHERE Position in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  UNION
+  SELECT rsid, 2012 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2012]
+    WHERE Pos in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  UNION
+  SELECT rsid, 2013 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2013]
+    WHERE Position in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  UNION
+  SELECT rsid, 2014 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2014]
+    WHERE Position in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  UNION
+  SELECT rsid, 2015 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2015]
+    WHERE Position in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  UNION
+  SELECT rsid, 2016 as season_dl, sum(days) as DLDays
+    FROM [DisabledList].[dbo].[DL2016]
+    WHERE Position in ('LHP','RHP','RP','SP','P')
+    GROUP BY rsid
+  ";
+  
+  dl <- sqlQuery(dbhandle, query);
+  dl <- dl[complete.cases(dl),];
+  dl$season_1 <- dl$season-1;
+  close(dbhandle);
+}
 ```
 
 
 ```{r merge pitches to disabled list}
+if (need_load) {
+  #use previous season to predict DL in current season
+  pitches_dl <- merge(x=pitches, y=dl, by.x=c("rsID", "season"), by.y=c("rsid", "season_1"), all.x = TRUE, all.y=FALSE)
+  
+  pitches_dl[pitches_dl==""] <- NA; #replace blanks with NA
+  
+  pitches_dl$DLDays[is.na(pitches_dl$DLDays)] <- 0; #no DL pitchers are on DL for 0 days
+  
+  drops <- c("season_dl");
+  pitches_dl <- pitches_dl[ , !(names(pitches_dl) %in% drops)];
+  
+  pitches_dl <- pitches_dl[complete.cases(pitches_dl),];
+  
+  pitches_dl_dataset <- pitches_dl[pitches_dl$season < 2016,]; #for modeling
+  pitches_dl_predict <- pitches_dl[pitches_dl$season == 2016,]; #for 2017 prediction
+  
+  pitches_dl_dataset$OnDL <- as.factor(ifelse(pitches_dl_dataset$DLDays>0, 'YES', 'NO'));
+  
+  #write to csv to save time
+  write.csv(pitches_dl_dataset, "pitches_dl_dataset.csv");
+  write.csv(pitches_dl_dataset, "pitches_dl_predict.csv");
+  
+}
+```
 
-#use previous season to predict DL in current season
-pitches_dl <- merge(x=pitches, y=dl, by.x=c("rsID", "season"), by.y=c("rsid", "season_1"), all.x = TRUE, all.y=FALSE)
+```{r calculate percentage of pitch types}
+pitches_dl_dataset$num_pitches <- sqrt(pitches_dl_dataset$num_pitches);
+pitches_dl_dataset$num_AB <- sqrt(pitches_dl_dataset$num_AB);
+pitches_dl_dataset$num_AS <- sqrt(pitches_dl_dataset$num_AS);
+pitches_dl_dataset$num_CH <- sqrt(pitches_dl_dataset$num_CH);
+pitches_dl_dataset$num_CU <- sqrt(pitches_dl_dataset$num_CU);
+pitches_dl_dataset$num_EP <- sqrt(pitches_dl_dataset$num_EP);
+pitches_dl_dataset$num_FA <- sqrt(pitches_dl_dataset$num_FA);
+pitches_dl_dataset$num_FC <- sqrt(pitches_dl_dataset$num_FC);
+pitches_dl_dataset$num_FF <- sqrt(pitches_dl_dataset$num_FF);
+pitches_dl_dataset$num_FO <- sqrt(pitches_dl_dataset$num_FO);
+pitches_dl_dataset$num_FS <- sqrt(pitches_dl_dataset$num_FS);
+pitches_dl_dataset$num_FT <- sqrt(pitches_dl_dataset$num_FT);
+pitches_dl_dataset$num_IN <- sqrt(pitches_dl_dataset$num_IN);
+pitches_dl_dataset$num_KC <- sqrt(pitches_dl_dataset$num_KC);
+pitches_dl_dataset$num_KN <- sqrt(pitches_dl_dataset$num_KN);
+pitches_dl_dataset$num_PO <- sqrt(pitches_dl_dataset$num_PO);
+pitches_dl_dataset$num_SC <- sqrt(pitches_dl_dataset$num_SC);
+pitches_dl_dataset$num_SI <- sqrt(pitches_dl_dataset$num_SI);
+pitches_dl_dataset$num_UN <- sqrt(pitches_dl_dataset$num_UN);
 
-pitches_dl[pitches_dl==""] <- NA; #replace blanks with NA
-
-pitches_dl$DLDays[is.na(pitches_dl$DLDays)] <- 0; #no DL pitchers are on DL for 0 days
-
-drops <- c("season_dl");
-pitches_dl <- pitches_dl[ , !(names(pitches_dl) %in% drops)];
-
-pitches_dl <- pitches_dl[complete.cases(pitches_dl),];
-
-pitches_dl_dataset <- pitches_dl[pitches_dl$season < 2016,]; #for modeling
-pitches_dl_predict <- pitches_dl[pitches_dl$season == 2016,]; #for 2017 prediction
-
-pitches_dl_dataset$OnDL <- as.factor(ifelse(pitches_dl_dataset$DLDays>0, 'YES', 'NO'));
 
 ```
 
-
 ```{r pitch summary}
+
 summary(pitches_dl_dataset);
 
 ```
@@ -269,26 +311,54 @@ summary(pitches_dl_dataset);
 ```{r pitch correlation}
 numeric_dataset <- pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)];
 #exclude season and DLDays
-numeric_dataset <- numeric_dataset[2:(ncol(numeric_dataset)-1)];
+numeric_dataset <- numeric_dataset[3:(ncol(numeric_dataset)-1)];
 m <- cor(numeric_dataset);
 corrplot(m);
 ```
+
+```{r PCA}
+standardised <- as.data.frame(scale(numeric_dataset));
+pitch.pca <- prcomp(standardised);
+ summary(pitch.pca);
+```
+
+```{r pca plot}
+screeplot(pitch.pca, type="lines")
+```
+```{r pca loading}
+print(pitch.pca$rotation[,1]);
+```
+
 ```{r highly pitch correlation}
-highlyCorrelated <- findCorrelation(m, cutoff=0.4);
-lowCorrelatedCols <- colnames(numeric_dataset[-highlyCorrelated]);
-print(lowCorrelatedCols);
+all_variables <- colnames(numeric_dataset);
+#highlyCorrelated <- findCorrelation(m, cutoff=0.5);
+#lowCorrelatedCols <- colnames(numeric_dataset[2:(ncol(numeric_dataset)-1)]);
+print(all_variables);
 
 ```
 
 ```{r histogram}
+
 d <- melt(pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)]);
 
 ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
 
 ```
 
+```{r transform}
+trans <- preProcess(pitches_dl_dataset, method=c("BoxCox", "center", "scale"))
+
+pitches_dl_dataset_transform <- predict(trans, pitches_dl_dataset);
+
+d <- melt(numeric_dataset_trans);
+
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
+```
+
+
 ```{r qq plot for normality}
 par(mar=c(4,4,4,4))
+
 #for (i in 3:ncol(pitches_dl_dataset[,1: ncol(pitches_dl_dataset) - 1 ])){  
 for (i in 3:(ncol(pitches_dl_dataset)-2)){  
   tmp <- pitches_dl_dataset[, i];
@@ -302,13 +372,32 @@ for (i in 3:(ncol(pitches_dl_dataset)-2)){
 ```
 
 ```{r training and testing data set}
-train <- createDataPartition(pitches_dl_dataset$OnDL, p=0.65, list=FALSE);
+train <- createDataPartition(pitches_dl_dataset$OnDL, p=0.7, list=FALSE);
 training <- pitches_dl_dataset[train,];
 testing <- pitches_dl_dataset[-train,];
 ```
 
+
+```{r caret transformed model 1}
+selected_variables <- c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 
+                        'num_pitches');
+
+selected_i <- which(colnames(pitches_dl_dataset_transform) %in%selected_variables);
+  
+formula_text <- paste(names(pitches_dl_dataset_transform)[ncol(pitches_dl_dataset_transform)], "~",
+                      paste(names(pitches_dl_dataset_transform)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+mod_fit <- train(formula,  data=training, method="glm", family="binomial");
+summary(mod_fit);
+
+```
+
+
+
 ```{r caret model 1}
-selected_variables <-lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate');
+selected_variables <- c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 
+                        'num_pitches');
 
 selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
   
@@ -332,7 +421,14 @@ pred <- predict(mod_fit, newdata=testing);
 confusionMatrix(data=pred, reference=testing$OnDL);
 ```
 ```{r significant varables}
-formula <- as.formula('OnDL ~ y + x0 + spin_dir + num_CU + num_SL + num_FC + num_FS + num_FT + num_KC');
+
+selected_variables <- c('start_speed', 'num_pitches');
+
+selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
+  
+formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
+                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
 
 mod_fit <- train(formula,  data=training, method="glm", family="binomial");
 summary(mod_fit);
