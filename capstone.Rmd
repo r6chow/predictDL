@@ -7,7 +7,8 @@ output:
   word_document: default
 ---
 
-```{r setup}
+# Load libraries
+```{r warning=FALSE}
 setwd("F:/Capstone_Workspace/predictDL/");
 library('RODBC');
 library('DBI');
@@ -20,62 +21,55 @@ library('reshape2');
 library('lattice');
 library('ggplot2');
 library('caret');
+library('logistf');
+library('klaR');
+library('pROC');
+library('pls');
+
+
+resetPar <- function() {
+    dev.new()
+    op <- par(no.readonly = TRUE)
+    dev.off()
+    op
+}
+
+par(resetPar());
 ```
 
+# Prepare data
 
-# ```{r pitch from database}
-# dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
-# query <-
-# 'SELECT	m.rsid, min(ms.nameLast) as nameLast, min(ms.nameFirst) as nameFirst,
-# 		year(p.GameDate) as season, 
-# 		avg(p.x) as x, 
-# 		avg(p.y) as y, 
-# 		avg(p.start_speed) as start_speed, 
-# 		avg(p.end_speed) as end_speed, 
-# 		avg(p.sz_top) as sz_top,
-# 		avg(p.sz_bot) as sz_bot,
-# 		avg(p.pfx_x) as pfx_x, 
-# 		avg(p.pfx_z) as pfx_z,
-# 		avg(p.px) as px, 
-# 		avg(p.pz) as pz,
-# 		avg(p.x0) as x0, 
-# 		avg(p.y0) as y0, 
-# 		avg(p.z0) as z0,
-# 		avg(p.vx0) as vx0, 
-# 		avg(p.vy0) as vy0, 
-# 		avg(p.vz0) as vz0,
-# 		avg(p.ax) as ax, 
-# 		avg(p.ay) as ay, 
-# 		avg(p.az) as az,
-# 		avg(p.break_y) as break_y, 
-# 		avg(p.break_angle) as break_angle, 
-# 		avg(p.break_length) as break_length,
-# 		avg(p.spin_dir) as spin_dir, 
-# 		avg(p.spin_rate) as spin_rate,
-# 		sum(p.num_pitches) as num_pitches
-#   FROM [PitchFx].[dbo].[GamesAtBatsAggregatePitches] p
-#   INNER JOIN [Mapping].[dbo].[RSID_MLBID_MAP] m on p.pitcher = m.mlbid
-#   INNER JOIN [Lahman].[dbo].[Master] ms on ms.retroID = m.rsID
-#   GROUP BY m.rsid, year(p.GameDate)'
-# 
-# pitches <- sqlQuery(dbhandle, query);
-# pitches <- pitches[complete.cases(pitches),];
-# close(dbhandle);
-# ```
+## Load from Cache
+
+Load the data from cache if the cache exists.  This is will save time when re-running the analysis since the data will not change.  It takes approximately 30 minutes to load the data from scratch.
 
 
-
-```{r load data from cache if exists}
+```{r warning=FALSE}
 need_load <- TRUE;
 if (file.exists("pitches_dl_dataset.csv")){
   pitches_dl_dataset <- read.csv("pitches_dl_dataset.csv");
   pitches_dl_predict <- read.csv("pitches_dl_predict.csv");
+  
+  
+  drops <- c("X");
+  pitches_dl_dataset <- pitches_dl_dataset[ , !(names(pitches_dl_dataset) %in% drops)];
+  pitches_dl_predict <- pitches_dl_predict[ , !(names(pitches_dl_predict) %in% drops)];
+
   need_load <- FALSE;
 }
 
 ```
 
-```{r pitch data for each year from database}
+
+## Load pitchFX data from Database
+
+If there is data cached, load the data from the SQL Server database.
+
+Impute missing values using the Median.
+
+The median is used to measure the central tendency for each continuous variable for each pitcher.  The count of the pitch types is also calculate for each pitcher in each year.  
+
+```{r warning=FALSE}
 
 if (need_load) {
   years <- c(2010, 2011, 2012, 2013, 2014, 2015, 2016);
@@ -89,7 +83,7 @@ if (need_load) {
   
     
   centroid_fun <- median;
-  impute_fun <- mean;
+  impute_fun <- median;
   
   
   for (i in 2010:2016)
@@ -209,8 +203,14 @@ if (need_load) {
 ```
 
 
-```{r disabled list}
-if (need_load) {
+## Load the disabled this
+
+If there is no data cached, load the disable list data from the SQL Server database.
+
+This data contains the list of pitchers on the disable list in each year.  Define a new column for season_1  to denote the previous season.  This is required since the pitching data from the previous season will be used to determine if the player will be on the disabled list in the current season. 
+
+```{r warning=FALSE}
+ if (need_load) {
   dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=PitchFx;trusted_connection=true');
   query <- " 
   SELECT rsid, 2011 as season_dl, sum(days) as DLDays
@@ -248,11 +248,21 @@ if (need_load) {
   dl <- dl[complete.cases(dl),];
   dl$season_1 <- dl$season-1;
   close(dbhandle);
-}
+ }
 ```
 
 
-```{r merge pitches to disabled list}
+## Join the pitch and disabled list data
+
+If there is no data cached, join the pitching data and disabled list data by season.  
+
+Define the response variable OnDL to be TRUE if the pitcher is was on the disabled list or FALSE otherwise.
+
+The pitching data from seasons 2010 to 2015 will be used to build and test the model since the disabled list is only available up to the 2016 season.
+
+The pitching data from 2016 will be used to predict which players are most likey be on the disable list in 2017.
+
+```{r warning=FALSE}
 if (need_load) {
   #use previous season to predict DL in current season
   pitches_dl <- merge(x=pitches, y=dl, by.x=c("rsID", "season"), by.y=c("rsid", "season_1"), all.x = TRUE, all.y=FALSE)
@@ -260,8 +270,9 @@ if (need_load) {
   pitches_dl[pitches_dl==""] <- NA; #replace blanks with NA
   
   pitches_dl$DLDays[is.na(pitches_dl$DLDays)] <- 0; #no DL pitchers are on DL for 0 days
+  pitches_dl$OnDL <- (ifelse(pitches_dl$DLDays>0, 1, 0));
   
-  drops <- c("season_dl");
+  drops <- c("season_dl", "DLDays");
   pitches_dl <- pitches_dl[ , !(names(pitches_dl) %in% drops)];
   
   pitches_dl <- pitches_dl[complete.cases(pitches_dl),];
@@ -269,7 +280,13 @@ if (need_load) {
   pitches_dl_dataset <- pitches_dl[pitches_dl$season < 2016,]; #for modeling
   pitches_dl_predict <- pitches_dl[pitches_dl$season == 2016,]; #for 2017 prediction
   
-  pitches_dl_dataset$OnDL <- as.factor(ifelse(pitches_dl_dataset$DLDays>0, 'YES', 'NO'));
+  #pitches_dl_dataset$OnDL <- as.factor(ifelse(pitches_dl_dataset$DLDays>0, 'YES', 'NO'));
+  
+    
+  drops <- c("season");
+  pitches_dl_dataset <- pitches_dl_dataset[ , !(names(pitches_dl_dataset) %in% drops)];
+  pitches_dl_predict <- pitches_dl_predict[ , !(names(pitches_dl_predict) %in% drops)];
+
   
   #write to csv to save time
   write.csv(pitches_dl_dataset, "pitches_dl_dataset.csv");
@@ -278,219 +295,545 @@ if (need_load) {
 }
 ```
 
-```{r calculate percentage of pitch types}
-pitches_dl_dataset$num_pitches <- sqrt(pitches_dl_dataset$num_pitches);
-pitches_dl_dataset$num_AB <- sqrt(pitches_dl_dataset$num_AB);
-pitches_dl_dataset$num_AS <- sqrt(pitches_dl_dataset$num_AS);
-pitches_dl_dataset$num_CH <- sqrt(pitches_dl_dataset$num_CH);
-pitches_dl_dataset$num_CU <- sqrt(pitches_dl_dataset$num_CU);
-pitches_dl_dataset$num_EP <- sqrt(pitches_dl_dataset$num_EP);
-pitches_dl_dataset$num_FA <- sqrt(pitches_dl_dataset$num_FA);
-pitches_dl_dataset$num_FC <- sqrt(pitches_dl_dataset$num_FC);
-pitches_dl_dataset$num_FF <- sqrt(pitches_dl_dataset$num_FF);
-pitches_dl_dataset$num_FO <- sqrt(pitches_dl_dataset$num_FO);
-pitches_dl_dataset$num_FS <- sqrt(pitches_dl_dataset$num_FS);
-pitches_dl_dataset$num_FT <- sqrt(pitches_dl_dataset$num_FT);
-pitches_dl_dataset$num_IN <- sqrt(pitches_dl_dataset$num_IN);
-pitches_dl_dataset$num_KC <- sqrt(pitches_dl_dataset$num_KC);
-pitches_dl_dataset$num_KN <- sqrt(pitches_dl_dataset$num_KN);
-pitches_dl_dataset$num_PO <- sqrt(pitches_dl_dataset$num_PO);
-pitches_dl_dataset$num_SC <- sqrt(pitches_dl_dataset$num_SC);
-pitches_dl_dataset$num_SI <- sqrt(pitches_dl_dataset$num_SI);
-pitches_dl_dataset$num_UN <- sqrt(pitches_dl_dataset$num_UN);
+## Transform count variables
 
+```{r warning=FALSE}
+pitches_dl_dataset$trf_num_pitches <- sqrt(pitches_dl_dataset$num_pitches+(2/3));
+pitches_dl_dataset$trf_num_AB <- sqrt(pitches_dl_dataset$num_AB+(2/3));
+pitches_dl_dataset$trf_num_AS <- sqrt(pitches_dl_dataset$num_AS+(2/3));
+pitches_dl_dataset$trf_num_CH <- sqrt(pitches_dl_dataset$num_CH+(2/3));
+pitches_dl_dataset$trf_num_CU <- sqrt(pitches_dl_dataset$num_CU+(2/3));
+pitches_dl_dataset$trf_num_EP <- sqrt(pitches_dl_dataset$num_EP+(2/3));
+pitches_dl_dataset$trf_num_FA <- sqrt(pitches_dl_dataset$num_FA+(2/3));
+pitches_dl_dataset$trf_num_FC <- sqrt(pitches_dl_dataset$num_FC+(2/3));
+pitches_dl_dataset$trf_num_FF <- sqrt(pitches_dl_dataset$num_FF+(2/3));
+pitches_dl_dataset$trf_num_FO <- sqrt(pitches_dl_dataset$num_FO+(2/3));
+pitches_dl_dataset$trf_num_FS <- sqrt(pitches_dl_dataset$num_FS+(2/3));
+pitches_dl_dataset$trf_num_FT <- sqrt(pitches_dl_dataset$num_FT+(2/3));
+pitches_dl_dataset$trf_num_IN <- sqrt(pitches_dl_dataset$num_IN+(2/3));
+pitches_dl_dataset$trf_num_KC <- sqrt(pitches_dl_dataset$num_KC+(2/3));
+pitches_dl_dataset$trf_num_KN <- sqrt(pitches_dl_dataset$num_KN+(2/3));
+pitches_dl_dataset$trf_num_PO <- sqrt(pitches_dl_dataset$num_PO+(2/3));
+pitches_dl_dataset$trf_num_SC <- sqrt(pitches_dl_dataset$num_SC+(2/3));
+pitches_dl_dataset$trf_num_SI <- sqrt(pitches_dl_dataset$num_SI+(2/3));
+pitches_dl_dataset$trf_num_UN <- sqrt(pitches_dl_dataset$num_UN+(2/3));
+
+pitches_dl_predict$trf_num_pitches <- sqrt(pitches_dl_predict$num_pitches+(2/3));
+pitches_dl_predict$trf_num_AB <- sqrt(pitches_dl_predict$num_AB+(2/3));
+pitches_dl_predict$trf_num_AS <- sqrt(pitches_dl_predict$num_AS+(2/3));
+pitches_dl_predict$trf_num_CH <- sqrt(pitches_dl_predict$num_CH+(2/3));
+pitches_dl_predict$trf_num_CU <- sqrt(pitches_dl_predict$num_CU+(2/3));
+pitches_dl_predict$trf_num_EP <- sqrt(pitches_dl_predict$num_EP+(2/3));
+pitches_dl_predict$trf_num_FA <- sqrt(pitches_dl_predict$num_FA+(2/3));
+pitches_dl_predict$trf_num_FC <- sqrt(pitches_dl_predict$num_FC+(2/3));
+pitches_dl_predict$trf_num_FF <- sqrt(pitches_dl_predict$num_FF+(2/3));
+pitches_dl_predict$trf_num_FO <- sqrt(pitches_dl_predict$num_FO+(2/3));
+pitches_dl_predict$trf_num_FS <- sqrt(pitches_dl_predict$num_FS+(2/3));
+pitches_dl_predict$trf_num_FT <- sqrt(pitches_dl_predict$num_FT+(2/3));
+pitches_dl_predict$trf_num_IN <- sqrt(pitches_dl_predict$num_IN+(2/3));
+pitches_dl_predict$trf_num_KC <- sqrt(pitches_dl_predict$num_KC+(2/3));
+pitches_dl_predict$trf_num_KN <- sqrt(pitches_dl_predict$num_KN+(2/3));
+pitches_dl_predict$trf_num_PO <- sqrt(pitches_dl_predict$num_PO+(2/3));
+pitches_dl_predict$trf_num_SC <- sqrt(pitches_dl_predict$num_SC+(2/3));
+pitches_dl_predict$trf_num_SI <- sqrt(pitches_dl_predict$num_SI+(2/3));
+pitches_dl_predict$trf_num_UN <- sqrt(pitches_dl_predict$num_UN+(2/3));
+
+model_dataset <- pitches_dl_dataset[,-grep( "^num_" , names( pitches_dl_dataset ) )];
+predict_dataset <- pitches_dl_predict[,-grep( "^num_" , names( pitches_dl_predict ) )];
+                              
+```
+
+## Summary of data set
+
+```{r warning=FALSE}
+
+summary(model_dataset);
 
 ```
 
-```{r pitch summary}
+# Exploratory Analysis
 
-summary(pitches_dl_dataset);
+## Histogram of data
+```{r warning=FALSE}
 
-```
-
-```{r pitch correlation}
-numeric_dataset <- pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)];
-#exclude season and DLDays
-numeric_dataset <- numeric_dataset[3:(ncol(numeric_dataset)-1)];
-m <- cor(numeric_dataset);
-corrplot(m);
-```
-
-```{r PCA}
-standardised <- as.data.frame(scale(numeric_dataset));
-pitch.pca <- prcomp(standardised);
- summary(pitch.pca);
-```
-
-```{r pca plot}
-screeplot(pitch.pca, type="lines")
-```
-```{r pca loading}
-print(pitch.pca$rotation[,1]);
-```
-
-```{r highly pitch correlation}
-all_variables <- colnames(numeric_dataset);
-#highlyCorrelated <- findCorrelation(m, cutoff=0.5);
-#lowCorrelatedCols <- colnames(numeric_dataset[2:(ncol(numeric_dataset)-1)]);
-print(all_variables);
-
-```
-
-```{r histogram}
-
-d <- melt(pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)]);
+d <- melt(model_dataset[sapply(model_dataset, is.numeric)]);
 
 ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
 
 ```
 
-```{r transform}
-trans <- preProcess(pitches_dl_dataset, method=c("BoxCox", "center", "scale"))
-
-pitches_dl_dataset_transform <- predict(trans, pitches_dl_dataset);
-
-d <- melt(numeric_dataset_trans);
-
-ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
-```
-
-
-```{r qq plot for normality}
+## Check normality using QQ plot
+```{r warning=FALSE}
 par(mar=c(4,4,4,4))
 
-#for (i in 3:ncol(pitches_dl_dataset[,1: ncol(pitches_dl_dataset) - 1 ])){  
-for (i in 3:(ncol(pitches_dl_dataset)-2)){  
-  tmp <- pitches_dl_dataset[, i];
-  qqnorm(tmp, main = colnames(pitches_dl_dataset[i]));
+for (i in 2:(ncol(model_dataset)-1)){  
+  tmp <- model_dataset[, i];
+  qqnorm(tmp, main = colnames(model_dataset[i]));
   qqline(tmp);
 }
 ```
 
-```{r outlier detection}
-#outliers <- mvOutlier(numeric_dataset, qqplot = TRUE, method = "quan");
+
+##Display correlation
+```{r warning=FALSE}
+
+numeric_dataset <- model_dataset[sapply(model_dataset, is.numeric)];
+
+#ignore column y0 since there is 0 variance
+numeric_dataset <- numeric_dataset[ , !(names(numeric_dataset) %in% c("y0", "OnDL"))];
+
+#numeric_dataset <- numeric_dataset[1:(ncol(numeric_dataset))];
+m <- cor(numeric_dataset);
+corrplot::corrplot(m, type="upper");
 ```
+# Model Building
 
-```{r training and testing data set}
-train <- createDataPartition(pitches_dl_dataset$OnDL, p=0.7, list=FALSE);
-training <- pitches_dl_dataset[train,];
-testing <- pitches_dl_dataset[-train,];
-```
+## Create training and testing set using 70% training and 30% testing
+```{r warning=FALSE}
+train <- createDataPartition(model_dataset$OnDL, p=0.7, list=FALSE);
 
 
-```{r caret transformed model 1}
-selected_variables <- c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 
-                        'num_pitches');
-
-selected_i <- which(colnames(pitches_dl_dataset_transform) %in%selected_variables);
+training <- model_dataset[train,];
   
-formula_text <- paste(names(pitches_dl_dataset_transform)[ncol(pitches_dl_dataset_transform)], "~",
-                      paste(names(pitches_dl_dataset_transform)[selected_i], collapse="+"));
-formula <- as.formula(formula_text);
+# drops <- c("rsid");
+# training <- training[ , !(names(training) %in% drops)];
 
-mod_fit <- train(formula,  data=training, method="glm", family="binomial");
-summary(mod_fit);
+testing <- model_dataset[-train,];
+# testing <- testing[ , !(names(testing) %in% drops)];
 
+dependent_var <- colnames(model_dataset[,-grep( "^OnDL" , names( model_dataset ) )])[-1];
+original_var <- dependent_var[1:22];
+
+response_var <- "OnDL";
 ```
 
 
+## Model 1 All variables
 
-```{r caret model 1}
-selected_variables <- c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 
-                        'num_pitches');
+### Construct Model
+```{r warning=FALSE}
+selected_variables <- dependent_var; 
 
-selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
+selected_i <- which(colnames(training) %in% selected_variables);
   
-formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
-                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
-formula <- as.formula(formula_text);
-
-mod_fit <- train(formula,  data=training, method="glm", family="binomial");
-summary(mod_fit);
-
-```
-
-```{r coefficients of model 1}
-
-coef(mod_fit$finalModel);
-
-```
-
-```{r evaluation of model 1}
-pred <- predict(mod_fit, newdata=testing);
-confusionMatrix(data=pred, reference=testing$OnDL);
-```
-```{r significant varables}
-
-selected_variables <- c('start_speed', 'num_pitches');
-
-selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables);
-  
-formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
-                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
-formula <- as.formula(formula_text);
-
-mod_fit <- train(formula,  data=training, method="glm", family="binomial");
-summary(mod_fit);
-
-```
-
-```{r coefficients of model 2}
-
-coef(mod_fit$finalModel);
-
-```
-
-```{r evaluation of model 2}
-pred <- predict(mod_fit, newdata=testing);
-#residuals<-resid(mod_fit);
-confusionMatrix(data=pred, reference=testing$OnDL);
-```
-
-
-
-
-
-```{r predictions for 2017 using model 2}
-prediction <- predict(mod_fit, newdata=pitches_dl_predict, type='prob');
-prediction <- cbind(pitches_dl_predict, prediction);
-
-prediction_df <- as.data.frame(prediction);
-prediction_df <- prediction_df[order(prediction_df$YES, decreasing = TRUE),];
-head(prediction_df[c('nameFirst', 'nameLast', 'num_pitches', 'YES')]);
-```
-
-
-```{r logisic regression with GLM }
-selected_variables <- lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir','num_pitches');
-
-selected_i <- which(colnames(pitches_dl_dataset) %in% selected_variables);
-  
-formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~",
-                      paste(names(pitches_dl_dataset)[selected_i], collapse="+"));
+formula_text <- paste(response_var, "~",
+                      paste(names(training)[selected_i], collapse="+"));
 formula <- as.formula(formula_text);
 
 mod_1 = glm(formula = formula , family=binomial(logit), data=training);
-summary(mod_1);
-
-
 ```
 
+### Summary
+```{r warning=FALSE}
+summary(mod_1);
+```
 
-```{r evaluation of glm model}
-pred <- ifelse(predict(mod_1, testing, type='response') > 0.5, 'YES', 'NO')
+### COefficients
+```{r warning=FALSE}
+mod_1$coefficients;
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(mod_1, testing, type='response') > 0.6,  1, 0)
 confusionMatrix(data=pred, reference=testing$OnDL);
 ```
 
-```{r nothing model}
-formula_text <- paste(names(training)[ncol(training)], "~1");
+
+
+
+
+## Model 2 Only low correlation variables
+
+### Low correlation variables
+```{r warning=FALSE}
+highlyCorDescr <- findCorrelation(m, cutoff = .25)
+
+lowCorColNames<- colnames(numeric_dataset[,-highlyCorDescr]);
+
+
+#filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr]
+#all_variables <- colnames(numeric_dataset);
+print(lowCorColNames);
+
+```
+
+### Construct Model
+```{r warning=FALSE}
+selected_variables <- lowCorColNames; 
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training)[selected_i], collapse="+"));
 formula <- as.formula(formula_text);
 
+mod_2 = glm(formula = formula , family=binomial(logit), data=training);
 
-mod_nothing = glm(formula = formula , family=binomial(logit), data=training);
-
-summary(mod_nothing);
 ```
+
+### Summary
+```{r warning=FALSE}
+summary(mod_2);
+```
+
+### Residual
+```{r warning=TRUE}
+plot(predict(mod_2),residuals(mod_2));
+abline(h=0,lty=2,col="grey");
+```
+
+### COefficients
+```{r warning=FALSE}
+mod_2$coefficients;
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(mod_2, testing, type='response') > 0.6,  1, 0);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+
+
+## Model 3 PCR
+
+### Construct Model
+
+https://pdfs.semanticscholar.org/6ef4/6cb18946dac5ad250f41df87f5c1c1745a1e.pdf
+https://www.r-bloggers.com/performing-principal-components-regression-pcr-in-r/
+
+
+```{r warning=FALSE}
+
+training$OnDL <- (ifelse(training$OnDL == 1, 1, 0));
+
+selected_variables <- lowCorColNames; 
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+pcr_model <- pcr(formula, data = training, scale =FALSE, validation = "CV");
+
+```
+
+
+### Summary
+```{r warning=FALSE}
+summary(pcr_model);
+```
+
+### Residual
+```{r warning=TRUE}
+par(mfrow = c(2, 2));
+plot(pcr_model);
+
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(pcr_model, testing, ncomp = 3) > 0.6,  1, 0);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+
+## Model 4 only original variables
+
+### Construct Model
+```{r warning=FALSE}
+selected_variables <- original_var; 
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+mod_4 = glm(formula = formula , family=binomial(logit), data=training);
+```
+
+
+### Summary
+```{r warning=FALSE}
+summary(mod_4);
+```
+
+### Residual
+```{r warning=TRUE}
+plot(predict(mod_4),residuals(mod_4));
+abline(h=0,lty=2,col="grey");
+```
+
+### COefficients
+```{r warning=FALSE}
+mod_4$coefficients;
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(mod_4, testing, type='response') > 0.6,  1, 0);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+
+
+## Model 5 PCR with original variables
+
+### Construct Model
+
+https://pdfs.semanticscholar.org/6ef4/6cb18946dac5ad250f41df87f5c1c1745a1e.pdf
+https://www.r-bloggers.com/performing-principal-components-regression-pcr-in-r/
+
+
+```{r warning=FALSE}
+
+selected_variables <- original_var; 
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+pcr_model <- pcr(formula, data = training, scale =FALSE, validation = "CV");
+
+```
+
+
+### Summary
+```{r warning=FALSE}
+summary(pcr_model);
+```
+
+### Residual
+```{r warning=TRUE}
+par(mfrow = c(2, 2));
+plot(pcr_model);
+
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(pcr_model, testing, ncomp = 3) > 0.6,  1, 0);
+confusionMatrix(data=pred, reference=testing$OnDL);
+```
+<!-- ```{r caret transformed model 1} -->
+<!-- selected_variables <- lowCorColNames; # c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 'num_pitches'); -->
+
+<!-- selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables); -->
+
+<!-- formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~", -->
+<!--                       paste(names(pitches_dl_dataset)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+<!-- mod_fit <- train(formula,  data=training, method="glm", family="binomial"); -->
+<!-- summary(mod_fit); -->
+
+<!-- ``` -->
+<!-- ```{r coefficients of model 1} -->
+
+<!-- coef(mod_fit$finalModel); -->
+
+<!-- ``` -->
+<!-- ```{r evaluation of model 1} -->
+<!-- pred <- predict(mod_fit, newdata=testing); -->
+<!-- confusionMatrix(data=pred, reference=testing$OnDL); -->
+<!-- ``` -->
+
+
+<!-- ```{r filter highly pitch correlation 0.5} -->
+<!-- highlyCorDescr <- findCorrelation(m, cutoff = .25) -->
+
+<!-- lowCorColNames<- colnames(numeric_dataset[,-highlyCorDescr]); -->
+
+
+<!-- #filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr] -->
+<!-- #all_variables <- colnames(numeric_dataset); -->
+<!-- print(lowCorColNames); -->
+
+<!-- ``` -->
+
+
+<!-- ```{r caret transformed model 2} -->
+<!-- selected_variables <- lowCorColNames; # c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 'num_pitches'); -->
+
+<!-- selected_i <- which(colnames(pitches_dl_dataset_transform) %in%selected_variables); -->
+
+<!-- formula_text <- paste(names(pitches_dl_dataset_transform)[ncol(pitches_dl_dataset_transform)], "~", -->
+<!--                       paste(names(pitches_dl_dataset_transform)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+<!-- mod_fit <- train(formula,  data=training, method="glm", family="binomial"); -->
+<!-- summary(mod_fit); -->
+
+<!-- ``` -->
+
+
+
+<!-- ```{r coefficients of model 2} -->
+
+<!-- coef(mod_fit$finalModel); -->
+
+<!-- ``` -->
+<!-- ```{r evaluation of model 2} -->
+<!-- pred <- predict(mod_fit, newdata=testing); -->
+<!-- confusionMatrix(data=pred, reference=testing$OnDL); -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r caret model 2} -->
+<!-- selected_variables <- c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate',  -->
+<!--                         'num_pitches'); -->
+
+<!-- selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables); -->
+
+<!-- formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~", -->
+<!--                       paste(names(pitches_dl_dataset)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+<!-- mod_fit <- train(formula,  data=training, method="glm", family="binomial"); -->
+<!-- summary(mod_fit); -->
+
+<!-- ``` -->
+
+<!-- ```{r coefficients of model 2} -->
+
+<!-- coef(mod_fit$finalModel); -->
+
+<!-- ``` -->
+
+<!-- ```{r evaluation of model 2} -->
+<!-- pred <- predict(mod_fit, newdata=testing); -->
+<!-- confusionMatrix(data=pred, reference=testing$OnDL); -->
+<!-- ``` -->
+<!-- ```{r significant varables} -->
+
+<!-- selected_variables <- c('start_speed', 'num_pitches'); -->
+
+<!-- selected_i <- which(colnames(pitches_dl_dataset) %in%selected_variables); -->
+
+<!-- formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~", -->
+<!--                       paste(names(pitches_dl_dataset)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+<!-- mod_fit <- train(formula,  data=training, method="glm", family="binomial"); -->
+<!-- summary(mod_fit); -->
+
+<!-- ``` -->
+
+<!-- ```{r coefficients of model 2} -->
+
+<!-- coef(mod_fit$finalModel); -->
+
+<!-- ``` -->
+
+<!-- ```{r evaluation of model 2} -->
+<!-- pred <- predict(mod_fit, newdata=testing); -->
+<!-- #residuals<-resid(mod_fit); -->
+<!-- confusionMatrix(data=pred, reference=testing$OnDL); -->
+<!-- ``` -->
+
+
+
+
+
+<!-- ```{r predictions for 2017 using model 2} -->
+<!-- prediction <- predict(mod_fit, newdata=pitches_dl_predict, type='prob'); -->
+<!-- prediction <- cbind(pitches_dl_predict, prediction); -->
+
+<!-- prediction_df <- as.data.frame(prediction); -->
+<!-- prediction_df <- prediction_df[order(prediction_df$YES, decreasing = TRUE),]; -->
+<!-- head(prediction_df[c('nameFirst', 'nameLast', 'num_pitches', 'YES')]); -->
+<!-- ``` -->
+
+
+
+
+
+
+
+
+
+<!-- ```{r k kold} -->
+
+<!-- train_control <- trainControl(method="cv", number=10, savePredictions=T); -->
+
+<!-- model <- train(OnDL~., data=pitches_dl_dataset, trControl=train_control, method="glm"); -->
+
+<!-- print(model); -->
+
+
+<!-- fitpredt <- function(t) ifelse(fitpred > t , TRUE,FALSE); -->
+
+
+
+<!-- ``` -->
+
+<!-- ```{r test} -->
+<!-- fitpred <- model$finalModel$fitted.values; -->
+<!-- fitpredt <- function(t) ifelse(fitpred > t , TRUE,FALSE); -->
+
+<!-- confusionMatrix(fitpredt(0.7),pitches_dl_dataset$onDL) -->
+
+<!-- ``` -->
+
+<!-- ```{r logisic regression with logistf } -->
+<!-- selected_variables <- lowCorrelatedCols; #c('x', 'start_speed', 'y0', 'break_y', 'spin_dir','num_pitches'); -->
+
+<!-- selected_i <- which(colnames(pitches_dl_dataset) %in% lowCorColNames); -->
+
+<!-- formula_text <- paste(names(pitches_dl_dataset)[ncol(pitches_dl_dataset)], "~", -->
+<!--                       paste(names(pitches_dl_dataset)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+<!-- mod_1 = logistf(formula = formula, data=training); -->
+<!-- summary(mod_1); -->
+
+
+<!-- ``` -->
+
+<!-- ```{r nothing model} -->
+<!-- formula_text <- paste(names(training)[ncol(training)], "~1"); -->
+<!-- formula <- as.formula(formula_text); -->
+
+
+<!-- mod_nothing = glm(formula = formula , family=binomial(logit), data=training); -->
+
+<!-- summary(mod_nothing); -->
+<!-- ``` -->
+
+<!-- ```{r evaluation of glm model} -->
+<!-- pred <- ifelse(predict(mod_nothing, testing, type='response') > 0.5, 'YES', 'NO') -->
+<!-- confusionMatrix(data=pred, reference=testing$OnDL); -->
+<!-- ``` -->
+
+
+<!-- ```{r coefficients of model 2} -->
+
+<!-- coef(mod_nothing$finalModel); -->
+
+<!-- ``` -->
+
+
+
+
+<!-- ```{r PCA} -->
+<!-- standardised <- as.data.frame(scale(pitches_dl_dataset[sapply(pitches_dl_dataset, is.numeric)])); -->
+<!-- pitch.pca <- prcomp(standardised); -->
+<!--  summary(pitch.pca); -->
+<!-- ``` -->
+
+<!-- ```{r pca plot} -->
+<!-- screeplot(pitch.pca, type="lines") -->
+<!-- ``` -->
+
+<!-- ```{r PCA with pre-preprocess} -->
+
+
+
+<!-- ``` -->
 
 
 
