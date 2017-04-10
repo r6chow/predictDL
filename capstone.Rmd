@@ -1,10 +1,10 @@
 ---
 title: "Predicting Pitcher DL"
 author: "Roger Chow"
-date: "March 19, 2017"
+date: "April 9, 2017"
 output:
-  pdf_document: default
   word_document: default
+  pdf_document: default
 ---
 
 # Load libraries
@@ -408,14 +408,14 @@ formula <- as.formula(formula_text);
 mod <- glm(formula=formula, data=model_dataset);
 cooksd <- cooks.distance(mod);
 
-plot(cooksd, pch="*", cex=2, main="Influential Obs by Cooks distance");  # plot cook's distance
-abline(h = 4*mean(cooksd, na.rm=T), col="red");  # add cutoff line
+plot(cooksd, pch=".", cex=2, main="Influential Obs by Cooks distance");  # plot cook's distance
+abline(h = 3*mean(cooksd, na.rm=T), col="red");  # add cutoff line
 # text(x=1:length(cooksd)+1, y=cooksd, labels=ifelse(cooksd>10*mean(cooksd, na.rm=T),names(cooksd),""), col="red")
 ```
 
 ### Remove outliers
 ```{r warning=FALSE}
-influential <- as.numeric(names(cooksd)[(cooksd > 4*mean(cooksd, na.rm=T))]);
+influential <- as.numeric(names(cooksd)[(cooksd > 3*mean(cooksd, na.rm=T))]);
 
 model_dataset_lessOutliers <- model_dataset[-(influential[!is.na(influential)]), ];
 ```
@@ -468,7 +468,9 @@ corrplot::corrplot(m_lessOutliers, type="upper");
 
 # Model Building with all data
 
-## Create training and testing set using 75% training and 25% testing 
+## Model 1 All variables
+
+### Create training and testing set using 75% training and 25% testing 
 ```{r warning=FALSE}
 train <- createDataPartition(model_dataset$OnDL, p=0.75, list=FALSE);
 
@@ -476,9 +478,6 @@ training <- model_dataset[train,];
 
 testing <- model_dataset[-train,];
 ```
-
-
-## Model 1 All variables
 
 ### Construct Model
 ```{r warning=FALSE}
@@ -514,7 +513,7 @@ abline(h=0,lty=2,col="grey");
 
 ### Performance
 
-This model produced 75.67% accuracy rate.
+This model produced 72.9% accuracy rate.
 ```{r warning=FALSE}
 pred <- ifelse(predict(mod_1, testing, type='response') > 0.5,  1, 0)
 confusionMatrix(data=pred, reference=testing$OnDL);
@@ -531,7 +530,10 @@ plot(g1)
 
 # Model Building without outliers
 
-## Create training and testing set using 75% training and 25% testing 
+
+## Model 1(b) All variables
+
+### Create training and testing set using 75% training and 25% testing 
 ```{r warning=FALSE}
 train_lessOutliers <- createDataPartition(model_dataset_lessOutliers$OnDL, p=0.75, list=FALSE);
 
@@ -540,7 +542,6 @@ training_lessOutliers <- model_dataset_lessOutliers[train_lessOutliers,];
 testing_lessOutliers <- model_dataset_lessOutliers[-train_lessOutliers,];
 ```
 
-## Model 1(b) All variables
 
 ### Construct Model
 ```{r warning=FALSE}
@@ -840,11 +841,11 @@ plot(g3)
 
 
 
-## Model 3(b) Siginifican Continue Variables + num pitches
+## Model 3(b) Siginificant Continuous Variables + num pitches
 
 ### Construct Model
 ```{r warning=FALSE}
-selected_variables <- c("y", "start_speed", "sz_bot", "pz", "vy0", "break_y", "trf_num_pitches");
+selected_variables <- c("y", "start_speed", "sz_bot", "vy0", "break_y", "trf_num_pitches", "trf_num_FA");
 
 selected_i <- which(colnames(training_lessOutliers) %in% selected_variables);
 
@@ -893,11 +894,27 @@ plot(g2c, col='deeppink', add=TRUE);
 plot(g3, col='skyblue', add=TRUE);
 plot(g3b, col='limegreen', add=TRUE);
 
-legend(0.2,0.4,       c("All Variable","Cutoff=0.5","Cutoff=0.75","Cutoff=0.25","Continuous Only","Continuous+Num Pitches"), lty=c(1,1), lwd=c(2.5,2.5),col=c("red","blue","green","deeppink","skyblue","limegreen"),pch=1, 
-cex=0.75); # gives the legend lines the correct color and width
+legend(0.3,0.4,       c("Model 1b","Model 2","Model 2b","Model 2c","Model 3","Model 3b"), lty=c(1,1), lwd=c(2.5,2.5),col=c("red","blue","green","deeppink","skyblue","limegreen"), pch=1, cex=0.5);
 ```
 
+# Predictions for 2017
+Model 3b has the highest accuracry rate.  
+```{r warning=FALSE}
+pred <- predict(mod_3b, pitches_dl_predict, type='response')*100;
 
+predictions <- data.frame(rsid=pitches_dl_predict$rsID, probabilty=pred);
+
+dbhandle <- odbcDriverConnect('driver={SQL Server};server=localhost;database=Lahman;trusted_connection=true');
+
+query <- "SELECT retroID as rsid, nameFirst, nameLast FROM Master";
+    
+players <-sqlQuery(dbhandle, query);
+
+predictions_players <- merge(x=predictions, y=players, by="rsid", all.x=TRUE);
+
+head(predictions_players[rev(order(predictions_players$probabilty)),], 20);
+
+```
 
 <!-- ## Model 4 only count variables -->
 
