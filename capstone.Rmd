@@ -1,7 +1,7 @@
 ---
 title: "Predicting Pitcher DL"
 author: "Roger Chow"
-date: "April 9, 2017"
+date: "April 16, 2017"
 output:
   word_document: default
   pdf_document: default
@@ -25,7 +25,8 @@ library('logistf');
 library('klaR');
 library('pROC');
 library('pls');
-
+library('ROSE');
+library('randomForest')
 
 resetPar <- function() {
     dev.new()
@@ -292,7 +293,7 @@ if (need_load) {
   
   #write to csv to save time
   write.csv(pitches_dl_dataset, "pitches_dl_dataset.csv");
-  write.csv(pitches_dl_dataset, "pitches_dl_predict.csv");
+  write.csv(pitches_dl_predict, "pitches_dl_predict.csv");
   
 }
 ```
@@ -302,51 +303,67 @@ Apply Anscombe transformation to count variables
 
 ```{r warning=FALSE}
 trf_func <- function(x) {
-    return ( 2*sqrt(x+3/8));
+  return ( 2*sqrt(x+3/8));
+  #return ( log(x+1));
 }
 
 pitches_dl_dataset$trf_num_pitches <- trf_func(pitches_dl_dataset$num_pitches);
-pitches_dl_dataset$trf_num_AB <- trf_func(pitches_dl_dataset$num_AB);
-pitches_dl_dataset$trf_num_AS <- trf_func(pitches_dl_dataset$num_AS);
-pitches_dl_dataset$trf_num_CH <- trf_func(pitches_dl_dataset$num_CH);
-pitches_dl_dataset$trf_num_CU <- trf_func(pitches_dl_dataset$num_CU);
-pitches_dl_dataset$trf_num_EP <- trf_func(pitches_dl_dataset$num_EP);
-pitches_dl_dataset$trf_num_FA <- trf_func(pitches_dl_dataset$num_FA);
-pitches_dl_dataset$trf_num_FC <- trf_func(pitches_dl_dataset$num_FC);
-pitches_dl_dataset$trf_num_FF <- trf_func(pitches_dl_dataset$num_FF);
-pitches_dl_dataset$trf_num_FO <- trf_func(pitches_dl_dataset$num_FO);
-pitches_dl_dataset$trf_num_FS <- trf_func(pitches_dl_dataset$num_FS);
-pitches_dl_dataset$trf_num_FT <- trf_func(pitches_dl_dataset$num_FT);
-pitches_dl_dataset$trf_num_IN <- trf_func(pitches_dl_dataset$num_IN);
-pitches_dl_dataset$trf_num_KC <- trf_func(pitches_dl_dataset$num_KC);
-pitches_dl_dataset$trf_num_KN <- trf_func(pitches_dl_dataset$num_KN);
-pitches_dl_dataset$trf_num_PO <- trf_func(pitches_dl_dataset$num_PO);
-pitches_dl_dataset$trf_num_SC <- trf_func(pitches_dl_dataset$num_SC);
-pitches_dl_dataset$trf_num_SI <- trf_func(pitches_dl_dataset$num_SI);
-pitches_dl_dataset$trf_num_SL <- trf_func(pitches_dl_dataset$num_SL);
-pitches_dl_dataset$trf_num_UN <- trf_func(pitches_dl_dataset$num_UN);
-
 pitches_dl_predict$trf_num_pitches <- trf_func(pitches_dl_predict$num_pitches);
-pitches_dl_predict$trf_num_AB <- trf_func(pitches_dl_predict$num_AB);
-pitches_dl_predict$trf_num_AS <- trf_func(pitches_dl_predict$num_AS);
-pitches_dl_predict$trf_num_CH <- trf_func(pitches_dl_predict$num_CH);
-pitches_dl_predict$trf_num_CU <- trf_func(pitches_dl_predict$num_CU);
-pitches_dl_predict$trf_num_EP <- trf_func(pitches_dl_predict$num_EP);
-pitches_dl_predict$trf_num_FA <- trf_func(pitches_dl_predict$num_FA);
-pitches_dl_predict$trf_num_FC <- trf_func(pitches_dl_predict$num_FC);
-pitches_dl_predict$trf_num_FF <- trf_func(pitches_dl_predict$num_FF);
-pitches_dl_predict$trf_num_FO <- trf_func(pitches_dl_predict$num_FO);
-pitches_dl_predict$trf_num_FS <- trf_func(pitches_dl_predict$num_FS);
-pitches_dl_predict$trf_num_FT <- trf_func(pitches_dl_predict$num_FT);
-pitches_dl_predict$trf_num_IN <- trf_func(pitches_dl_predict$num_IN);
-pitches_dl_predict$trf_num_KC <- trf_func(pitches_dl_predict$num_KC);
-pitches_dl_predict$trf_num_KN <- trf_func(pitches_dl_predict$num_KN);
-pitches_dl_predict$trf_num_PO <- trf_func(pitches_dl_predict$num_PO);
-pitches_dl_predict$trf_num_SC <- trf_func(pitches_dl_predict$num_SC);
-pitches_dl_predict$trf_num_SI <- trf_func(pitches_dl_predict$num_SI);
-pitches_dl_predict$trf_num_SL <- trf_func(pitches_dl_predict$num_SL);
-pitches_dl_predict$trf_num_UN <- trf_func(pitches_dl_predict$num_UN);
+# 
+# for (t in c("AB", "AS", "CH", "CU", "EP", "FA", "FC", "FF", "FO", "FS", "FT", "IN","KC", "KN", "PO", "SC", "SI", "SL", "UN"))
+# {
+#   expression <-  paste("pitches_dl_dataset$num_", t, sep="");
+#   eval_expression <- eval(parse(text=expression)) /pitches_dl_dataset$num_pitches;
+#   assign_var = paste("pitches_dl_dataset$trf_num_", t, sep="");
+#   assign(assign_var,  eval_expression)
+#   
+#   expression <-  paste("pitches_dl_dataset$num_", t, sep="");
+#   eval_expression <- eval(parse(text=expression))/pitches_dl_predict$num_pitches;
+#   assign_var = paste("pitches_dl_predict$trf_num_", t, sep="");
+#   assign(assign_var,  eval_expression)
+# 
+# }
 
+
+pitches_dl_dataset$trf_num_AB <- trf_func(pitches_dl_dataset$num_AB)
+pitches_dl_dataset$trf_num_AS <- trf_func(pitches_dl_dataset$num_AS)
+pitches_dl_dataset$trf_num_CH <- trf_func(pitches_dl_dataset$num_CH)
+pitches_dl_dataset$trf_num_CU <- trf_func(pitches_dl_dataset$num_CU)
+pitches_dl_dataset$trf_num_EP <- trf_func(pitches_dl_dataset$num_EP)
+pitches_dl_dataset$trf_num_FA <- trf_func(pitches_dl_dataset$num_FA)
+pitches_dl_dataset$trf_num_FC <- trf_func(pitches_dl_dataset$num_FC)
+pitches_dl_dataset$trf_num_FF <- trf_func(pitches_dl_dataset$num_FF)
+pitches_dl_dataset$trf_num_FO <- trf_func(pitches_dl_dataset$num_FO)
+pitches_dl_dataset$trf_num_FS <- trf_func(pitches_dl_dataset$num_FS)
+pitches_dl_dataset$trf_num_FT <- trf_func(pitches_dl_dataset$num_FT)
+pitches_dl_dataset$trf_num_IN <- trf_func(pitches_dl_dataset$num_IN)
+pitches_dl_dataset$trf_num_KC <- trf_func(pitches_dl_dataset$num_KC)
+pitches_dl_dataset$trf_num_KN <- trf_func(pitches_dl_dataset$num_KN)
+pitches_dl_dataset$trf_num_PO <- trf_func(pitches_dl_dataset$num_PO)
+pitches_dl_dataset$trf_num_SC <- trf_func(pitches_dl_dataset$num_SC)
+pitches_dl_dataset$trf_num_SI <- trf_func(pitches_dl_dataset$num_SI)
+pitches_dl_dataset$trf_num_SL <- trf_func(pitches_dl_dataset$num_SL)
+pitches_dl_dataset$trf_num_UN <- trf_func(pitches_dl_dataset$num_UN)
+
+pitches_dl_predict$trf_num_AB <- trf_func(pitches_dl_predict$num_AB)
+pitches_dl_predict$trf_num_AS <- trf_func(pitches_dl_predict$num_AS)
+pitches_dl_predict$trf_num_CH <- trf_func(pitches_dl_predict$num_CH)
+pitches_dl_predict$trf_num_CU <- trf_func(pitches_dl_predict$num_CU)
+pitches_dl_predict$trf_num_EP <- trf_func(pitches_dl_predict$num_EP)
+pitches_dl_predict$trf_num_FA <- trf_func(pitches_dl_predict$num_FA)
+pitches_dl_predict$trf_num_FC <- trf_func(pitches_dl_predict$num_FC)
+pitches_dl_predict$trf_num_FF <- trf_func(pitches_dl_predict$num_FF)
+pitches_dl_predict$trf_num_FO <- trf_func(pitches_dl_predict$num_FO)
+pitches_dl_predict$trf_num_FS <- trf_func(pitches_dl_predict$num_FS)
+pitches_dl_predict$trf_num_FT <- trf_func(pitches_dl_predict$num_FT)
+pitches_dl_predict$trf_num_IN <- trf_func(pitches_dl_predict$num_IN)
+pitches_dl_predict$trf_num_KC <- trf_func(pitches_dl_predict$num_KC)
+pitches_dl_predict$trf_num_KN <- trf_func(pitches_dl_predict$num_KN)
+pitches_dl_predict$trf_num_PO <- trf_func(pitches_dl_predict$num_PO)
+pitches_dl_predict$trf_num_SC <- trf_func(pitches_dl_predict$num_SC)
+pitches_dl_predict$trf_num_SI <- trf_func(pitches_dl_predict$num_SI)
+pitches_dl_predict$trf_num_SL <- trf_func(pitches_dl_predict$num_SL)
+pitches_dl_predict$trf_num_UN <- trf_func(pitches_dl_predict$num_UN)
 
 
 
@@ -362,7 +379,7 @@ predict_dataset <- pitches_dl_predict[,-grep( "^num_" , names( pitches_dl_predic
 ### List of variables
 ```{r warning=FALSE}
 dependent_var <- colnames(model_dataset[,-grep( "^OnDL" , names( model_dataset ) )])[-1];
-original_var <- dependent_var[1:21];
+original_var <- dependent_var[1:22];
 count_var <- dependent_var[22:40];
 response_var <- "OnDL";
 ```
@@ -413,6 +430,8 @@ abline(h = 3*mean(cooksd, na.rm=T), col="red");  # add cutoff line
 # text(x=1:length(cooksd)+1, y=cooksd, labels=ifelse(cooksd>10*mean(cooksd, na.rm=T),names(cooksd),""), col="red")
 ```
 
+
+
 ### Remove outliers
 ```{r warning=FALSE}
 influential <- as.numeric(names(cooksd)[(cooksd > 3*mean(cooksd, na.rm=T))]);
@@ -425,6 +444,28 @@ model_dataset_lessOutliers <- model_dataset[-(influential[!is.na(influential)]),
 summary(model_dataset_lessOutliers);
 ```
 
+## Histogram of data
+
+### Continuous Variables with outliers
+```{r warning=FALSE}
+d <- melt(model_dataset[which(colnames(model_dataset) %in% original_var)]);
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
+```              
+### Count Variables with outliers
+```{r warning=FALSE}
+d <- melt(model_dataset[which(colnames(model_dataset) %in% count_var)]);
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
+```  
+### Continuous Variables without outliers
+```{r warning=FALSE}
+d <- melt(model_dataset_lessOutliers[which(colnames(model_dataset_lessOutliers) %in% original_var)]);
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
+```              
+### Count Variables without outlisers
+```{r warning=FALSE}
+d <- melt(model_dataset_lessOutliers[which(colnames(model_dataset_lessOutliers) %in% count_var)]);
+ggplot(d,aes(x = value)) + facet_wrap(~variable,scales = "free_x") +  geom_histogram();
+```  
 
 ## Check normality using QQ plot without outliers
 ```{r warning=FALSE}
@@ -450,6 +491,7 @@ numeric_dataset <- numeric_dataset[ , !(names(numeric_dataset) %in% c("y0", "OnD
 #numeric_dataset <- numeric_dataset[1:(ncol(numeric_dataset))];
 m <- cor(numeric_dataset);
 corrplot::corrplot(m, type="upper");
+#corrplot::corrplot.mixed(m);
 ```
 
 ### All variables without outliers
@@ -462,6 +504,8 @@ numeric_dataset_lessOutliers <- numeric_dataset_lessOutliers[ , !(names(numeric_
 #numeric_dataset <- numeric_dataset[1:(ncol(numeric_dataset))];
 m_lessOutliers <- cor(numeric_dataset_lessOutliers);
 corrplot::corrplot(m_lessOutliers, type="upper");
+
+#corrplot::corrplot.mixed(m_lessOutliers);
 ```
 
 
@@ -472,11 +516,18 @@ corrplot::corrplot(m_lessOutliers, type="upper");
 
 ### Create training and testing set using 75% training and 25% testing 
 ```{r warning=FALSE}
+
+set.seed(123)
+
 train <- createDataPartition(model_dataset$OnDL, p=0.75, list=FALSE);
 
 training <- model_dataset[train,];
+write.csv(training, "training.csv");
 
 testing <- model_dataset[-train,];
+
+
+threshold <- 0.4;
 ```
 
 ### Construct Model
@@ -505,6 +556,11 @@ summary(mod_1);
 mod_1$coefficients;
 ```
 
+### Odds Ratio
+```{r warning=FALSE}
+exp(mod_1$coefficients);
+```
+
 ### Residual
 ```{r warning=TRUE}
 plot(predict(mod_1),residuals(mod_1));
@@ -513,10 +569,9 @@ abline(h=0,lty=2,col="grey");
 
 ### Performance
 
-This model produced 72.9% accuracy rate.
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_1, testing, type='response') > 0.5,  1, 0)
-confusionMatrix(data=pred, reference=testing$OnDL);
+pred <- ifelse(predict(mod_1, testing, type='response') > threshold,  1, 0)
+confusionMatrix(data=pred, reference=testing$OnDL, positive='1');
 ```
 
 ### ROC curve
@@ -524,6 +579,7 @@ confusionMatrix(data=pred, reference=testing$OnDL);
 ```{r warning=FALSE}
 prob <- predict(mod_1, testing, type='response');
 g1 <- roc(OnDL ~ prob, data = testing);
+roc.curve(testing$OnDL, prob, plotit =F)
 plot(g1)  
 ```
 
@@ -540,6 +596,8 @@ train_lessOutliers <- createDataPartition(model_dataset_lessOutliers$OnDL, p=0.7
 training_lessOutliers <- model_dataset_lessOutliers[train_lessOutliers,];
 
 testing_lessOutliers <- model_dataset_lessOutliers[-train_lessOutliers,];
+
+
 ```
 
 
@@ -570,6 +628,11 @@ summary(mod_1b);
 mod_1b$coefficients;
 ```
 
+### Odds Ratio
+```{r warning=FALSE}
+exp(mod_1b$coefficients);
+```
+
 ### Residual
 ```{r warning=TRUE}
 plot(predict(mod_1b),residuals(mod_1b));
@@ -578,10 +641,9 @@ abline(h=0,lty=2,col="grey");
 
 ### Performance
 
-With outliers removed, this model resulted in a 76.69% accuracy rate, slightly higher than the first model that considered all records for training.
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_1b, testing_lessOutliers, type='response') > 0.5,  1, 0)
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
+pred <- ifelse(predict(mod_1b, testing_lessOutliers, type='response') > threshold,  1, 0)
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
 ```
 
 
@@ -590,6 +652,7 @@ confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
 ```{r warning=FALSE}
 prob <- predict(mod_1b, testing_lessOutliers, type='response');
 g1b <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit =F)
 plot(g1b)  
 ```
 
@@ -599,25 +662,21 @@ The comparison of the ROC curve between the model with outliers (red) and one wi
 ```{r warning=FALSE}
 plot(g1, col='red')  
 plot(g1b, add=TRUE, col='blue')
+
+legend(0.3,0.4,       c("Model 1","Model 1b"), lty=c(1,1), lwd=c(2.5,2.5),col=c("red","blue"), pch=1, cex=0.5);
 ```
 
 
 
-## Model 2 Only low correlation variables (less than 0.5)
-
-Using the data with outliers removed as the foundation, build a model with features that have a correlation of less than 0.5. 
+## Model 2 Only low correlation variables (less than 0.25)
 
 ### Low correlation variables
 ```{r warning=FALSE}
-highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .5)
+highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .25)
 
 lowCorColNames<- colnames(numeric_dataset[,-highlyCorDescr]);
 
-
-#filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr]
-#all_variables <- colnames(numeric_dataset);
 print(lowCorColNames);
-
 ```
 
 ### Construct Model
@@ -631,7 +690,6 @@ formula_text <- paste(response_var, "~",
 formula <- as.formula(formula_text);
 
 mod_2 = glm(formula = formula , family=binomial(logit), data=training_lessOutliers);
-
 ```
 
 ### Summary
@@ -650,45 +708,49 @@ abline(h=0,lty=2,col="grey");
 mod_2$coefficients;
 ```
 
+### Odds ratio
+```{r warning=FALSE}
+exp(mod_2$coefficients);
+```
+
 ### Performance
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_2, testing, type='response') > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing$OnDL);
+pred <- ifelse(predict(mod_2, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
 ```
 ### ROC curve
 ```{r warning=FALSE}
-prob <- predict(mod_2, testing, type='response');
-g2 <- roc(OnDL ~ prob, data = testing);
+prob <- predict(mod_2, testing_lessOutliers, type='response');
+g2 <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F);
 plot(g2)  
 ```
 
-## Model 2(b) Only low correlation variables (less than 0.75)
+
+
+
+## Model 2(b) Only low correlation variables (less than 0.5)
 
 ### Low correlation variables
 ```{r warning=FALSE}
-highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .75);
+highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .5)
 
-lowCorColNames <- colnames(numeric_dataset_lessOutliers[,-highlyCorDescr]);
+lowCorColNames<- colnames(numeric_dataset[,-highlyCorDescr]);
 
-
-#filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr]
-#all_variables <- colnames(numeric_dataset);
 print(lowCorColNames);
-
 ```
 
 ### Construct Model
 ```{r warning=FALSE}
 selected_variables <- lowCorColNames; 
 
-selected_i <- which(colnames(training) %in% selected_variables);
+selected_i <- which(colnames(training_lessOutliers) %in% selected_variables);
   
 formula_text <- paste(response_var, "~",
                       paste(names(training_lessOutliers)[selected_i], collapse="+"));
 formula <- as.formula(formula_text);
 
 mod_2b = glm(formula = formula , family=binomial(logit), data=training_lessOutliers);
-
 ```
 
 ### Summary
@@ -707,16 +769,21 @@ abline(h=0,lty=2,col="grey");
 mod_2b$coefficients;
 ```
 
-### Performance
+### Odds ratio
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_2b, testing_lessOutliers, type='response') > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
+exp(mod_2b$coefficients);
 ```
 
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(mod_2b, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
+```
 ### ROC curve
 ```{r warning=FALSE}
 prob <- predict(mod_2b, testing_lessOutliers, type='response');
 g2b <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F);
 plot(g2b)  
 ```
 
@@ -724,11 +791,11 @@ plot(g2b)
 
 
 
-## Model 2(c) Only low correlation variables (less than 0.25)
+## Model 2(c) Only low correlation variables (less than 0.75)
 
 ### Low correlation variables
 ```{r warning=FALSE}
-highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff =0.25);
+highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .75);
 
 lowCorColNames <- colnames(numeric_dataset_lessOutliers[,-highlyCorDescr]);
 
@@ -771,15 +838,79 @@ mod_2c$coefficients;
 
 ### Performance
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_2c, testing_lessOutliers, type='response') > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
+pred <- ifelse(predict(mod_2c, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
 ```
 
 ### ROC curve
 ```{r warning=FALSE}
 prob <- predict(mod_2c, testing_lessOutliers, type='response');
 g2c <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F)
 plot(g2c)  
+```
+
+
+
+
+
+## Model 2(d) Only low correlation variables (less than 0.85)
+
+### Low correlation variables
+```{r warning=FALSE}
+highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff =0.85);
+
+lowCorColNames <- colnames(numeric_dataset_lessOutliers[,-highlyCorDescr]);
+
+
+#filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr]
+#all_variables <- colnames(numeric_dataset);
+print(lowCorColNames);
+
+```
+
+### Construct Model
+```{r warning=FALSE}
+selected_variables <- lowCorColNames; 
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training_lessOutliers)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+mod_2d = glm(formula = formula , family=binomial(logit), data=training_lessOutliers);
+
+```
+
+### Summary
+```{r warning=FALSE}
+summary(mod_2d);
+```
+
+### Residual
+```{r warning=TRUE}
+plot(predict(mod_2d),residuals(mod_2d));
+abline(h=0,lty=2,col="grey");
+```
+
+### COefficients
+```{r warning=FALSE}
+exp(mod_2d$coefficients);
+```
+
+### Performance
+```{r warning=FALSE}
+pred <- ifelse(predict(mod_2d, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
+```
+
+### ROC curve
+```{r warning=FALSE}
+prob <- predict(mod_2d, testing_lessOutliers, type='response');
+g2d <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F)
+plot(g2d)  
 ```
 
 
@@ -787,9 +918,11 @@ plot(g2c)
 ## Compare ROC Curve of model by correlation
 
 ```{r warning=FALSE}
-plot(g2, col='red'); #cutoff 0.5
-plot(g2b, add=TRUE, col='blue') #cutoff 0.75
-plot(g2c, add=TRUE, col='green')  #cutoff 0.25
+plot(g2, col='red'); #cutoff 0.25
+plot(g2b, add=TRUE, col='blue') #cutoff 0.5
+plot(g2c, add=TRUE, col='green')  #cutoff 0.75
+plot(g2d, add=TRUE, col='purple')  #cutoff 0.85
+legend(0.3,0.4,       c("Model 2","Model 2b","Model 2c", "Model 2d"), lty=c(1,1), lwd=c(2.5,2.5),col=c("red","blue","green", "purple"), pch=1, cex=0.5);
 ```
 
 
@@ -826,16 +959,23 @@ abline(h=0,lty=2,col="grey");
 mod_3$coefficients;
 ```
 
+
+### Odds Raio
+```{r warning=FALSE}
+exp(mod_3$coefficients);
+```
+
 ### Performance
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_3, testing_lessOutliers, type='response') > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
+pred <- ifelse(predict(mod_3, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
 ```
 
 ### ROC curve
 ```{r warning=FALSE}
 prob <- predict(mod_3, testing_lessOutliers, type='response');
 g3 <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F)
 plot(g3)
 ```
 
@@ -845,7 +985,7 @@ plot(g3)
 
 ### Construct Model
 ```{r warning=FALSE}
-selected_variables <- c("y", "start_speed", "sz_bot", "vy0", "break_y", "trf_num_pitches", "trf_num_FA");
+selected_variables <- c("trf_num_pitches",  "start_speed", "vy0", "vz0", "break_y" );
 
 selected_i <- which(colnames(training_lessOutliers) %in% selected_variables);
 
@@ -869,19 +1009,21 @@ abline(h=0,lty=2,col="grey");
 
 ### COefficients
 ```{r warning=FALSE}
-mod_3b$coefficients;
+mod_3b$coefficients
+exp(mod_3b$coefficients);
 ```
 
 ### Performance
 ```{r warning=FALSE}
-pred <- ifelse(predict(mod_3b, testing_lessOutliers, type='response') > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
+pred <- ifelse(predict(mod_3b, testing_lessOutliers, type='response') > threshold,  1, 0);
+confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1');
 ```
 
 ### ROC curve
 ```{r warning=FALSE}
 prob <- predict(mod_3b, testing_lessOutliers, type='response');
 g3b <- roc(OnDL ~ prob, data = testing_lessOutliers);
+roc.curve(testing_lessOutliers$OnDL, prob, plotit = F)
 plot(g3b)
 ```
 
@@ -891,16 +1033,146 @@ plot(g1b, col='red');
 plot(g2, col='blue', add=TRUE);
 plot(g2b, col='green', add=TRUE);
 plot(g2c, col='deeppink', add=TRUE);
+plot(g2d, col='purple', add=TRUE);
 plot(g3, col='skyblue', add=TRUE);
 plot(g3b, col='limegreen', add=TRUE);
 
 legend(0.3,0.4,       c("Model 1b","Model 2","Model 2b","Model 2c","Model 3","Model 3b"), lty=c(1,1), lwd=c(2.5,2.5),col=c("red","blue","green","deeppink","skyblue","limegreen"), pch=1, cex=0.5);
 ```
 
-# Predictions for 2017
-Model 3b has the highest accuracry rate.  
+
+#Cross Validation on significant variables
 ```{r warning=FALSE}
-pred <- predict(mod_3b, pitches_dl_predict, type='response')*100;
+
+
+# highlyCorDescr <- findCorrelation(m_lessOutliers, cutoff = .85);
+# 
+# lowCorColNames <- colnames(numeric_dataset_lessOutliers[,-highlyCorDescr]);
+# 
+# 
+# #filter_pitches_dl_dataset <-  filteredDescr[,-highlyCorDescr]
+# #all_variables <- colnames(numeric_dataset);
+# print(lowCorColNames);
+
+selected_variables <- c("y","z0", "ay", "trf_num_FA", "trf_num_FC", "trf_num_FF", "trf_num_FT", "trf_num_IN", "trf_num_SI");  
+
+selected_i <- which(colnames(training) %in% selected_variables);
+  
+formula_text <- paste(response_var, "~",
+                      paste(names(training_lessOutliers)[selected_i], collapse="+"));
+formula <- as.formula(formula_text);
+
+
+# False positive rate
+fpr <- NULL
+
+# False negative rate
+fnr <- NULL
+
+# True positive rate
+tpr <- NULL
+
+# True negative rate
+tnr <- NULL
+
+auc <- NULL
+
+# Number of iterations
+k <- 500
+
+# # Initialize progress bar
+# pbar <- create_progress_bar('text')
+# pbar$init(k)
+
+# Accuracy
+acc <- NULL
+
+set.seed(123)
+
+
+for(i in 1:k)
+{
+    # Train-test splitting
+    # 95% of samples -> fitting
+    # 5% of samples -> testing
+    smp_size <- floor(0.75 * nrow(model_dataset_lessOutliers))
+    index <- sample(seq_len(nrow(model_dataset_lessOutliers)),size=smp_size)
+    train <- model_dataset_lessOutliers[index, ]
+    test <- model_dataset_lessOutliers[-index, ]
+    
+    # Fitting
+    model <- glm(formula=formula,family=binomial,data=model_dataset_lessOutliers)
+ 
+    
+    # Predict results
+    results_prob <- predict(model,test,type='response')
+    
+    # If prob > 0.4 then 1, else 0
+    results <- ifelse(results_prob > 0.4,1,0)
+    
+    # Actual answers
+    answers <- test$OnDL;
+    
+    # Accuracy calculation
+    misClasificError <- mean(answers != results)
+    
+    # Collecting results
+    acc[i] <- 1-misClasificError
+    
+    # Confusion matrix
+    cm <- confusionMatrix(data=results, reference=answers, positive='1')
+    tnr[i] <- cm$table[1]/(cm$table[1]+cm$table[2])
+    tpr[i] <- cm$table[4]/(cm$table[3]+cm$table[4])
+    fpr[i] <- cm$table[2]/(cm$table[1]+cm$table[2])
+    fnr[i] <- cm$table[3]/(cm$table[3]+cm$table[4])
+    auc[i] <- roc.curve(test$OnDL, results_prob, plotit = F)$auc
+    
+    # pbar$step()
+}
+
+# Average accuracy of the model
+mean(acc)
+
+# Average au of the model
+mean(auc)
+
+# Histogram of accuracy
+hist(acc,xlab='Accuracy',ylab='Freq', col='cyan',border='blue',density=30)
+
+
+# Histogram of auc
+hist(auc,xlab='AUC',ylab='Freq', col='cyan',border='blue',density=30)
+
+# Boxplot of accuracy
+boxplot(acc,col='cyan',border='blue',horizontal=T,xlab='Accuracy', main='Accuracy CV')
+
+
+# Boxplot of auc
+boxplot(auc,col='cyan',border='blue',horizontal=T,xlab='AUC', main='AUC CV')
+
+# Confusion matrix and plots of fpr and fnr
+
+mean(fpr)
+mean(fnr)
+mean(tpr)
+mean(tnr)
+hist(fpr,xlab='% of fnr',ylab='Freq',main='FPR',
+     col='cyan',border='blue',density=30)
+hist(fnr,xlab='% of fnr',ylab='Freq',main='FNR',
+     col='cyan',border='blue',density=30)
+hist(tpr,xlab='% of fnr',ylab='Freq',main='TPR',
+     col='cyan',border='blue',density=30)
+hist(tnr,xlab='% of fnr',ylab='Freq',main='TNR',
+     col='cyan',border='blue',density=30)
+```
+
+
+
+
+# Predictions for 2017
+Model 2b has the highest accuracry rate.  
+```{r warning=FALSE}
+pred <- (predict(mod_2b, pitches_dl_predict, type='response'))*100;
 
 predictions <- data.frame(rsid=pitches_dl_predict$rsID, probabilty=pred);
 
@@ -915,6 +1187,96 @@ predictions_players <- merge(x=predictions, y=players, by="rsid", all.x=TRUE);
 head(predictions_players[rev(order(predictions_players$probabilty)),], 20);
 
 ```
+
+<!-- # Oversampling -->
+<!-- ```{r warning=FALSE} -->
+<!-- prop.table(table(training_lessOutliers$OnDL)) -->
+
+<!-- selected_variables <- dependent_var; # c("y", "start_speed", "sz_bot", "vy0", "break_y", "trf_num_pitches", "trf_num_FA"); -->
+
+<!-- selected_i <- which(colnames(training_lessOutliers) %in% selected_variables); -->
+
+<!-- formula_text <- paste(response_var, "~", -->
+<!--                       paste(names(training_lessOutliers)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+
+<!-- library('ROSE') -->
+<!-- library('rpart') -->
+<!-- mod_imb <- glm(formula = formula , family=binomial(logit), data=training_lessOutliers); -->
+<!-- pred_imb <- predict(mod_3b, testing_lessOutliers) -->
+
+<!-- accuracy.meas(testing_lessOutliers$OnDL, pred_imb) -->
+
+<!-- roc.curve(testing_lessOutliers$OnDL, pred_imb, plotit = F) -->
+<!-- ``` -->
+
+<!-- ```{r warning=FALSE} -->
+<!-- data_balanced_over <- ovun.sample(formula = formula, data=training_lessOutliers, method="over", N=4744, seed=1)$data; -->
+
+<!-- #data_balanced_over <- ROSE(formula = formula, data=training_lessOutliers, seed=1)$data; -->
+
+
+<!-- table(data_balanced_over$OnDL) -->
+
+<!-- mod_bal <- glm(formula = formula , family=binomial(logit), data=data_balanced_over); -->
+<!-- summary(mod_bal) -->
+<!-- pred_bal <- predict(mod_bal, testing_lessOutliers) -->
+
+<!-- accuracy.meas(testing_lessOutliers$OnDL, pred_bal, threshold = 0.4) -->
+
+<!-- roc.curve(testing_lessOutliers$OnDL, pred_bal, plotit =F) -->
+<!-- # pred <- ifelse(predict(pred_bal, testing_lessOutliers, type='response') > threshold,  1, 0); -->
+<!-- # confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1'); -->
+
+<!-- prob <- predict(mod_bal, testing_lessOutliers, type='response'); -->
+<!-- gbal <- roc(OnDL ~ prob, data = testing_lessOutliers); -->
+<!-- plot(gbal) -->
+<!-- ``` -->
+<!-- Random Forest -->
+
+<!-- ```{r warning=FALSE} -->
+<!-- data_balanced_over <- ovun.sample(formula = formula, data=training_lessOutliers, method="over", N=4744, seed=1)$data; -->
+
+<!-- #data_balanced_over <- ROSE(formula = formula, data=training_lessOutliers, seed=1)$data; -->
+
+
+<!-- table(data_balanced_over$OnDL) -->
+
+
+
+<!-- selected_variables <- dependent_var; # c("y", "start_speed", "sz_bot", "vy0", "break_y", "trf_num_pitches", "trf_num_FA"); -->
+
+<!-- selected_i <- which(colnames(training_lessOutliers) %in% selected_variables); -->
+
+<!-- formula_text <- paste("as.factor(", response_var, ")", "~", -->
+<!--                       paste(names(training_lessOutliers)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
+
+
+<!-- rf <- randomForest(formula, training_lessOutliers, ntree=500, importance=T) -->
+<!-- getTree(rf, 1) -->
+<!-- # mod_rf <- train(formula = formula , method="rf", data=data_balanced_over, prox=TRUE); -->
+<!-- summary(rf) -->
+<!-- pred_bal <- predict(rf, testing_lessOutliers, type="response") -->
+
+<!-- accuracy.meas(testing_lessOutliers$OnDL, pred_bal, threshold = 0.4) -->
+
+<!-- library('party'); -->
+<!-- rf_tree <- ctree(formula, data=training_lessOutliers) -->
+<!-- plot(rf_tree, type="simple") -->
+
+<!-- roc.curve(testing_lessOutliers$OnDL, pred_bal, plotit =F) -->
+<!-- # pred <- ifelse(predict(pred_bal, testing_lessOutliers, type='response') > threshold,  1, 0); -->
+
+<!-- pred <- ifelse(predict(rf, testing_lessOutliers, type='response') > threshold,  1, 0); -->
+<!-- confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1'); -->
+
+<!-- prob <- predict(mod_bal, testing_lessOutliers, type='response'); -->
+<!-- gbal <- roc(OnDL ~ prob, data = testing_lessOutliers); -->
+<!-- plot(gbal) -->
+<!-- ``` -->
+
 
 <!-- ## Model 4 only count variables -->
 
@@ -1056,63 +1418,63 @@ head(predictions_players[rev(order(predictions_players$probabilty)),], 20);
 
 
 
-## Model YYYY PCR with coninuous variables
+<!-- ## Model YYYY PCR with coninuous variables -->
 
-### Construct Model
+<!-- ### Construct Model -->
 
-https://pdfs.semanticscholar.org/6ef4/6cb18946dac5ad250f41df87f5c1c1745a1e.pdf
-https://www.r-bloggers.com/performing-principal-components-regression-pcr-in-r/
-
-
-```{r warning=FALSE}
-
-selected_variables <- dependent_var;
-
-selected_i <- which(colnames(training_lessOutliers) %in% selected_variables);
-
-formula_text <- paste(response_var, "~",
-                      paste(names(training_lessOutliers)[selected_i], collapse="+"));
-formula <- as.formula(formula_text);
-
-pcr_model <- pcr(formula, data = training_lessOutliers, scale =FALSE, validation = "CV");
-
-```
+<!-- https://pdfs.semanticscholar.org/6ef4/6cb18946dac5ad250f41df87f5c1c1745a1e.pdf -->
+<!-- https://www.r-bloggers.com/performing-principal-components-regression-pcr-in-r/ -->
 
 
-### Summary
-```{r warning=FALSE}
-summary(pcr_model);
-```
+<!-- ```{r warning=FALSE} -->
 
-### Residual
-```{r warning=TRUE}
-par(mfrow = c(2, 2));
-plot(pcr_model);
+<!-- selected_variables <- dependent_var; -->
 
-```
+<!-- selected_i <- which(colnames(training_lessOutliers) %in% selected_variables); -->
 
-### Performance
-```{r warning=FALSE}
-pred <- ifelse(predict(pcr_model, testing_lessOutliers, ncomp = 10) > 0.5,  1, 0);
-confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL);
-```
+<!-- formula_text <- paste(response_var, "~", -->
+<!--                       paste(names(training_lessOutliers)[selected_i], collapse="+")); -->
+<!-- formula <- as.formula(formula_text); -->
 
-### ROC curve
-```{r warning=FALSE}
-prob <- predict(pcr_model, testing_lessOutliers, type='response');
-gPCR <- roc(OnDL ~ prob, data = testing_lessOutliers);
-plot(gPCR)  
-```
+<!-- pcr_model <- pcr(formula, data = training_lessOutliers, scale =FALSE, validation = "CV"); -->
+
+<!-- ``` -->
 
 
+<!-- ### Summary -->
+<!-- ```{r warning=FALSE} -->
+<!-- summary(pcr_model); -->
+<!-- ``` -->
 
-	
- 
-# Plot the root mean squared error
-```{r warning=FALSE}
+<!-- ### Residual -->
+<!-- ```{r warning=TRUE} -->
+<!-- par(mfrow = c(2, 2)); -->
+<!-- plot(pcr_model); -->
 
-validationplot(pcr_model)
-```
+<!-- ``` -->
+
+<!-- ### Performance -->
+<!-- ```{r warning=FALSE} -->
+<!-- pred <- ifelse(predict(pcr_model, testing_lessOutliers, ncomp = 10) > 0.5,  1, 0); -->
+<!-- confusionMatrix(data=pred, reference=testing_lessOutliers$OnDL, positive='1'); -->
+<!-- ``` -->
+
+<!-- ### ROC curve -->
+<!-- ```{r warning=FALSE} -->
+<!-- prob <- predict(pcr_model, testing_lessOutliers, type='response'); -->
+<!-- gPCR <- roc(OnDL ~ prob, data = testing_lessOutliers); -->
+<!-- plot(gPCR)   -->
+<!-- ``` -->
+
+
+
+
+
+<!-- # Plot the root mean squared error -->
+<!-- ```{r warning=FALSE} -->
+
+<!-- validationplot(pcr_model) -->
+<!-- ``` -->
 
 <!-- ```{r caret transformed model 1} -->
 <!-- selected_variables <- lowCorColNames; # c('x', 'start_speed', 'y0', 'break_y', 'spin_dir', 'spin_rate', 'num_pitches'); -->
@@ -1334,8 +1696,45 @@ validationplot(pcr_model)
 
 
 
+```{r old trf}
+# pitches_dl_dataset$trf_num_AB <- trf_func(pitches_dl_dataset$num_AB/);
+# pitches_dl_dataset$trf_num_AS <- trf_func(pitches_dl_dataset$num_AS);
+# pitches_dl_dataset$trf_num_CH <- trf_func(pitches_dl_dataset$num_CH);
+# pitches_dl_dataset$trf_num_CU <- trf_func(pitches_dl_dataset$num_CU);
+# pitches_dl_dataset$trf_num_EP <- trf_func(pitches_dl_dataset$num_EP);
+# pitches_dl_dataset$trf_num_FA <- trf_func(pitches_dl_dataset$num_FA);
+# pitches_dl_dataset$trf_num_FC <- trf_func(pitches_dl_dataset$num_FC);
+# pitches_dl_dataset$trf_num_FF <- trf_func(pitches_dl_dataset$num_FF);
+# pitches_dl_dataset$trf_num_FO <- trf_func(pitches_dl_dataset$num_FO);
+# pitches_dl_dataset$trf_num_FS <- trf_func(pitches_dl_dataset$num_FS);
+# pitches_dl_dataset$trf_num_FT <- trf_func(pitches_dl_dataset$num_FT);
+# pitches_dl_dataset$trf_num_IN <- trf_func(pitches_dl_dataset$num_IN);
+# pitches_dl_dataset$trf_num_KC <- trf_func(pitches_dl_dataset$num_KC);
+# pitches_dl_dataset$trf_num_KN <- trf_func(pitches_dl_dataset$num_KN);
+# pitches_dl_dataset$trf_num_PO <- trf_func(pitches_dl_dataset$num_PO);
+# pitches_dl_dataset$trf_num_SC <- trf_func(pitches_dl_dataset$num_SC);
+# pitches_dl_dataset$trf_num_SI <- trf_func(pitches_dl_dataset$num_SI);
+# pitches_dl_dataset$trf_num_SL <- trf_func(pitches_dl_dataset$num_SL);
+# pitches_dl_dataset$trf_num_UN <- trf_func(pitches_dl_dataset$num_UN);
 
+# pitches_dl_predict$trf_num_AB <- trf_func(pitches_dl_predict$num_AB);
+# pitches_dl_predict$trf_num_AS <- trf_func(pitches_dl_predict$num_AS);
+# pitches_dl_predict$trf_num_CH <- trf_func(pitches_dl_predict$num_CH);
+# pitches_dl_predict$trf_num_CU <- trf_func(pitches_dl_predict$num_CU);
+# pitches_dl_predict$trf_num_EP <- trf_func(pitches_dl_predict$num_EP);
+# pitches_dl_predict$trf_num_FA <- trf_func(pitches_dl_predict$num_FA);
+# pitches_dl_predict$trf_num_FC <- trf_func(pitches_dl_predict$num_FC);
+# pitches_dl_predict$trf_num_FF <- trf_func(pitches_dl_predict$num_FF);
+# pitches_dl_predict$trf_num_FO <- trf_func(pitches_dl_predict$num_FO);
+# pitches_dl_predict$trf_num_FS <- trf_func(pitches_dl_predict$num_FS);
+# pitches_dl_predict$trf_num_FT <- trf_func(pitches_dl_predict$num_FT);
+# pitches_dl_predict$trf_num_IN <- trf_func(pitches_dl_predict$num_IN);
+# pitches_dl_predict$trf_num_KC <- trf_func(pitches_dl_predict$num_KC);
+# pitches_dl_predict$trf_num_KN <- trf_func(pitches_dl_predict$num_KN);
+# pitches_dl_predict$trf_num_PO <- trf_func(pitches_dl_predict$num_PO);
+# pitches_dl_predict$trf_num_SC <- trf_func(pitches_dl_predict$num_SC);
+# pitches_dl_predict$trf_num_SI <- trf_func(pitches_dl_predict$num_SI);
+# pitches_dl_predict$trf_num_SL <- trf_func(pitches_dl_predict$num_SL);
+# pitches_dl_predict$trf_num_UN <- trf_func(pitches_dl_predict$num_UN);
 
-
-
-
+```
